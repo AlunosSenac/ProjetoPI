@@ -1,0 +1,41 @@
+/* Other CSS styles... */
+
+.carousel {
+    width: 100%;
+    height: 400px; /* You can adjust the height as needed */
+    overflow: hidden;
+  }
+  
+  .carousel-inner .carousel-item {
+    position: relative;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out; /* Adjust the duration for the fade transition */
+  }
+  
+  .carousel-inner .carousel-item.active {
+    opacity: 1;
+  }
+  
+  .carousel-inner .carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* Keyframes for fade transition */
+  @keyframes fadeInOut {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  /* Apply the fade-in animation to carousel items */
+  .carousel-inner .carousel-item {
+    animation: fadeInOut 1.5s ease-in-out forwards; /* Adjust the duration to match the transition duration */
+  }
+  
+  /* Other CSS styles... */
+  

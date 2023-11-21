@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="../img\logo visual journey.png" type="image/png">
+    <title>Visual Journey</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="..\css\cadastrouser.css">
+    <link rel="stylesheet" href="../css\header.css">
+    <link rel="stylesheet" href="../css\footer.css">
+</head>
+  <body>
+ 
+</head>
+<header class="custom-header">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+      <a class="navbar-brand" href="#"><img class="logo" src="..\img\logo visual journey.png" alt=""></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="..\views\quemsomos.html">Quem Somos?</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="..\index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="..\views\lojafotos.html">Loja de Fotos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="..\photo-gallery template\carousel-15\index.html">Fotógrafos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="..\views\login.html">
+              <i class="bi bi-person-circle"></i>
+              Login
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main>
+    <h1 class="text-center mt-5">Cadastro de Fotógrafo</h1>
+    <div class="container form-container">
+        <form class="w-100">
+            <div class="mb-3">
+                <label for="inputName" class="form-label">Nome</label>
+                <input type="text" id="inputName" class="form-control" placeholder="Nome" required>
+            </div>
+            <div class="mb-3">
+                <label for="inputEmail" class="form-label">Email</label>
+                <input type="email" class="form-control" id="inputEmail" placeholder="Email" required>
+            </div>
+            <div class="mb-3">
+                <label for="inputPhone" class="form-label">Telefone</label>
+                <input type="tel" class="form-control" id="inputPhone" placeholder="Telefone" required>
+            </div>
+            <div class="mb-3">
+                <label for="inputCategories" class="form-label">Categorias</label>
+                <select id="inputCategories" class="form-select" multiple size="4" required>
+                    <option value="portrait">Retratos</option>
+                    <option value="landscape">Paisagens</option>
+                    <option value="wedding">Casamentos</option>
+                    <option value="nature">Natureza</option>
+                    <!-- Add more categories here -->
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="inputDescription" class="form-label">Descrição da Área</label>
+                <textarea class="form-control" id="inputDescription" rows="4" placeholder="Descrição da área de atuação" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </form>
+    </div>
+</main>
+
+    <footer class="footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <p>&copy; 2023 Seu Site. Todos os direitos reservados.</p>
+            </div>
+            <div class="col-md-6">
+              <ul class="social-icons">
+                <li><a href="#"><i class="bi bi-facebook"></i></a></li>
+                <li><a href="#"><i class="bi bi-twitter"></i></a></li>
+                <li><a href="#"><i class="bi bi-instagram"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+  
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+  </body>
+</html>

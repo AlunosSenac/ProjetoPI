@@ -1,0 +1,22 @@
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  
+  .btn {
+    background-color: black;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 12px 24px;
+    margin-bottom: 24px;
+  }
+  
+  .btn:hover {
+    transform: scale(1.05);
+    background-color: #3a3a3a;
+  }
+  
