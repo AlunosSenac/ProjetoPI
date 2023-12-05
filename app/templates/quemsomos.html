@@ -8,9 +8,10 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <link rel="icon" href="../img\logo visual journey.png" type="image/png">
   <title>Visual Journey</title>
-  <link rel="stylesheet" href="../css/quemsomos.css">
-  <link rel="stylesheet" href="../css/header.css">
-  <link rel="stylesheet" href="../css/footer.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/quemsomos.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+
 </head>
 
 <body>
@@ -19,7 +20,7 @@
 <header class="custom-header">
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
-      <a class="navbar-brand" href="#"><img class="logo" src="..\img\logo visual journey.png" alt=""></a>
+      <a class="navbar-brand" href="#"><img class="logo" src="{{ url_for('static', filename='img/logo visual journey.png') }}" alt=""></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -27,10 +28,10 @@
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="..\views\quemsomos.html">Quem Somos?</a>
+            <a class="nav-link" href="{{ url_for('quemsomos') }}">Quem Somos?</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="..\index.html">Home</a>
+            <a class="nav-link" href="{{ url_for('index') }}">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="..\views\lojafotos.html">Loja de Fotos</a>
@@ -39,7 +40,7 @@
             <a class="nav-link" href="..\photo-gallery template\carousel-15\index.html">Fotógrafos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="..\views\login.html">
+            <a class="nav-link" href="{{url_for('login')}}">
               <i class="bi bi-person-circle"></i>
               Login
             </a>
@@ -59,13 +60,13 @@
       <div id="myCarousel" class="carousel slide reduzido" data-bs-ride="carousel" data-bs-interval="2500">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="..\img\photographer1.jpg" class="d-block w-100" alt="Imagem 1">
+            <img src="{{ url_for('static', filename='img/banners/banerAnimado1.gif') }}" class="d-block w-100" alt="Imagem 1">
           </div>
           <div class="carousel-item">
-            <img src="..\img\photographer9.jpg" class="d-block w-100" alt="Imagem 2">
+            <img src="{{ url_for('static', filename='img/banners/banerAnimado2.gif') }}" class="d-block w-100" alt="Imagem 2">
           </div>
           <div class="carousel-item">
-            <img src="..\img\photographer11.jpg" class="d-block w-100" alt="Imagem 3">
+            <img src="{{ url_for('static', filename='img/banners/banerAnimado3.gif') }}" class="d-block w-100" alt="Imagem 3">
           </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
@@ -92,7 +93,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6">
-            <img id="imgani" src="..\img\photographer12.jpg" alt="Imagem" class="animate-left">
+            <img id="imgani" src="{{ url_for('static', filename='img/Foto2.jpg') }}" alt="Imagem" class="animate-left">
           </div>
           <div class="col-md-6">
             <h2 class="animate-right"><b>Fotografos Profissionais</b></h2>
@@ -106,7 +107,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6">
-            <img id="imgani" src="..\img\photographer7.jpg" alt="Imagem" class="animate-left">
+            <img id="imgani" src="{{ url_for('static', filename='img/Foto1.jpg') }}" alt="Imagem" class="animate-left">
           </div>
           <div class="col-md-6">
             <h2 class="animate-right"><b>Fotógrafos Iniciantes</b></h2>
@@ -140,6 +141,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
-    <script src="../js/quemsomos.js"></script>
+    <script src="{{ url_for('static', filename='js/quemsomos.js') }}"></script>
   </body>
 </html>

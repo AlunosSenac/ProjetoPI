@@ -82,8 +82,7 @@ p {
 
 .carousel {
   width: 100%;
-  height: 400px;
-  overflow: hidden;
+
 }
 
 .carousel-inner .carousel-item img {
