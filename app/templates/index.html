@@ -29,10 +29,10 @@
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="..\views\quemsomos.html">Quem Somos?</a>
+            <a class="nav-link" href="{{ url_for('index') }}">Quem Somos?</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="..\index.html">Home</a>
+            <a class="nav-link" href="{{ url_for('index') }}">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="..\views\lojafotos.html">Loja de Fotos</a>
@@ -41,7 +41,7 @@
             <a class="nav-link" href="..\photo-gallery template\carousel-15\index.html">Fotógrafos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="..\views\login.html">
+            <a class="nav-link" href="{{url_for('login')}}">
               <i class="bi bi-person-circle"></i>
               Login
             </a>
