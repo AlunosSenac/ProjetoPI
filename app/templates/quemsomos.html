@@ -1,92 +1,102 @@
- <!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="pt-Br">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-  <link rel="icon" href="../img\logo visual journey.png" type="image/png">
   <title>Visual Journey</title>
+  <link rel="icon" href="{{ url_for('static', filename='img/logoVJ.png') }}" type="image/png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/quemsomos.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
 
+  <script src="{{ url_for('static', filename='js/bootstrap.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/quemsomos.js') }}" defer></script>
+
 </head>
 
 <body>
-<!-- ... (previous HTML code) ... -->
+  <!-- ... (previous HTML code) ... -->
 
-<header class="custom-header">
-  <nav class="navbar navbar-expand-lg navbar-light">
-    <div class="container">
-      <a class="navbar-brand" href="#"><img class="logo" src="{{ url_for('static', filename='img/logo visual journey.png') }}" alt=""></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('quemsomos') }}">Quem Somos?</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('index') }}">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="..\views\lojafotos.html">Loja de Fotos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="..\photo-gallery template\carousel-15\index.html">Fotógrafos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{url_for('login')}}">
-              <i class="bi bi-person-circle"></i>
-              Login
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-</header>
-
-<!-- ... (rest of the HTML code) ... -->
-
-  
-
- 
-    <main>
-      <div id="myCarousel" class="carousel slide reduzido" data-bs-ride="carousel" data-bs-interval="2500">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="{{ url_for('static', filename='img/banners/banerAnimado1.gif') }}" class="d-block w-100" alt="Imagem 1">
-          </div>
-          <div class="carousel-item">
-            <img src="{{ url_for('static', filename='img/banners/banerAnimado2.gif') }}" class="d-block w-100" alt="Imagem 2">
-          </div>
-          <div class="carousel-item">
-            <img src="{{ url_for('static', filename='img/banners/banerAnimado3.gif') }}" class="d-block w-100" alt="Imagem 3">
-          </div>
+  <header class="custom-header">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="container">
+        <a class="navbar-brand" href="#"><img class="logo"
+            src="{{ url_for('static', filename='img/logoVJ.png') }}" alt=""></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('quemsomos') }}">Quem Somos?</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="..\views\lojafotos.html">Loja de Fotos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="..\photo-gallery template\carousel-15\index.html">Fotógrafos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('login')}}">
+                <i class="bi bi-person-circle"></i>
+                Login
+              </a>
+            </li>
+          </ul>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
       </div>
+    </nav>
+  </header>
 
-    
+  <!-- ... (rest of the HTML code) ... -->
+
+
+
+
+  <main>
+    <div id="myCarousel" class="carousel slide reduzido" data-bs-ride="carousel" data-bs-interval="2500">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="{{ url_for('static', filename='img/banners/banerAnimado1.gif') }}" class="d-block w-100"
+            alt="Imagem 1">
+        </div>
+        <div class="carousel-item">
+          <img src="{{ url_for('static', filename='img/banners/banerAnimado2.gif') }}" class="d-block w-100"
+            alt="Imagem 2">
+        </div>
+        <div class="carousel-item">
+          <img src="{{ url_for('static', filename='img/banners/banerAnimado3.gif') }}" class="d-block w-100"
+            alt="Imagem 3">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+
 
     <div id="texto1">
       <h1>VISUAL JOURNEY</h1>
-      <p>É uma aplicação web com a finalidade de desenvolver o setor de serviços voltados pro ramo da fotografia, como venda de imagens ou contratação de profissionais, visamos o aprimoramento da qualidade de serviços, desde o encontro do melhor profissional para atender as suas necessidades até o melhor entendimento do cliente sobre suas próprias necessidades com uma visão técnica e profissional</p>
-      
+      <p>É uma aplicação web com a finalidade de desenvolver o setor de serviços voltados pro ramo da fotografia, como
+        venda de imagens ou contratação de profissionais, visamos o aprimoramento da qualidade de serviços, desde o
+        encontro do melhor profissional para atender as suas necessidades até o melhor entendimento do cliente sobre
+        suas próprias necessidades com uma visão técnica e profissional</p>
+
     </div>
-    
+
 
     <div class="espliacacao"></div>
     <div id="imgtext">
@@ -97,7 +107,10 @@
           </div>
           <div class="col-md-6">
             <h2 class="animate-right"><b>Fotografos Profissionais</b></h2>
-            <p class="animate-right">Para profissionais o Visual Journey trás uma plataforma com design mutável para a melhor apresentação de seus projetos e trabalhos, oferece um local seguro de armazenamento de imagens, banindo eventuais plágios e roubos de imagens. Sendo assim um local seguro para a exposição de trabalhos e apresentação</p>
+            <p class="animate-right">Para profissionais o Visual Journey trás uma plataforma com design mutável para a
+              melhor apresentação de seus projetos e trabalhos, oferece um local seguro de armazenamento de imagens,
+              banindo eventuais plágios e roubos de imagens. Sendo assim um local seguro para a exposição de trabalhos e
+              apresentação</p>
           </div>
         </div>
       </div>
@@ -111,14 +124,15 @@
           </div>
           <div class="col-md-6">
             <h2 class="animate-right"><b>Fotógrafos Iniciantes</b></h2>
-            <p class="animate-right">Para fotógrafos iniciantes, o Visual Journey pode ser uma ótima ferramenta para ajudá-los a desenvolver suas habilidades e apresentar seus trabalhos.</p>
+            <p class="animate-right">Para fotógrafos iniciantes, o Visual Journey pode ser uma ótima ferramenta para
+              ajudá-los a desenvolver suas habilidades e apresentar seus trabalhos.</p>
           </div>
         </div>
       </div>
     </div>
-    
-  
-    
+
+
+
   </main>
 
   <footer class="footer">
@@ -138,9 +152,7 @@
     </div>
   </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
-    <script src="{{ url_for('static', filename='js/quemsomos.js') }}"></script>
-  </body>
+
+</body>
+
 </html>
