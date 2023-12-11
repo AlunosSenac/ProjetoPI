@@ -7,12 +7,12 @@
   <title>Visual Journey</title>
   <link rel="icon" href="{{ url_for('static', filename='img/logoVJ.png') }}" type="image/png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/quemsomos.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
 
-  <script src="{{ url_for('static', filename='js/bootstrap.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}" defer></script>
   <script src="{{ url_for('static', filename='js/quemsomos.js') }}" defer></script>
 
 </head>
@@ -53,15 +53,10 @@
         </div>
       </div>
     </nav>
-  </header>
-
-  <!-- ... (rest of the HTML code) ... -->
 
 
-
-
-  <main>
-    <div id="myCarousel" class="carousel slide reduzido" data-bs-ride="carousel" data-bs-interval="2500">
+    <div class="d-flex justify-content-center"> 
+    <div id="myCarousel"  class="carousel slide reduzido" data-bs-ride="carousel" data-bs-interval="2500">
       <div class="carousel-inner">
         <div class="carousel-item active">
           <img src="{{ url_for('static', filename='img/banners/banerAnimado1.gif') }}" class="d-block w-100"
@@ -85,9 +80,12 @@
         <span class="visually-hidden">Next</span>
       </button>
     </div>
+    </div>
+  
+  </header>
 
-
-
+  <main>
+    
     <div id="texto1">
       <h1>VISUAL JOURNEY</h1>
       <p>É uma aplicação web com a finalidade de desenvolver o setor de serviços voltados pro ramo da fotografia, como

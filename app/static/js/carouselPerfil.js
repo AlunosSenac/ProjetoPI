@@ -1,67 +1,78 @@
-let indiceAtual = 0;
-const perfis = document.querySelectorAll('.usuario');
-let perfisVisiveis = 6; // Ajuste o número de perfis visíveis conforme desejado
+class Carousel {
+    constructor(carouselElement) {
+        this.indiceAtual = 0;
+        this.perfis = carouselElement.querySelectorAll('.usuario');
+        this.perfisVisiveis = 6; // Adjust the number of visible profiles as desired
 
-function atualizarPerfisVisiveis() {
-    if (window.innerWidth <= 768) {
-        perfisVisiveis = 2;
-    } else {
-        perfisVisiveis = 6; // Ajuste o número de perfis visíveis para telas maiores
+        this.atualizarPerfisVisiveis();
+        this.mostrarPerfis();
+
+        // Event listeners
+        carouselElement.querySelector('.anterior').addEventListener('click', () => this.retrocederPerfil());
+        carouselElement.querySelector('.proximo').addEventListener('click', () => this.avancarPerfil());
+
+        // Drag and drop events
+        document.addEventListener('mousedown', (e) => this.iniciarArrastar(e));
+        document.addEventListener('touchstart', (e) => this.iniciarArrastar(e));
+
+        document.addEventListener('mouseup', (e) => this.finalizarArrastar(e));
+        document.addEventListener('touchend', (e) => this.finalizarArrastar(e));
+
+        // Resize event
+        window.addEventListener('resize', () => {
+            this.atualizarPerfisVisiveis();
+            this.mostrarPerfis();
+        });
     }
-}
 
-function mostrarPerfis() {
-    perfis.forEach((perfil, i) => {
-        if (i >= indiceAtual && i < indiceAtual + perfisVisiveis) {
-            perfil.style.display = 'block';
+    atualizarPerfisVisiveis() {
+        if (window.innerWidth <= 768) {
+            this.perfisVisiveis = 2;
         } else {
-            perfil.style.display = 'none';
+            this.perfisVisiveis = 6;
         }
-    });
-}
+    }
 
-function avancarPerfil() {
-    if (indiceAtual + 1 <= perfis.length - perfisVisiveis) {
-        indiceAtual += 1;
-        mostrarPerfis();
+    mostrarPerfis() {
+        this.perfis.forEach((perfil, i) => {
+            if (i >= this.indiceAtual && i < this.indiceAtual + this.perfisVisiveis) {
+                perfil.style.display = 'block';
+            } else {
+                perfil.style.display = 'none';
+            }
+        });
+    }
+
+    avancarPerfil() {
+        if (this.indiceAtual + 1 <= this.perfis.length - this.perfisVisiveis) {
+            this.indiceAtual += 1;
+            this.mostrarPerfis();
+        }
+    }
+
+    retrocederPerfil() {
+        if (this.indiceAtual > 0) {
+            this.indiceAtual -= 1;
+            this.mostrarPerfis();
+        }
+    }
+
+    iniciarArrastar(e) {
+        this.startX = e.touches ? e.touches[0].clientX : e.clientX;
+    }
+
+    finalizarArrastar(e) {
+        const endX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+        const diffX = this.startX - endX;
+
+        if (diffX > 50) {
+            this.avancarPerfil();
+        } else if (diffX < -50) {
+            this.retrocederPerfil();
+        }
     }
 }
 
-function retrocederPerfil() {
-    if (indiceAtual > 0) {
-        indiceAtual -= 1;
-        mostrarPerfis();
-    }
-}
-
-function iniciarArrastar(e) {
-    startX = e.touches ? e.touches[0].clientX : e.clientX;
-}
-
-function finalizarArrastar(e) {
-    const endX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
-    const diffX = startX - endX;
-
-    if (diffX > 50) {
-        avancarPerfil();
-    } else if (diffX < -50) {
-        retrocederPerfil();
-    }
-}
-
-document.addEventListener('mousedown', iniciarArrastar);
-document.addEventListener('touchstart', iniciarArrastar);
-
-document.addEventListener('mouseup', finalizarArrastar);
-document.addEventListener('touchend', finalizarArrastar);
-
-document.querySelector('#anterior').addEventListener('click', retrocederPerfil);
-document.querySelector('#proximo').addEventListener('click', avancarPerfil);
-
-atualizarPerfisVisiveis();
-mostrarPerfis();
-
-window.addEventListener('resize', () => {
-    atualizarPerfisVisiveis();
-    mostrarPerfis();
-});
+// Create instances for each carousel on your page
+const carousels = document.querySelectorAll('.custom-carousel');
+carousels.forEach((carousel) => new Carousel(carousel));
