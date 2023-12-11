@@ -1,22 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Tektur:wght@400;500;600&display=swap');
 
-/* Define um estilo para o corpo da página */
-body {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  font-family: 'Tektur', sans-serif;
-}
-
-/* Define o estilo do conteúdo principal */
-.main-content {
-  flex: 1;
-  padding: 20px;
-}
-
-/* Define o estilo do rodapé */
 .footer {
   background-color: #333;
   color: #fff;

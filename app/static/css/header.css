@@ -1,4 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Tektur:wght@400;500;600&display=swap');
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+
 .custom-header {
   padding: 20px;
   background-color: transparent;

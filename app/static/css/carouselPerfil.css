@@ -1,0 +1,101 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+@keyframes changeBorderColor {
+    0% { border-color: #FF6347; } /* Tom de vermelho */
+    25% { border-color: #4B0082; } /* Tom de roxo */
+    50% { border-color: #008000; } /* Tom de verde */
+    75% { border-color: #FFD700; } /* Tom de amarelo */
+    100% { border-color: #FF6347; } /* Retorna ao vermelho no final */
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+}
+
+.custom-carousel {
+    border: 2px solid #FF6347;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 100%;
+    position: relative;
+    overflow: hidden;
+    animation: changeBorderColor 4s infinite;
+}
+
+.custom-carousel legend {
+    display: flex;
+    align-items: center;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.custom-carousel .legend-buttons-container button {
+    background-color: rgb(92, 92, 92);
+    margin-left: 5px;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    outline: none;
+}
+
+.carousel{
+    display: flex;
+    justify-content: center;
+}
+
+.custom-carousel .legend-buttons-container button:hover {
+    background-color: #0056b3;
+}
+
+.custom-carousel .carousel-container {
+    overflow: hidden;
+}
+
+.custom-carousel .carousel {
+    display: flex;
+    transition: transform 0.5s ease;
+    margin: 0 -1rem; /* Aumenta a margem horizontal entre os cards */
+}
+
+.custom-carousel .usuario {
+    margin: 0 1rem; /* Aumenta a margem horizontal entre os cards */
+}
+
+.custom-carousel .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 150px;
+}
+
+.custom-carousel .card img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 5px;
+}
+
+.custom-carousel .info {
+    text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+    .custom-carousel .carousel {
+        flex-wrap: nowrap;
+    }
+}
