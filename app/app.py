@@ -14,19 +14,12 @@ def quemsomos():
 def login():
     return render_template('login.html')
 
+#Rota de cadastro geral para todos usuários
+@app.route('/cadastro')
+def cadastro():
+    return render_template('cadastro.html')
 
-@app.route('/cadastros')
-def cadastros():
-    return render_template('cadastros.html')
 
-
-@app.route('/cadastrofotog')
-def cadastrofotog():
-    return render_template('cadastrofotog.html')
-
-@app.route('/cadastrouser')
-def cadastrouser():
-    return render_template('cadastrouser.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
