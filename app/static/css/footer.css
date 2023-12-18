@@ -20,3 +20,37 @@
 .social-icons a:hover {
   color: #ccc;
 }
+
+/* Efeito de hover azul nos links do formulário de login */
+.formLogin a:hover {
+  color: #07a4ff; /* Cor azul desejada */
+  /* Ou você pode definir um fundo azul */
+  /* background-color: #07a4ff; */
+  /* Certifique-se de ajustar as propriedades conforme necessário */
+}
+
+/* Efeito de hover azul nos links do footer */
+.footer a:hover {
+  color: #07a4ff; /* Cor azul desejada */
+  /* Ou você pode definir um fundo azul */
+  /* background-color: #07a4ff; */
+  /* Certifique-se de ajustar as propriedades conforme necessário */
+}
+
+/* Efeito de hover azul nos links do footer */
+.footer a:hover {
+  color: #07a4ff; /* Cor azul desejada */
+  /* Ou você pode definir um fundo azul */
+  /* background-color: #07a4ff; */
+  /* Certifique-se de ajustar as propriedades conforme necessário */
+}
+
+/* Efeito de hover azul no texto de direitos autorais */
+.footer p:hover {
+  color: #07a4ff; /* Cor azul desejada */
+  /* Ou você pode definir um fundo azul */
+  /* background-color: #07a4ff; */
+  /* Certifique-se de ajustar as propriedades conforme necessário */
+}
+
+
