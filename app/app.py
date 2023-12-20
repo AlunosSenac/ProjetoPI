@@ -67,7 +67,7 @@ def configurar_banco():
     except Exception as e:
         return f"Erro ao configurar e criar o banco de dados: {str(e)}"
 
-#Bloco de configuação de banco de dados do projeto - Fim
+#Bloco de configuação de banco de dados  - Fim
 
 
 @app.route('/')
