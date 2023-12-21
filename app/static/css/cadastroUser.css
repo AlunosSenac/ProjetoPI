@@ -14,17 +14,19 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 50px;
+  margin-top: 5px;
 }
 
 form {
+  position: absolute;
+  top: 40%;
   width: 100%;
   max-width: 800px; /* Ajustado para uma caixa de formulário mais larga */
   padding: 40px; /* Maior espaçamento interno */
   background-color: #ffffff4c;
   border-radius: 7px;
   box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.4);
-  margin-bottom: 30px;
+  margin-bottom: 0px;
 }
 
 .form-label {

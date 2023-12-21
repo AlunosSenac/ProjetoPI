@@ -157,23 +157,28 @@
       <button type="submit" class="btn btn-primary">Cadastrar</button>
     </form>
   </div>
+  <video autoplay muted loop id="videoBG">
+    <source src="{{ url_for('static', filename='video/photofundo.mp4') }}" type="video/mp4">
+    <!-- Adicione outros formatos de vídeo aqui para maior compatibilidade -->
+    Seu navegador não suporta vídeos HTML5.
+  </video>
 </main>
 
 <footer class="footer">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-6">
-              <p>&copy; 2023 Seu Site. Todos os direitos reservados.</p>
-            </div>
-            <div class="col-md-6">
-              <ul class="social-icons">
-                <li><a href="#"><i class="bi bi-facebook"></i></a></li>
-                <li><a href="#"><i class="bi bi-twitter"></i></a></li>
-                <li><a href="#"><i class="bi bi-instagram"></i></a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
+  <div class="container">
+    <div class="row">
+      
+        <p>&copy; 2023 Seu Site. Todos os direitos reservados.</p>
+      </div>
+      
+        <ul class="social-icons">
+          <li><a href="#"><i class="bi bi-facebook"></i></a></li>
+          <li><a href="#"><i class="bi bi-twitter"></i></a></li>
+          <li><a href="#"><i class="bi bi-instagram"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </footer>
   
     
