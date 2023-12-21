@@ -7,18 +7,18 @@ class Carousel {
         this.atualizarPerfisVisiveis();
         this.mostrarPerfis();
 
-        // Event listeners
+        
         carouselElement.querySelector('.anterior').addEventListener('click', () => this.retrocederPerfil());
         carouselElement.querySelector('.proximo').addEventListener('click', () => this.avancarPerfil());
 
-        // Drag and drop events
+        
         document.addEventListener('mousedown', (e) => this.iniciarArrastar(e));
         document.addEventListener('touchstart', (e) => this.iniciarArrastar(e));
 
         document.addEventListener('mouseup', (e) => this.finalizarArrastar(e));
         document.addEventListener('touchend', (e) => this.finalizarArrastar(e));
 
-        // Resize event
+      
         window.addEventListener('resize', () => {
             this.atualizarPerfisVisiveis();
             this.mostrarPerfis();
