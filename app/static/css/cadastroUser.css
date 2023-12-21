@@ -1,52 +1,80 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
+/* Estilo para o formulário de cadastro */
 body {
-  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-main {
-  font-family: 'Inter', sans-serif;
-  color: #151717;
+.text-center {
+  text-align: center;
 }
 
 .form-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  min-height: 100vh;
+  justify-content: center;
+  margin-top: 50px;
 }
 
-.form-container form {
+form {
   width: 100%;
-  max-width: 900px; /* Increased max-width */
-  padding: 40px; /* Increased padding */
-  background-color: #fff;
+  max-width: 800px; /* Ajustado para uma caixa de formulário mais larga */
+  padding: 40px; /* Maior espaçamento interno */
+  background-color: #ffffff4c;
   border-radius: 7px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.4);
+  margin-bottom: 30px;
 }
 
-.form-container label {
+.form-label {
   font-weight: 600;
 }
 
 .form-control {
-  margin-bottom: 20px; /* Increased margin */
-  padding: 12px; /* Increased padding */
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  transition: all linear 160ms;
+  outline: none;
+}
+
+.form-control:focus {
+  border: 1px solid black;
+}
+
+.form-select {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  transition: all linear 160ms;
+  outline: none;
 }
 
 .btn {
   background-color: black;
-  width: 140px; /* Increased width */
-  padding: 12px; /* Increased padding */
   color: #fff;
-  font-size: 16px; /* Increased font size */
+  font-size: 14px;
   font-weight: 600;
   border: none !important;
   transition: all linear 160ms;
   cursor: pointer;
+  margin-top: 10px;
 }
 
 .btn:hover {
   transform: scale(1.05);
   background-color: #3a3a3a;
+}
+
+form h1{
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  font-weight: 500;
+  font-size: 2.3em;
 }
