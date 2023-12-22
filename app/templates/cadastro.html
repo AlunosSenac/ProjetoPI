@@ -50,6 +50,10 @@
 </header>
 
 <main>
+  <video autoplay muted loop id="videoBG">
+    <source src="{{ url_for('static', filename='video/photofundo.mp4') }}" type="video/mp4">
+    Seu navegador não suporta vídeos HTML5.
+  </video>
   <div class="container form-container">
     <form class="w-100" id="userForm"> 
       <h1 class="text-center mt-5">Cadastro de Usuário</h1>
@@ -157,11 +161,6 @@
       <button type="submit" class="btn btn-primary">Cadastrar</button>
     </form>
   </div>
-  <video autoplay muted loop id="videoBG">
-    <source src="{{ url_for('static', filename='video/photofundo.mp4') }}" type="video/mp4">
-    <!-- Adicione outros formatos de vídeo aqui para maior compatibilidade -->
-    Seu navegador não suporta vídeos HTML5.
-  </video>
 </main>
 
 <footer class="footer">

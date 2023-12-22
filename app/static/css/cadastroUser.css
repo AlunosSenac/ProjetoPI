@@ -19,10 +19,10 @@ body {
 
 form {
   position: absolute;
-  top: 40%;
+  top: 20%;
   width: 100%;
-  max-width: 800px; /* Ajustado para uma caixa de formulário mais larga */
-  padding: 40px; /* Maior espaçamento interno */
+  max-width: 800px; 
+  padding: 40px; 
   background-color: #ffffff4c;
   border-radius: 7px;
   box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.4);
@@ -80,3 +80,11 @@ form h1{
   font-weight: 500;
   font-size: 2.3em;
 }
+
+#videoBG{
+  position: relative;
+  z-index: -1;
+  padding-bottom: 0;
+  width: 100%;
+}
+
