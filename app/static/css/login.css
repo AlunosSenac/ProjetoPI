@@ -102,7 +102,7 @@ body {
     /* Ou você pode definir um fundo azul */
     /* background-color: #07a4ff; */
     /* Certifique-se de ajustar as propriedades conforme necessário */
-  }
+}
   
   /* Efeito de hover azul nos links do footer */
   .footer a:hover {
@@ -119,25 +119,34 @@ body {
   }
   
 
-  .page {
+.page {
     position: relative; /* Garante que o vídeo fique como fundo */
     width: 100%;
     height: 100vh;
     overflow: hidden; /* Para esconder partes do vídeo que excedam a div */
-  }
+
+}
   
   
  
   
  
-  body, html {
+body, html {
     margin: 0;
     padding: 0;
     height: 100%;
-  }
+}
   
  
   
 form{
     position: absolute;
 }
+
+#videoBG{
+    position: relative;
+    z-index: 0;
+    padding-bottom: 0;
+    width: 100%;
+  }
+  
