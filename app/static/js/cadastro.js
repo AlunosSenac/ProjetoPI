@@ -1,10 +1,16 @@
 $(document).ready(function () {
-    // Mostrar/ocultar campos adicionais com base no tipo de usuário selecionado
-    $('#userType').change(function () {
-        if ($(this).val() === 'fotografo') {
-            $('#additionalFields').show();
+    // Salve uma referência aos elementos relevantes para melhorar o desempenho
+    var userType = $('#userType');
+    var additionalFields = $('#additionalFields');
+
+    // Adicione uma classe ao corpo do documento para ajudar a estilização
+    userType.change(function () {
+        if (userType.val() === 'fotografo') {
+            additionalFields.show();
+            $('body').addClass('fotografo-selected');
         } else {
-            $('#additionalFields').hide();
+            additionalFields.hide();
+            $('body').removeClass('fotografo-selected');
         }
     });
 });

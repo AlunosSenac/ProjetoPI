@@ -32,23 +32,29 @@ main {
 }
 
 form {
-  max-width: 800px; 
-  padding: 40px; 
+  max-width: 600px; 
+  padding: 20px; 
   background-color: #ffffff4c;
   border-radius: 7px;
   box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.4);
-  margin-bottom: 0px;
+  margin-bottom: 30px;
+  margin-top: 30px;
+  transition: max-height 0.3s ease;
 }
 
+
+
+
+
 .form-label {
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .form-control {
   padding: 10px;
   font-size: 14px;
   border: 1px solid #ccc;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   border-radius: 4px;
   transition: all linear 160ms;
   outline: none;
@@ -62,7 +68,7 @@ form {
   padding: 10px;
   font-size: 14px;
   border: 1px solid #ccc;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   border-radius: 4px;
   transition: all linear 160ms;
   outline: none;
@@ -76,7 +82,7 @@ form {
   border: none !important;
   transition: all linear 160ms;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .btn:hover {
