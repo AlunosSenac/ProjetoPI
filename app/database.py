@@ -6,8 +6,7 @@ def conectar_banco():
         db = mysql.connector.connect(
             host="localhost",
             user="root",
-            password="",
-            database="PhoenixData"
+            password=""
         )
         return db
     except Exception as e:

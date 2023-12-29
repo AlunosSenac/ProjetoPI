@@ -3,18 +3,6 @@ from database import conectar_banco, configurar_e_criar_tabelas, cadastrar_usuar
 
 app = Flask(__name__)
 
-#Bloco de configuação de banco de dados  - Fim
-@app.route('/configurar_banco')
-def configurar_banco():
-    try:
-        db = conectar_banco()
-        cursor = db.cursor()
-        mensagem = configurar_e_criar_tabelas(cursor)
-        db.commit()
-        db.close()
-        return mensagem
-    except Exception as e:
-        return f"Erro ao configurar e criar o banco de dados: {str(e)}"
 
 #Rotas das paginas da aplicação
 @app.route('/')
@@ -32,32 +20,33 @@ def login():
 #Rota de cadastro geral para todos usuários
 @app.route('/cadastro', methods = ['GET', 'POST'])
 def cadastro():
-    if request.method == 'POST':
-        email = request.form['inputEmail4']
-        nick = request.form['inputNick']
+    if request.method == 'POST': 
         nome = request.form['inputName']
-        sobrenome = request.form['inputSurname']
-        senha = request.form['inputPassword4']
-        tipo_usuario = request.form['userType']
+        sobrenome = request.form['inputSobrenome']
+        email = request.form['inputEmail']
+        nick = request.form['inputNick']
+        senha = request.form['inputPassword']
+        tipo_usuario = request.form['userType'] 
+        estado = request.form['inputState']
         cidade = request.form['inputCity']
         bairro = request.form.get('inputBairro', '')  # Pode ser nulo, então usar get
-        estado = request.form['inputState']
+       
 
         # Se o tipo de usuário for fotógrafo, obter dados específicos do fotógrafo
         dados_fotografo = None
         if tipo_usuario == 'fotografo':
         # Obter dados específicos do fotógrafo do formulário
-            dados_fotografo = (
-                request.form['inputCPF'],
-                request.form['inputProfilePic'],
-                request.form['inputContact'],
-                request.form['inputArea']
-            )
-
+            dados_fotografo = {
+                'cpf': request.form['inputCPF'],
+                'foto_perfil': request.files.get['inputProfilePic', None],
+                'contato': request.form['inputContact'],
+                'area_atuacao': request.form['inputArea']  
+            }
+              
         # Chamar a função cadastrar_usuario com os dados do formulário
         mensagem = cadastrar_usuario(email, nick, nome, sobrenome, senha, tipo_usuario, cidade, bairro, estado, dados_fotografo)
 
-        return render_template('resultado_cadastro.html', mensagem=mensagem)
+        return "Cadastro concluído com sucesso!"
 
 
     return render_template('cadastro.html')
@@ -65,4 +54,13 @@ def cadastro():
 
 
 if __name__ == '__main__':
+    try:
+            db = conectar_banco()
+            cursor = db.cursor()
+            mensagem = configurar_e_criar_tabelas(cursor)
+            db.commit()
+            db.close()
+    except Exception as e:
+            print (f"Erro ao configurar e criar o banco de dados: {str(e)}")
+
     app.run(debug=True)
