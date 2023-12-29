@@ -27,28 +27,28 @@ def configurar_e_criar_tabelas(cursor):
     # Criação da tabela usuarios
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS usuarios (
-            Email VARCHAR(255) PRIMARY KEY,
-            Nome VARCHAR(255),
-            Sobrenome VARCHAR(255),
-            Senha VARCHAR(255),
-            Tipo_Usuario VARCHAR(255),
-            Endereco_RuaAv VARCHAR(255),
-            Endereco_Compl VARCHAR(255),
-            Endereco_Cidade VARCHAR(255),
-            Endereco_CEP VARCHAR(10),
-            Endereco_Estado VARCHAR(255)
+            Email VARCHAR(255) UNIQUE NOT NULL,
+            Username VARCHAR(255) PRIMARY KEY NOT NULL,
+            Nome VARCHAR(100) NOT NULL,
+            Sobrenome VARCHAR(100) NOT NULL,
+            Senha VARCHAR(255) NOT NULL,
+            Tipo_Usuario VARCHAR(50) NOT NULL,
+            Cidade VARCHAR(100) NOT NULL,
+            Bairro VARCHAR(100),
+            Estado VARCHAR(50) NOT NULL
         )
     """)
 
     # Criação da tabela fotografos
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS fotografos (
-            CPF VARCHAR(14) PRIMARY KEY,
-            Email_fotografo VARCHAR(255) UNIQUE,
+            CPF VARCHAR(11) PRIMARY KEY NOT NULL,
+            Username_fotografo VARCHAR(255) UNIQUE NOT NULL,
             Foto_Perfil VARCHAR(255),
-            Contato VARCHAR(20),
-            Area_Atuacao VARCHAR(255),
-            FOREIGN KEY (Email_fotografo) REFERENCES usuarios(Email)
+            Contato VARCHAR(15) NOT NULL,
+            Area_Atuacao VARCHAR(100) NOT NULL,
+            Username_usuario VARCHAR(255) NOT NULL,
+            FOREIGN KEY (Username_usuario) REFERENCES usuarios(Username)
         )
     """)
 
