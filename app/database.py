@@ -25,7 +25,7 @@ def configurar_e_criar_tabelas(cursor):
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS usuarios (
             Email VARCHAR(255) UNIQUE NOT NULL,
-            Username VARCHAR(255) PRIMARY KEY NOT NULL,
+            Nick VARCHAR(255) PRIMARY KEY NOT NULL,
             Nome VARCHAR(100) NOT NULL,
             Sobrenome VARCHAR(100) NOT NULL,
             Senha VARCHAR(255) NOT NULL,
@@ -39,14 +39,15 @@ def configurar_e_criar_tabelas(cursor):
     # Criação da tabela fotografos
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS fotografos (
-            CPF VARCHAR(11) PRIMARY KEY NOT NULL,
-            Username_fotografo VARCHAR(255) UNIQUE NOT NULL,
-            Foto_Perfil VARCHAR(255),
-            Contato VARCHAR(15) NOT NULL,
-            Area_Atuacao VARCHAR(100) NOT NULL,
-            Username_usuario VARCHAR(255) NOT NULL,
-            FOREIGN KEY (Username_usuario) REFERENCES usuarios(Username)
-        )
+        CPF VARCHAR(11) PRIMARY KEY NOT NULL,
+        Foto_Perfil VARCHAR(255),
+        Contato VARCHAR(15) NOT NULL,
+        Area_Atuacao VARCHAR(100) NOT NULL,
+        Nick_usuario VARCHAR(255) NOT NULL,
+        FOREIGN KEY (Nick_usuario) REFERENCES usuarios(Nick)
+);
     """)
 
     return "Banco de dados e tabelas criados com sucesso!"
+
+

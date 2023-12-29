@@ -50,62 +50,45 @@
 </header>
 <main>
   <video autoplay muted loop id="videoBG">
-    <source src="{{ url_for('static', filename='video/photofundo.mp4') }}" type="video/mp4">
-    Seu navegador não suporta vídeos HTML5.
+      <source src="{{ url_for('static', filename='video/photofundo.mp4') }}" type="video/mp4">
+      Seu navegador não suporta vídeos HTML5.
   </video>
   <div class="container form-container">
-    <form class="w-50 h-70" id="userForm"> 
-      <h1 class="text-center mt-5">Cadastro de Usuário</h1>
-      <div class="mb-3 row">
-        <div class="col-md-6">
-          <label for="inputName" class="form-label">Nome</label>
-          <input type="text" id="inputName" class="form-control" placeholder="Nome" required>
-        </div>
-        <div class="col-md-6">
-          <label for="inputSurname" class="form-label">Sobrenome</label>
-          <input type="text" class="form-control" id="inputSurname" placeholder="Sobrenome" required>
-        </div>
-        <div class="col-md-6">
-          <label for="inputEmail4" class="form-label">Email</label>
-          <input type="email" class="form-control" id="inputEmail4" placeholder="Digite seu email" required>
-        </div>
-        <div class="col-md-6">
-          <label for="inputPassword4" class="form-label">Senha</label>
-          <div class="input-group">
-            <input type="password" class="form-control" id="inputPassword4" placeholder="Senha" required>
-          </div>
-        </div>
-        <div class="mb-3 col-md-6">
-          <label for="userType" class="form-label">Tipo de Usuário</label>
-          <select id="userType" class="form-select" required>
-            <option selected hidden>Escolha...</option>
-            <option value="cliente">Cliente</option>
-            <option value="fotografo">Fotógrafo</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="mb-3">
-        <label for="inputAddress" class="form-label">Endereço</label>
-        <input type="text" class="form-control" id="inputAddress" placeholder="Rua ou Av" required>
-      </div>
-      <div class="mb-3">
-        <label for="inputAddress2" class="form-label">Complemento</label>
-        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartamento, casa, sítio...">
-      </div>
-      <div class="mb-3 row">
-        <div class="col-md-6">
-          <label for="inputCity" class="form-label">Cidade</label>
-          <input type="text" class="form-control" id="inputCity" required>
-        </div>
-        <div class="col-md-2">
-          <label for="inputZip" class="form-label">CEP</label>
-          <input type="text" class="form-control" id="inputZip" required>
-        </div>
-        <div class="col-md-4">
-          <label for="inputState" class="form-label">Estado</label>
-          <select id="inputState" class="form-select" required>
-            <option selected hidden>Escolha...</option>
+      <form class="w-50 h-70" id="userForm">
+          <h1 class="text-center mt-5">Cadastro de Usuário</h1>
+          <div class="mb-3 row">
+              <div class="col-md-6">
+                  <label for="inputName" class="form-label">Nome</label>
+                  <input type="text" id="inputName" class="form-control" placeholder="Nome" required>
+              </div>
+              <div class="col-md-6">
+                  <label for="inputSurname" class="form-label">Sobrenome</label>
+                  <input type="text" class="form-control" id="inputSurname" placeholder="Sobrenome" required>
+              </div>
+              <div class="col-md-6">
+                  <label for="inputEmail4" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="inputEmail4" placeholder="Digite seu email"
+                      required>
+              </div>
+              <div class="col-md-6">
+                  <label for="inputPassword4" class="form-label">Senha</label>
+                  <div class="input-group">
+                      <input type="password" class="form-control" id="inputPassword4" placeholder="Senha"
+                          required>
+                  </div>
+              </div>
+              <div class="mb-3 col-md-6">
+                  <label for="userType" class="form-label">Tipo de Usuário</label>
+                  <select id="userType" class="form-select" required>
+                      <option selected hidden>Escolha...</option>
+                      <option value="cliente">Cliente</option>
+                      <option value="fotografo">Fotógrafo</option>
+                  </select>
+              </div>
+              <div class="mb-3 col-md-6">
+                  <label for="inputState" class="form-label">Estado</label>
+                  <select id="inputState" class="form-select" required>
+                      <option selected hidden>Escolha...</option>
                       <option value="AC">Acre</option>
                       <option value="AL">Alagoas</option>
                       <option value="AP">Amapá</option>
@@ -135,30 +118,40 @@
                       <option value="TO">Tocantins</option>
                   </select>
               </div>
+              <div class="mb-3 col-md-6">
+                  <label for="inputCity" class="form-label">Cidade</label>
+                  <input type="text" class="form-control" id="inputCity" name="cidade" placeholder="Cidade"
+                      required>
+              </div>
+              <div class="mb-3 col-md-6">
+                  <label for="inputBairro" class="form-label">Bairro</label>
+                  <input type="text" class="form-control" id="inputBairro" name="bairro" placeholder="Bairro"
+                      required>
+              </div>
           </div>
 
-           <!-- Campos adicionais para o tipo de usuário "Fotógrafo" -->
-      <div class="mb-3 row" id="additionalFields" style="display:none;">
-        <div class="col-md-6">
-          <label for="inputCPF" class="form-label">CPF</label>
-          <input type="text" class="form-control" id="inputCPF" placeholder="CPF">
-        </div>
-        <div class="col-md-6">
-          <label for="inputProfilePic" class="form-label">Foto do Perfil</label>
-          <input type="file" class="form-control" id="inputProfilePic">
-        </div>
-        <div class="col-md-6">
-          <label for="inputContact" class="form-label">Contato</label>
-          <input type="text" class="form-control" id="inputContact" placeholder="Contato">
-        </div>
-        <div class="col-md-6">
-          <label for="inputArea" class="form-label">Área do Fotógrafo</label>
-          <input type="text" class="form-control" id="inputArea" placeholder="Área do Fotógrafo">
-        </div>
-      </div>
+          <!-- Campos adicionais para o tipo de usuário "Fotógrafo" -->
+          <div class="mb-3 row" id="additionalFields" style="display:none;">
+              <div class="col-md-6">
+                  <label for="inputCPF" class="form-label">CPF</label>
+                  <input type="text" class="form-control" id="inputCPF" placeholder="CPF">
+              </div>
+              <div class="col-md-6">
+                  <label for="inputProfilePic" class="form-label">Foto do Perfil</label>
+                  <input type="file" class="form-control" id="inputProfilePic">
+              </div>
+              <div class="col-md-6">
+                  <label for="inputContact" class="form-label">Contato</label>
+                  <input type="text" class="form-control" id="inputContact" placeholder="Contato">
+              </div>
+              <div class="col-md-6">
+                  <label for="inputArea" class="form-label">Área do Fotógrafo</label>
+                  <input type="text" class="form-control" id="inputArea" placeholder="Área do Fotógrafo">
+              </div>
+          </div>
 
-      <button type="submit" class="btn btn-primary">Cadastrar</button>
-    </form>
+          <button type="submit" class="btn btn-primary">Cadastrar</button>
+      </form>
   </div>
 </main>
 
