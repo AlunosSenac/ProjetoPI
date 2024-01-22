@@ -1,11 +1,9 @@
-# Conteúdo do arquivo app.py
 from flask import Flask, render_template, request
 from database.database import db
 from database.models import Usuario, Fotografo
-from config import SECRET_KEY
 
 app = Flask(__name__)
-app.secret_key = SECRET_KEY
+app.secret_key = 'sua_chave_secreta'
 
 # Configuração do banco de dados
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///projeto_fotografia.db'
@@ -13,7 +11,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Inicialização do objeto db
 db.init_app(app)
-
 
 # Rotas e lógica da aplicação
 @app.route('/')
@@ -59,12 +56,42 @@ def cadastro():
 
     return render_template('cadastro.html')
 
+def cadastrar_usuario(email, nick, nome, sobrenome, senha, tipo_usuario, cidade, bairro, estado, dados_fotografo=None):
+    # Lógica para cadastrar usuário no banco de dados
+    novo_usuario = Usuario(
+        email=email,
+        nick=nick,
+        nome=nome,
+        sobrenome=sobrenome,
+        senha=senha,
+        tipo_usuario=tipo_usuario,
+        cidade=cidade,
+        bairro=bairro,
+        estado=estado
+    )
+
+    # Adicionar usuário ao banco de dados
+    db.session.add(novo_usuario)
+    db.session.commit()
+
+    # Se o usuário for um fotógrafo, cadastrar dados específicos do fotógrafo
+    if tipo_usuario == 'fotografo' and dados_fotografo:
+        novo_fotografo = Fotografo(
+            cpf=dados_fotografo['cpf'],
+            foto_perfil=dados_fotografo.get('foto_perfil', None),
+            contato=dados_fotografo['contato'],
+            area_atuacao=dados_fotografo['area_atuacao'],
+            nick_usuario=nick
+        )
+
+        # Adicionar fotógrafo ao banco de dados
+        db.session.add(novo_fotografo)
+        db.session.commit()
+
+    return "Usuário cadastrado com sucesso!"
+
 if __name__ == '__main__':
-    try:
-        with app.app_context():
-            db.init_app(app)
-            db.create_all()
-    except Exception as e:
-        print(f"Erro ao configurar e criar o banco de dados: {str(e)}")
+    with app.app_context():
+        db.create_all()
 
     app.run(debug=True)
