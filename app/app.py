@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from database.database import db
 from database.models import Usuario, Fotografo
-
+#banco feito
 app = Flask(__name__)
 app.secret_key = 'sua_chave_secreta'
 
