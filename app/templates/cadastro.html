@@ -11,8 +11,9 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/cadastroUser.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/cadastro.js') }}" defer></script>
+
 </head>
 
 <body>
@@ -51,149 +52,105 @@
     </nav>
   </header>
   <main>
-    <video autoplay muted loop id="videoBG">
-      <source src="{{ url_for('static', filename='video/photofundo.mp4') }}" type="video/mp4">
-      Seu navegador não suporta vídeos HTML5.
-    </video>
+
+<section class="formulario">
+  <form id="cadastroForm">
+    <h2>Cadastro</h2>
+
+    <!-- Informações Pessoais -->
+    <label for="inputName">Nome:</label>
+    <input type="text" id="inputName" name="inputName" required>
+
+    <label for="inputSobrenome">Sobrenome:</label>
+    <input type="text" id="inputSobrenome" name="inputSobrenome" required>
+
+    <label for="inputEmail">E-mail:</label>
+    <input type="email" id="inputEmail" name="inputEmail" required>
+
+    <label for="inputNick">Nick:</label>
+    <input type="text" id="inputNick" name="inputNick" required>
+
+    <label for="inputPassword">Senha:</label>
+    <input type="password" id="inputPassword" name="inputPassword" required>
+
+    <!-- Informações de Endereço -->
+    <label for="inputState">Estado:</label>
+    <select id="inputState" name="inputState" required>
+        <option value="" selected hidden>Escolha...</option>
+        <!-- Adicione opções para todos os estados -->
+    </select>
+
+    <label for="inputCity">Cidade:</label>
+    <input type="text" id="inputCity" name="inputCity" required>
+
+    <label for="inputBairro">Bairro:</label>
+    <input type="text" id="inputBairro" name="inputBairro" required>
+
+    <!-- Informações Específicas do Fotógrafo -->
+    <label for="inputUserType">Tipo de Usuário:</label>
+    <select id="inputUserType" name="inputUserType" required>
+        <option value="" selected hidden>Escolha...</option>
+        <option value="cliente">Cliente</option>
+        <option value="fotografo">Fotógrafo</option>
+    </select>
+
+    <button type="button" onclick="cadastrarUsuario()">Cadastrar</button>
+</form>
 
 
-
-    <div class="container form-container">
-      <form class="w-50 h-70" id="userForm" method="POST" action="/cadastro" enctype="multipart/form-data">
-        <h1 class="text-center mt-5">Cadastro de Usuário</h1>
-        <div class="mb-3 row">
-          <div class="col-md-6">
-            <label for="inputName" class="form-label">Nome</label>
-            <input type="text" id="inputName" name="inputName" class="form-control" placeholder="Nome" required>
-          </div>
-          <div class="col-md-6">
-            <label for="inputSurname" class="form-label">Sobrenome</label>
-            <input type="text" class="form-control" id="inputSobrenome" name="inputSobrenome" placeholder="Sobrenome"
-              required>
-          </div>
-          <div class="col-md-6">
-            <label for="inputEmail" class="form-label">Email</label>
-            <input type="email" class="form-control" id="inputEmail" name="inputEmail"
-              placeholder="Digite seu email" required>
-          </div>
-          <div class="col-md-6">
-            <label for="inputNick" class="form-label">Nick</label>
-            <input type="text" class="form-control" id="inputNick" name="inputNick" placeholder="Nick">
-          </div>
-          <div class="col-md-6">
-            <label for="inputPassword" class="form-label">Senha</label>
-            <div class="input-group">
-              <input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="Senha"
-                required>
-            </div>
-          </div>
-          <div class="mb-3 col-md-6">
-            <label for="userType" class="form-label">Tipo de Usuário</label>
-            <select id="userType" class="form-select" name="userType" required>
-              <option selected hidden>Escolha...</option>
-              <option value="cliente">Cliente</option>
-              <option value="fotografo">Fotógrafo</option>
-            </select>
-          </div>
-          <div class="mb-3 col-md-6">
-            <label for="inputState" class="form-label">Estado</label>
-            <select id="inputState" class="form-select" name="inputState" required>
-              <option selected hidden>Escolha...</option>
-              <option value="AC">Acre</option>
-              <option value="AL">Alagoas</option>
-              <option value="AP">Amapá</option>
-              <option value="AM">Amazonas</option>
-              <option value="BA">Bahia</option>
-              <option value="CE">Ceará</option>
-              <option value="DF">Distrito Federal</option>
-              <option value="ES">Espírito Santo</option>
-              <option value="GO">Goiás</option>
-              <option value="MA">Maranhão</option>
-              <option value="MT">Mato Grosso</option>
-              <option value="MS">Mato Grosso do Sul</option>
-              <option value="MG">Minas Gerais</option>
-              <option value="PA">Pará</option>
-              <option value="PB">Paraíba</option>
-              <option value="PR">Paraná</option>
-              <option value="PE">Pernambuco</option>
-              <option value="PI">Piauí</option>
-              <option value="RJ">Rio de Janeiro</option>
-              <option value="RN">Rio Grande do Norte</option>
-              <option value="RS">Rio Grande do Sul</option>
-              <option value="RO">Rondônia</option>
-              <option value="RR">Roraima</option>
-              <option value="SC">Santa Catarina</option>
-              <option value="SP">São Paulo</option>
-              <option value="SE">Sergipe</option>
-              <option value="TO">Tocantins</option>    
-            </select>
-          </div>
-          <div class="mb-3 col-md-6">
-            <label for="inputCity" class="form-label">Cidade</label>
-            <input type="text" class="form-control" id="inputCity" name="inputCity" placeholder="Cidade" required>
-          </div>
-          <div class="mb-3 col-md-6">
-            <label for="inputBairro" class="form-label">Bairro</label>
-            <input type="text" class="form-control" id="inputBairro" name="inputBairro" placeholder="Bairro" required>
-          </div>
-        </div>
+</section>
   
-        <!-- Campos adicionais para o tipo de usuário "Fotógrafo" -->
-        <div class="mb-3 row" id="additionalFields" style="display:none;">
-          <div class="col-md-6">
-            <label for="inputCPF" class="form-label">CPF</label>
-            <input type="text" class="form-control" id="inputCPF" name="inputCPF" placeholder="CPF">
-          </div>
-          <div class="col-md-6">
-            <label for="inputProfilePic" class="form-label">Foto do Perfil</label>
-            <input type="file" class="form-control" id="inputProfilePic" name="inputProfilePic">
-          </div>
-          <div class="col-md-6">
-            <label for="inputContact" class="form-label">Contato</label>
-            <input type="text" class="form-control" id="inputContact" name="inputContact" placeholder="Contato">
-          </div>
-          <div class="col-md-6">
-            <label for="inputArea" class="form-label">Área do Fotógrafo</label>
-            <input type="text" class="form-control" id="inputArea" name="inputArea" placeholder="Área do Fotógrafo">
-          </div>
-        </div>
-  
-        <button type="submit" class="btn btn-primary col-md-4">Cadastrar</button>
-      </form>
-    </div>
-  
-
-
-  </main>
+</main>
 
   <footer class="footer">
     <div class="container">
       <div class="row">
-
-        <p>&copy; 2023 Seu Site. Todos os direitos reservados.</p>
+        
+          <p>&copy; 2023 Seu Site. Todos os direitos reservados.</p>
+        </div>
+        
+          <ul class="social-icons">
+            <li><a href="#"><i class="bi bi-facebook"></i></a></li>
+            <li><a href="#"><i class="bi bi-twitter"></i></a></li>
+            <li><a href="#"><i class="bi bi-instagram"></i></a></li>
+          </ul>
+        </div>
       </div>
-
-      <ul class="social-icons">
-        <li><a href="#"><i class="bi bi-facebook"></i></a></li>
-        <li><a href="#"><i class="bi bi-twitter"></i></a></li>
-        <li><a href="#"><i class="bi bi-instagram"></i></a></li>
-      </ul>
-    </div>
-    </div>
     </div>
   </footer>
 
+  <script>
+    document.getElementById('inputUserType').addEventListener('change', function() {
+        var fotografoFields = document.querySelector('.fotografoFields');
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
-    integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
-    crossorigin="anonymous"></script>
-  <script src="static/js/cadastro.js"></script>
+        if (this.value === 'fotografo') {
+            fotografoFields.style.display = 'block';
+        } else {
+            fotografoFields.style.display = 'none';
+        }
+    });
+
+    function cadastrarUsuario() {
+        var nome = document.getElementById('inputName').value;
+        var sobrenome = document.getElementById('inputSobrenome').value;
+        var email = document.getElementById('inputEmail').value;
+        var nick = document.getElementById('inputNick').value;
+        var senha = document.getElementById('inputPassword').value;
+        var estado = document.getElementById('inputState').value;
+        var cidade = document.getElementById('inputCity').value;
+        var bairro = document.getElementById('inputBairro').value;
+        var userType = document.getElementById('inputUserType').value;
+
+        // Aqui você pode adicionar lógica para enviar os dados para o backend ou realizar outras operações
+
+        alert("Usuário cadastrado com sucesso!");
+    }
+</script>
+
+
+
+ 
+
 </body>
 
 </html>

@@ -1,8 +1,7 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from database.database import db
 from database.models import Usuario, Fotografo
-from flask_sqlalchemy import SQLAlchemy
-#banco feito
+
 app = Flask(__name__)
 app.secret_key = 'sua_chave_secreta'
 
@@ -22,8 +21,27 @@ def index():
 def quemsomos():
     return render_template('quemsomos.html')
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
+    if request.method == 'POST':
+        nick_or_email = request.form['inputNickOrEmail']
+        senha = request.form['inputPassword']
+
+        # Verifica se é e-mail
+        if '@' in nick_or_email:
+            usuario = Usuario.query.filter_by(email=nick_or_email, senha=senha).first()
+        else:
+            # Se não for e-mail, assume que é nick
+            usuario = Usuario.query.filter_by(nick=nick_or_email, senha=senha).first()
+
+        if usuario:
+            if usuario.tipo_usuario == 'fotografo':
+                return redirect(url_for('admin_fotografo'))
+            else:
+                return render_template('usuarioNormal.html', usuario=usuario)
+        else:
+            return render_template('login.html', error='Credenciais inválidas')
+
     return render_template('login.html')
 
 @app.route('/cadastro', methods=['GET', 'POST'])
@@ -45,15 +63,24 @@ def cadastro():
         if tipo_usuario == 'fotografo':
             dados_fotografo = {
                 'cpf': request.form['inputCPF'],
-                'foto_perfil': request.files.get('inputProfilePic', None),
                 'contato': request.form['inputContact'],
                 'area_atuacao': request.form['inputArea']
             }
 
-        # Chamar a função cadastrar_usuario com os dados do formulário
-        mensagem = cadastrar_usuario(email, nick, nome, sobrenome, senha, tipo_usuario, cidade, bairro, estado, dados_fotografo)
+            # Chamar a função cadastrar_usuario com os dados do formulário
+            cadastrar_usuario(email, nick, nome, sobrenome, senha, tipo_usuario, cidade, bairro, estado, dados_fotografo)
 
-        return mensagem
+            # Adicionar redirecionamento para a página de administração do fotógrafo
+            return redirect(url_for('admin_fotografo'))
+
+        # Se o tipo de usuário for cliente, cadastrar como cliente
+        cadastrar_usuario(email, nick, nome, sobrenome, senha, tipo_usuario, cidade, bairro, estado)
+
+        # Redirecionar para a página adequada após o cadastro
+        if tipo_usuario == 'fotografo':
+            return redirect(url_for('admin_fotografo'))
+        else:
+            return render_template('usuarioNormal.html')
 
     return render_template('cadastro.html')
 
@@ -79,7 +106,6 @@ def cadastrar_usuario(email, nick, nome, sobrenome, senha, tipo_usuario, cidade,
     if tipo_usuario == 'fotografo' and dados_fotografo:
         novo_fotografo = Fotografo(
             cpf=dados_fotografo['cpf'],
-            foto_perfil=dados_fotografo.get('foto_perfil', None),
             contato=dados_fotografo['contato'],
             area_atuacao=dados_fotografo['area_atuacao'],
             nick_usuario=nick
@@ -89,7 +115,21 @@ def cadastrar_usuario(email, nick, nome, sobrenome, senha, tipo_usuario, cidade,
         db.session.add(novo_fotografo)
         db.session.commit()
 
-    return "Usuário cadastrado com sucesso!"
+@app.route('/admin/fotografo')
+def admin_fotografo():
+    # Lógica para obter informações específicas do fotógrafo (bio, fotos, links, contatos)
+    # Isso pode envolver consultas ao banco de dados para obter dados do fotógrafo logado
+    # Substitua essa lógica com base nas suas necessidades
+
+    # Por enquanto, vou apenas passar dados de exemplo para ilustrar
+    dados_fotografo = {
+        'bio': 'Essa é a bio do fotógrafo',
+        'fotos': ['foto1.jpg', 'foto2.jpg'],
+        'links': ['https://www.instagram.com/fotografo', 'https://www.portfolio.com'],
+        'contatos': {'email': 'fotografo@email.com', 'telefone': '123-456-7890'}
+    }
+
+    return render_template('usuarioFotografo.html', fotografo=dados_fotografo)
 
 if __name__ == '__main__':
     with app.app_context():
