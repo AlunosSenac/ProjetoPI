@@ -1,7 +1,8 @@
-import mysql.connector
 from flask import Flask, render_template, request, redirect, url_for, session
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user
+import mysql.connector
+import base64
 
 app = Flask(__name__)
 app.secret_key = 'chave_secreta'
@@ -60,6 +61,35 @@ def check_credentials(username_or_email, password):
     else:
         return None
 
+# Função para obter dados do fotógrafo do banco de dados
+def obter_dados_do_fotografo(fotografo_id):
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    try:
+        # Consulta para obter dados do fotógrafo com base no ID
+        cursor.execute("""
+            SELECT * FROM fotografos
+            WHERE usuario_id = %s
+        """, (fotografo_id,))
+
+        fotografo_data = cursor.fetchone()
+
+        if fotografo_data:
+            # Convertendo imagens binárias para base64 para exibição em HTML
+            fotografo_data['imagem_perfil'] = base64.b64encode(fotografo_data['imagem_perfil']).decode('utf-8')
+            fotografo_data['fotos'] = [base64.b64encode(foto).decode('utf-8') for foto in fotografo_data['fotos']]
+
+            return fotografo_data
+        else:
+            return None
+    except Exception as e:
+        print(f"Erro ao obter dados do fotógrafo: {e}")
+        return None
+    finally:
+        conn.close()
+
+# Rota para exibir a página de cadastro
 # Rota para exibir a página de cadastro
 @app.route('/cadastro', methods=['GET', 'POST'])
 def cadastro():
@@ -114,8 +144,10 @@ def cadastro():
     else:
         return render_template('cadastro.html')
 
+        # ... (código anterior)
+
 # Rota para exibir a página de login
-@app.route('/login', methods=['GET', 'POST'])
+# Rota para exibir a página de login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -151,33 +183,7 @@ def login():
     else:
         return render_template('login.html')
 
-# ... (outras rotas)
-
-# Executar a aplicação
-# ... (código anterior)
-
-# Rota para usuário fotógrafo
-@app.route('/usuario_fotografo')
-@login_required
-def usuario_fotografo():
-    return render_template('usuarioFotografo.html')
-
-# Rota para atualizar informações do fotógrafo (exemplo fictício)
-@app.route('/update_photographer_info', methods=['GET', 'POST'])
-@login_required
-def update_photographer_info():
-    if request.method == 'POST':
-        # Lógica para atualizar informações do fotógrafo no banco de dados
-        return redirect(url_for('usuario_fotografo'))  # Redirecionar para a página do fotógrafo após a atualização
-    else:
-        # Exibir formulário para atualização de informações do fotógrafo
-        return render_template('update_photographer_info.html')
-
-# Rota para usuário cliente
-@app.route('/usuario_cliente')
-@login_required
-def usuario_cliente():
-    return render_template('usuarioCliente.html')
+        # ... (código anterior)
 
 # Rota para exibir a página de índice
 @app.route('/')
@@ -197,7 +203,50 @@ def logout():
     session.clear()
     return redirect(url_for('index'))
 
-# Executar a aplicação
+# Rota para usuário fotógrafo
+@app.route('/usuario_fotografo')
+@login_required
+def usuario_fotografo():
+    fotografo = obter_dados_do_fotografo(session['user_id'])
+    return render_template('usuarioFotografo.html', fotografo=fotografo)
+
+# Rota para cadastrar fotógrafo
+@app.route('/cadastrar_fotografo', methods=['GET', 'POST'])
+@login_required
+def cadastrar_fotografo():
+    if request.method == 'POST':
+        categoria = request.form['categoria']
+        url = request.form['url']
+        bio = request.form['bio']
+        imagem_perfil = request.files['imagem_perfil'].read() if 'imagem_perfil' in request.files else None
+        fotos = [request.files['fotos'][i].read() for i in range(len(request.files.getlist('fotos')))]
+
+        try:
+            conn = get_db_connection()
+            cursor = conn.cursor()
+
+            cursor.execute("""
+                INSERT INTO fotografos
+                (usuario_id, categoria, url, bio, imagem_perfil, fotos)
+                VALUES (%s, %s, %s, %s, %s, %s)
+            """, (session['user_id'], categoria, url, bio, imagem_perfil, fotos))
+
+            conn.commit()
+
+            return redirect(url_for('visualizar_fotografo', fotografo_id=session['user_id']))
+        except Exception as e:
+            return render_template('cadastrar_fotografo.html', error='Erro durante o cadastro')
+        finally:
+            conn.close()
+
+    return render_template('cadastrar_fotografo.html')
+
+# Rota para visualizar fotógrafo
+@app.route('/visualizar_fotografo/<int:fotografo_id>')
+@login_required
+def visualizar_fotografo(fotografo_id):
+    fotografo = obter_dados_do_fotografo(fotografo_id)
+    return render_template('visualizar_fotografo.html', fotografo=fotografo)
+
 if __name__ == '__main__':
     app.run(debug=True)
-

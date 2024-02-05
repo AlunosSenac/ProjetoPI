@@ -28,14 +28,15 @@ CREATE TABLE IF NOT EXISTS usuarios (
 
 DELIMITER ;
 
-CREATE TABLE IF NOT EXISTS fotografo (
+CREATE TABLE IF NOT EXISTS fotografos (
     usuario_id INT PRIMARY KEY,
     categoria VARCHAR(255),
     url VARCHAR(255),
     bio VARCHAR(255),
-    fotos MEDIUMBLOB,  -- Armazena imagens de fotógrafos como dados binários
+    fotos MEDIUMBLOB,
     FOREIGN KEY (usuario_id) REFERENCES usuarios (id)
 );
+
 
 CREATE TABLE IF NOT EXISTS cliente (
     usuario_id INT PRIMARY KEY,  
