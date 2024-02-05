@@ -7,7 +7,21 @@
     <title>Painel do Fotógrafo</title>
 </head>
 <body>
-    <h1>Bem-vindo, Fotógrafo!</h1>
+    <h1>Bem-vindo, {{ current_user.username }}!</h1>
     <p>Essa é a página do fotógrafo. Personalize conforme suas necessidades.</p>
+
+    <!-- Add form for photographer information -->
+    <form action="{{ url_for('update_photographer_info') }}" method="post">
+        <label for="inputPhotoUrl">Foto URL:</label>
+        <input type="text" id="inputPhotoUrl" name="inputPhotoUrl" value="{{ current_user.photo_url }}" required>
+
+        <label for="inputCategory">Categoria:</label>
+        <input type="text" id="inputCategory" name="inputCategory" value="{{ current_user.category }}" required>
+
+        <label for="inputBio">Bio:</label>
+        <textarea id="inputBio" name="inputBio" required>{{ current_user.bio }}</textarea>
+
+        <button type="submit">Salvar Informações</button>
+    </form>
 </body>
 </html>

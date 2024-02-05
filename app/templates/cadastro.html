@@ -53,103 +53,65 @@
   </header>
   <main>
 
-<section class="formulario">
-  <form id="cadastroForm">
-    <h2>Cadastro</h2>
-
-    <!-- Informações Pessoais -->
-    <label for="inputName">Nome:</label>
-    <input type="text" id="inputName" name="inputName" required>
-
-    <label for="inputSobrenome">Sobrenome:</label>
-    <input type="text" id="inputSobrenome" name="inputSobrenome" required>
-
-    <label for="inputEmail">E-mail:</label>
-    <input type="email" id="inputEmail" name="inputEmail" required>
-
-    <label for="inputNick">Nick:</label>
-    <input type="text" id="inputNick" name="inputNick" required>
-
-    <label for="inputPassword">Senha:</label>
-    <input type="password" id="inputPassword" name="inputPassword" required>
-
-    <!-- Informações de Endereço -->
-    <label for="inputState">Estado:</label>
-    <select id="inputState" name="inputState" required>
-        <option value="" selected hidden>Escolha...</option>
-        <!-- Adicione opções para todos os estados -->
-    </select>
-
-    <label for="inputCity">Cidade:</label>
-    <input type="text" id="inputCity" name="inputCity" required>
-
-    <label for="inputBairro">Bairro:</label>
-    <input type="text" id="inputBairro" name="inputBairro" required>
-
-    <!-- Informações Específicas do Fotógrafo -->
-    <label for="inputUserType">Tipo de Usuário:</label>
-    <select id="inputUserType" name="inputUserType" required>
-        <option value="" selected hidden>Escolha...</option>
-        <option value="cliente">Cliente</option>
-        <option value="fotografo">Fotógrafo</option>
-    </select>
-
-    <button type="button" onclick="cadastrarUsuario()">Cadastrar</button>
-</form>
-
-
-</section>
+    <form id="cadastroForm" action="/cadastro" method="POST">
+      <h2>Cadastro</h2>
   
-</main>
+      <label for="inputName">Nome:</label>
+      <input type="text" id="inputName" name="nome" required>
+  
+      <label for="inputSobrenome">Sobrenome:</label>
+      <input type="text" id="inputSobrenome" name="sobrenome" required>
+  
+      <label for="inputTelefone">Telefone:</label>
+      <input type="tel" id="inputTelefone" name="inputTelefone">
+  
+      <label for="inputCpf">CPF:</label>
+      <input type="text" id="inputCpf" name="inputCpf" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" placeholder="123.456.789-01">
+  
+      <label for="inputEmail">E-mail:</label>
+      <input type="email" id="inputEmail" name="inputEmail" required>
+  
+      <label for="inputNick">Nick:</label>
+      <input type="text" id="inputNick" name="inputNick" required>
+  
+      <label for="inputPassword">Senha:</label>
+      <input type="password" id="inputPassword" name="inputPassword" required>
+  
+      <label for="inputUserType">Tipo de Usuário:</label>
+      <select id="inputUserType" name="inputUserType" required>
+          <option value="" selected hidden>Escolha...</option>
+          <option value="Fotografo">Fotógrafo</option>
+          <option value="Cliente">Cliente</option>
+      </select>
+  
+      <button type="submit">Cadastrar</button>
+  </form>
+
+  </main>
 
   <footer class="footer">
     <div class="container">
       <div class="row">
-        
-          <p>&copy; 2023 Seu Site. Todos os direitos reservados.</p>
-        </div>
-        
-          <ul class="social-icons">
-            <li><a href="#"><i class="bi bi-facebook"></i></a></li>
-            <li><a href="#"><i class="bi bi-twitter"></i></a></li>
-            <li><a href="#"><i class="bi bi-instagram"></i></a></li>
-          </ul>
-        </div>
+
+        <p>&copy; 2023 Seu Site. Todos os direitos reservados.</p>
       </div>
+
+      <ul class="social-icons">
+        <li><a href="#"><i class="bi bi-facebook"></i></a></li>
+        <li><a href="#"><i class="bi bi-twitter"></i></a></li>
+        <li><a href="#"><i class="bi bi-instagram"></i></a></li>
+      </ul>
+    </div>
+    </div>
     </div>
   </footer>
 
-  <script>
-    document.getElementById('inputUserType').addEventListener('change', function() {
-        var fotografoFields = document.querySelector('.fotografoFields');
-
-        if (this.value === 'fotografo') {
-            fotografoFields.style.display = 'block';
-        } else {
-            fotografoFields.style.display = 'none';
-        }
-    });
-
-    function cadastrarUsuario() {
-        var nome = document.getElementById('inputName').value;
-        var sobrenome = document.getElementById('inputSobrenome').value;
-        var email = document.getElementById('inputEmail').value;
-        var nick = document.getElementById('inputNick').value;
-        var senha = document.getElementById('inputPassword').value;
-        var estado = document.getElementById('inputState').value;
-        var cidade = document.getElementById('inputCity').value;
-        var bairro = document.getElementById('inputBairro').value;
-        var userType = document.getElementById('inputUserType').value;
-
-        // Aqui você pode adicionar lógica para enviar os dados para o backend ou realizar outras operações
-
-        alert("Usuário cadastrado com sucesso!");
-    }
-</script>
 
 
 
- 
+
+
+
 
 </body>
 
