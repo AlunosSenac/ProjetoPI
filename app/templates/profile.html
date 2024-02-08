@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil do Usuário</title>
+</head>
+<body>
+    <h1>Perfil do Usuário</h1>
+    {% if profile_data %}
+        <p>Nome: {{ profile_data[1] }} {{ profile_data[2] }}</p>
+        <p>Nome de Usuário: {{ profile_data[3] }}</p>
+        <p>Telefone: {{ profile_data[5] }}</p>
+        <p>Email: {{ profile_data[13] }}</p>
+        <p>Biografia: {{ profile_data[6] }}</p>
+        <p>URL: {{ profile_data[7] }}</p>
+        <p>Endereço: {{ profile_data[8] }}, {{ profile_data[9] }}, {{ profile_data[10] }}, {{ profile_data[11] }}, {{ profile_data[12] }}</p>
+        <p><a href="{{ url_for('edit_profile') }}">Editar Perfil</a> | <a href="{{ url_for('logout') }}">Logout</a></p>
+    {% else %}
+        <p>Não foi possível carregar o perfil do usuário.</p>
+    {% endif %}
+</body>
+</html>

@@ -67,22 +67,20 @@
         <!-- Adicione outros formatos de vídeo aqui para maior compatibilidade -->
         Seu navegador não suporta vídeos HTML5.
       </video>
-      <form method="POST" class="formLogin">
-        <h1>Login</h1>
-        <p>Digite os seus dados de acesso no campo abaixo.</p>
+
+      <form method="POST">
+        {{ form.csrf_token }}
+        <p>{{ form.nome_usuario.label }}: {{ form.nome_usuario }}</p>
+        <p>{{ form.senha.label }}: {{ form.senha }}</p>
+        <p>{{ form.submit }}</p>
+
+
+        <a href="{{ url_for('register') }}">Registre</a>
+      </form>
+
+      
+
         
-        <label for="inputNickOrEmail">Nick ou E-mail</label>
-        <input type="text" name="inputNickOrEmail" placeholder="Digite seu nick ou e-mail" autofocus="true" />
-    
-        <label for="inputPassword">Senha</label>
-        <input type="password" name="inputPassword" placeholder="Digite sua senha" />
-    
-        <a href="{{ url_for('cadastro') }}">Faça seu Cadastro.</a>
-        <a href="/">Esqueci minha senha?</a>
-    
-        <input type="submit" value="Acessar" class="btn" />
-    
-    
     </div>
   </main>
 

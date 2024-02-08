@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Perfil</title>
+</head>
+<body>
+    <h1>Editar Perfil</h1>
+    <form method="POST">
+        {{ form.csrf_token }}
+        <p>{{ form.nome.label }}: {{ form.nome }}</p>
+        <p>{{ form.sobrenome.label }}: {{ form.sobrenome }}</p>
+        <p>{{ form.nome_usuario.label }}: {{ form.nome_usuario }}</p>
+        <p>{{ form.senha.label }}: {{ form.senha }}</p>
+        <p>{{ form.telefone.label }}: {{ form.telefone }}</p>
+        <p>{{ form.email.label }}: {{ form.email }}</p>
+        <p>{{ form.bio.label }}: {{ form.bio }}</p>
+        <p>{{ form.url.label }}: {{ form.url }}</p>
+        <p>{{ form.rua.label }}: {{ form.rua }}</p>
+        <p>{{ form.cidade.label }}: {{ form.cidade }}</p>
+        <p>{{ form.estado.label }}: {{ form.estado }}</p>
+        <p>{{ form.pais.label }}: {{ form.pais }}</p>
+        <p>{{ form.codigo_postal.label }}: {{ form.codigo_postal }}</p>
+        <p>{{ form.submit }}</p>
+    </form>
+</body>
+</html>

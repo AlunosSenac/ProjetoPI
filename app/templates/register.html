@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+</head>
+<body>
+    <h1>Registro</h1>
+    <form method="POST">
+      {{ form.csrf_token }}
+      <p>{{ form.nome.label }}: {{ form.nome }}</p>
+      <p>{{ form.sobrenome.label }}: {{ form.sobrenome }}</p>
+      <p>{{ form.nome_usuario.label }}: {{ form.nome_usuario }}</p>
+      <p>{{ form.senha.label }}: {{ form.senha }}</p>
+      <p>{{ form.telefone.label }}: {{ form.telefone }}</p>
+      <p>{{ form.email.label }}: {{ form.email }}</p>
+      <p>{{ form.submit }}</p>
+  </form>
+  
+</body>
+</html>
