@@ -1,44 +1,32 @@
-CREATE DATABASE IF NOT EXISTS visualdb;
+-- Cria o banco de dados
+CREATE DATABASE IF NOT EXISTS fotografos;
 
-USE visualdb;
+-- Usa o banco de dados
+USE fotografos;
 
-DELIMITER $$
-
-CREATE TABLE IF NOT EXISTS usuarios (
+-- Cria a tabela perfilFotografos
+CREATE TABLE IF NOT EXISTS perfilFotografos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
     sobrenome VARCHAR(255) NOT NULL,
-    telefone VARCHAR(15),
-    cpf VARCHAR(14) UNIQUE,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    nome_usuario VARCHAR(50) NOT NULL,
-    senha_hash VARCHAR(255) NOT NULL,
-    tipo_usuario ENUM('Fotografo', 'Cliente') NOT NULL,
-    cep VARCHAR(10),
-    estado VARCHAR(50),
-    cidade VARCHAR(50),
-    bairro VARCHAR(50),
-    rua VARCHAR(255),
-    data_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    status_conta ENUM('Ativo', 'Inativo') DEFAULT 'Inativo',
-    imagem_perfil MEDIUMBLOB,  -- Armazena imagens de perfil como dados binários
-    ultimo_login DATETIME, -- Alteração aqui
-    tentativas_login INT DEFAULT 0
-)$$
-
-DELIMITER ;
-
-CREATE TABLE IF NOT EXISTS fotografos (
-    usuario_id INT PRIMARY KEY,
-    categoria VARCHAR(255),
+    nome_usuario VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL,
+    telefone VARCHAR(20) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    foto_perfil VARCHAR(255),
+    bio TEXT,
     url VARCHAR(255),
-    bio VARCHAR(255),
-    fotos MEDIUMBLOB,
-    FOREIGN KEY (usuario_id) REFERENCES usuarios (id)
+    rua VARCHAR(255),
+    cidade VARCHAR(255),
+    estado VARCHAR(255),
+    pais VARCHAR(255),
+    codigo_postal VARCHAR(20)
 );
 
-
-CREATE TABLE IF NOT EXISTS cliente (
-    usuario_id INT PRIMARY KEY,  
-    FOREIGN KEY (usuario_id) REFERENCES usuarios (id)
+-- Cria a tabela galeria
+CREATE TABLE IF NOT EXISTS galeria (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    perfil_id INT,
+    foto VARCHAR(255),
+    FOREIGN KEY (perfil_id) REFERENCES perfilFotografos(id)
 );
