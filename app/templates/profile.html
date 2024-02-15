@@ -3,21 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil do Usuário</title>
+    <title>Perfil</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Perfil do Usuário</h1>
-    {% if profile_data %}
-        <p>Nome: {{ profile_data[1] }} {{ profile_data[2] }}</p>
-        <p>Nome de Usuário: {{ profile_data[3] }}</p>
-        <p>Telefone: {{ profile_data[5] }}</p>
-        <p>Email: {{ profile_data[13] }}</p>
-        <p>Biografia: {{ profile_data[6] }}</p>
-        <p>URL: {{ profile_data[7] }}</p>
-        <p>Endereço: {{ profile_data[8] }}, {{ profile_data[9] }}, {{ profile_data[10] }}, {{ profile_data[11] }}, {{ profile_data[12] }}</p>
-        <p><a href="{{ url_for('edit_profile') }}">Editar Perfil</a> | <a href="{{ url_for('logout') }}">Logout</a></p>
-    {% else %}
-        <p>Não foi possível carregar o perfil do usuário.</p>
-    {% endif %}
+    <div class="container">
+        <h1>Perfil</h1>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <p>Detalhes do perfil:</p>
+        <ul>
+            <li>Nome: {{ profile_data[1] }}</li>
+            <li>Sobrenome: {{ profile_data[2] }}</li>
+            <li>Nome de usuário: {{ profile_data[3] }}</li>
+            <li>Telefone: {{ profile_data[5] }}</li>
+            <li>Email: {{ profile_data[6] }}</li>
+            {% if profile_data[8] %}
+                <li>Biografia: {{ profile_data[8] }}</li>
+            {% endif %}
+            {% if profile_data[9] %}
+                <li>URL: {{ profile_data[9] }}</li>
+            {% endif %}
+            {% if profile_data[10] %}
+                <li>Rua: {{ profile_data[10] }}</li>
+            {% endif %}
+            {% if profile_data[11] %}
+                <li>Cidade: {{ profile_data[11] }}</li>
+            {% endif %}
+            {% if profile_data[12] %}
+                <li>Estado: {{ profile_data[12] }}</li>
+            {% endif %}
+            {% if profile_data[13] %}
+                <li>País: {{ profile_data[13] }}</li>
+            {% endif %}
+            {% if profile_data[14] %}
+                <li>Código Postal: {{ profile_data[14] }}</li>
+            {% endif %}
+            {% if profile_data[7] %}
+                <li>Foto de Perfil: <img src="data:image/jpeg;base64,{{ profile_data[7] }}" alt="Foto de Perfil"></li>
+            {% endif %}
+        </ul>
+
+        <h2>Galeria</h2>
+        {% if galeria %}
+            <div class="gallery">
+                {% for foto in galeria %}
+                    <img src="data:image/jpeg;base64,{{ foto[2] }}" alt="Foto">
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>Não há fotos na galeria.</p>
+        {% endif %}
+
+        <div>
+            <button id="open-upload-form" class="btn btn-primary">Adicionar Foto</button>
+            <form id="upload-form" method="POST" enctype="multipart/form-data" action="{{ url_for('profile') }}">
+                {{ form.csrf_token }}
+                <input type="file" name="foto" accept="image/*">
+                <button type="submit" class="btn btn-success">Enviar</button>
+            </form>
+        </div>
+
+        <p><a href="{{ url_for('edit_profile') }}" class="btn btn-secondary">Editar perfil</a></p>
+        <p><a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a></p>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('open-upload-form').addEventListener('click', function() {
+            document.getElementById('upload-form').style.display = 'block';
+        });
+    </script>
 </body>
 </html>

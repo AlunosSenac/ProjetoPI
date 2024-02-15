@@ -7,22 +7,62 @@
 </head>
 <body>
     <h1>Editar Perfil</h1>
-    <form method="POST">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <form method="POST" enctype="multipart/form-data">
         {{ form.csrf_token }}
-        <p>{{ form.nome.label }}: {{ form.nome }}</p>
-        <p>{{ form.sobrenome.label }}: {{ form.sobrenome }}</p>
-        <p>{{ form.nome_usuario.label }}: {{ form.nome_usuario }}</p>
-        <p>{{ form.senha.label }}: {{ form.senha }}</p>
-        <p>{{ form.telefone.label }}: {{ form.telefone }}</p>
-        <p>{{ form.email.label }}: {{ form.email }}</p>
-        <p>{{ form.bio.label }}: {{ form.bio }}</p>
-        <p>{{ form.url.label }}: {{ form.url }}</p>
-        <p>{{ form.rua.label }}: {{ form.rua }}</p>
-        <p>{{ form.cidade.label }}: {{ form.cidade }}</p>
-        <p>{{ form.estado.label }}: {{ form.estado }}</p>
-        <p>{{ form.pais.label }}: {{ form.pais }}</p>
-        <p>{{ form.codigo_postal.label }}: {{ form.codigo_postal }}</p>
-        <p>{{ form.submit }}</p>
+        <div>
+            {{ form.nome.label }}: <input type="text" name="nome" value="{{ form.nome.data }}">
+        </div>
+        <div>
+            {{ form.sobrenome.label }}: <input type="text" name="sobrenome" value="{{ form.sobrenome.data }}">
+        </div>
+        <div>
+            {{ form.nome_usuario.label }}: <input type="text" name="nome_usuario" value="{{ form.nome_usuario.data }}">
+        </div>
+        <div>
+            {{ form.senha.label }}: <input type="password" name="senha">
+        </div>
+        <div>
+            {{ form.telefone.label }}: <input type="text" name="telefone" value="{{ form.telefone.data }}">
+        </div>
+        <div>
+            {{ form.email.label }}: <input type="email" name="email" value="{{ form.email.data }}">
+        </div>
+        <div>
+            {{ form.bio.label }}: <textarea name="bio">{{ form.bio.data }}</textarea>
+        </div>
+        <div>
+            {{ form.url.label }}: <input type="text" name="url" value="{{ form.url.data }}">
+        </div>
+        <div>
+            {{ form.rua.label }}: <input type="text" name="rua" value="{{ form.rua.data }}">
+        </div>
+        <div>
+            {{ form.cidade.label }}: <input type="text" name="cidade" value="{{ form.cidade.data }}">
+        </div>
+        <div>
+            {{ form.estado.label }}: <input type="text" name="estado" value="{{ form.estado.data }}">
+        </div>
+        <div>
+            {{ form.pais.label }}: <input type="text" name="pais" value="{{ form.pais.data }}">
+        </div>
+        <div>
+            {{ form.codigo_postal.label }}: <input type="text" name="codigo_postal" value="{{ form.codigo_postal.data }}">
+        </div>
+        <div>
+            <input type="hidden" name="foto_perfil" value="{{ profile_data[7] }}">
+        </div>
+        <div>
+            {{ form.submit }}
+        </div>
     </form>
 </body>
 </html>

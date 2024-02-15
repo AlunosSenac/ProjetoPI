@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS perfilFotografos (
     senha VARCHAR(255) NOT NULL,
     telefone VARCHAR(20) NOT NULL,
     email VARCHAR(255) NOT NULL,
-    foto_perfil VARCHAR(255),
+    foto_perfil BLOB,
     bio TEXT,
     url VARCHAR(255),
     rua VARCHAR(255),
@@ -27,6 +27,6 @@ CREATE TABLE IF NOT EXISTS perfilFotografos (
 CREATE TABLE IF NOT EXISTS galeria (
     id INT AUTO_INCREMENT PRIMARY KEY,
     perfil_id INT,
-    foto VARCHAR(255),
+    foto BLOB,
     FOREIGN KEY (perfil_id) REFERENCES perfilFotografos(id)
 );

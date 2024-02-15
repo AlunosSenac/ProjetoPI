@@ -50,6 +50,11 @@ class ProfileForm(FlaskForm):
     codigo_postal = StringField('Código Postal')
     submit = SubmitField('Salvar')
 
+# Define o formulário de upload de fotos
+class GalleryForm(FlaskForm):
+    foto = StringField('Foto')
+    submit = SubmitField('Enviar')
+
 # Página inicial
 @app.route('/')
 def index():
@@ -114,13 +119,27 @@ def logout():
     return redirect(url_for('index'))
 
 # Página de perfil
-@app.route('/profile')
+@app.route('/profile', methods=['GET', 'POST'])
 def profile():
+    form = GalleryForm()
     if 'loggedin' in session:
         user_id = session['id']
         cursor.execute("SELECT * FROM perfilFotografos WHERE id = %s", (user_id,))
         profile_data = cursor.fetchone()
-        return render_template('profile.html', profile_data=profile_data)
+        
+        cursor.execute("SELECT * FROM galeria WHERE perfil_id = %s", (user_id,))
+        galeria = cursor.fetchall()
+        
+        if request.method == 'POST':
+            if form.validate_on_submit():
+                foto = request.files['foto']
+                if foto:
+                    foto_data = foto.read()
+                    cursor.execute("INSERT INTO galeria (perfil_id, foto) VALUES (%s, %s)", (user_id, foto_data))
+                    db.commit()
+                    flash('Foto adicionada à galeria com sucesso!', 'success')
+                    return redirect(url_for('profile'))
+        return render_template('profile.html', profile_data=profile_data, form=form, galeria=galeria)
     else:
         flash('Você precisa fazer login para acessar esta página.', 'danger')
         return redirect(url_for('login'))
@@ -151,7 +170,9 @@ def edit_profile():
             db.commit()
             flash('Perfil atualizado com sucesso!', 'success')
             return redirect(url_for('profile'))
-        return render_template('edit_profile.html', form=form)
+        cursor.execute("SELECT * FROM perfilFotografos WHERE id = %s", (user_id,))
+        profile_data = cursor.fetchone()
+        return render_template('edit_profile.html', form=form, profile_data=profile_data)
     else:
         flash('Você precisa fazer login para acessar esta página.', 'danger')
         return redirect(url_for('login'))
