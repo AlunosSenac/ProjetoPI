@@ -4,9 +4,38 @@ from wtforms import StringField, PasswordField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Email
 from passlib.hash import sha256_crypt
 import mysql.connector
+import os
 
 app = Flask(__name__)
 app.secret_key = 'malucoFotografoSenac2024'
+
+# Conexão com o banco de dados
+db = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="", 
+)
+
+# Cursor para executar consultas SQL
+cursor_master = db.cursor()
+
+# Obtém o caminho absoluto para o arquivo SQL
+db_dir = os.path.join(os.path.dirname(__file__), 'db')
+sql_file = os.path.join(db_dir, 'banco.sql')
+
+# Executa os comandos SQL do arquivo
+with open(sql_file, 'r') as file:
+    sql_script = file.read()
+
+sql_commands = sql_script.split(';')
+
+# Executa cada comando SQL individualmente
+for command in sql_commands:
+    if command.strip(): 
+        cursor_master.execute(command)
+
+db.commit()
+cursor_master.close()
 
 # Conexão com o banco de dados
 db = mysql.connector.connect(
