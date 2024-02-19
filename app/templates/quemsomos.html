@@ -23,8 +23,8 @@
   <header class="custom-header">
     <nav class="navbar navbar-expand-lg navbar-light">
       <div class="container">
-        <a class="navbar-brand" href="#"><img class="logo"
-            src="{{ url_for('static', filename='img/logoVJ.png') }}" alt=""></a>
+        <a class="navbar-brand" href="#"><img class="logo" src="{{ url_for('static', filename='img/logoVJ.png') }}"
+            alt=""></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
           aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -38,10 +38,7 @@
               <a class="nav-link" href="{{ url_for('index') }}">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="..\views\lojafotos.html">Loja de Fotos</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="..\photo-gallery template\carousel-15\index.html">Fotógrafos</a>
+              <a class="nav-link" href="#">Fotógrafos</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{url_for('login')}}">
@@ -55,37 +52,37 @@
     </nav>
 
 
-    <div class="d-flex justify-content-center"> 
-    <div id="myCarousel"  class="carousel slide reduzido" data-bs-ride="carousel" data-bs-interval="2500">
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="{{ url_for('static', filename='img/banners/banerAnimado1.gif') }}" class="d-block w-100"
-            alt="Imagem 1">
+    <div class="d-flex justify-content-center">
+      <div id="myCarousel" class="carousel slide reduzido" data-bs-ride="carousel" data-bs-interval="2500">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{{ url_for('static', filename='img/banners/banerAnimado1.gif') }}" class="d-block w-100"
+              alt="Imagem 1">
+          </div>
+          <div class="carousel-item">
+            <img src="{{ url_for('static', filename='img/banners/banerAnimado2.gif') }}" class="d-block w-100"
+              alt="Imagem 2">
+          </div>
+          <div class="carousel-item">
+            <img src="{{ url_for('static', filename='img/banners/banerAnimado3.gif') }}" class="d-block w-100"
+              alt="Imagem 3">
+          </div>
         </div>
-        <div class="carousel-item">
-          <img src="{{ url_for('static', filename='img/banners/banerAnimado2.gif') }}" class="d-block w-100"
-            alt="Imagem 2">
-        </div>
-        <div class="carousel-item">
-          <img src="{{ url_for('static', filename='img/banners/banerAnimado3.gif') }}" class="d-block w-100"
-            alt="Imagem 3">
-        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
     </div>
-    </div>
-  
+
   </header>
 
   <main>
-    
+
     <div id="texto1">
       <h1>VISUAL JOURNEY</h1>
       <p>É uma aplicação web com a finalidade de desenvolver o setor de serviços voltados pro ramo da fotografia, como
