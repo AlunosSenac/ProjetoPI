@@ -1,11 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+
+<html lang="pt-Br">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Visual Journey</title>
+  <link rel="icon" href="{{ url_for('static', filename='img/logoVJ.png') }}" type="image/png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+
+
+  <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}" defer></script>
+
 </head>
+
 <body>
+
+  <header class="custom-header">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="container">
+        <a class="navbar-brand" href="#"><img class="logo" src="{{ url_for('static', filename='img/logoVJ.png') }}"
+            alt=""></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('quemsomos') }}">Quem Somos?</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="..\views\lojafotos.html">Loja de Fotos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="..\photo-gallery template\carousel-15\index.html">Fotógrafos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('login')}}">
+                <i class="bi bi-person-circle"></i>
+                Login
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
     <h1>Registro</h1>
     <form method="POST">
       {{ form.csrf_token }}
@@ -16,7 +65,25 @@
       <p>{{ form.telefone.label }}: {{ form.telefone }}</p>
       <p>{{ form.email.label }}: {{ form.email }}</p>
       <p>{{ form.submit }}</p>
-  </form>
-  
+    </form>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+
+        <p>&copy; 2023 Seu Site. Todos os direitos reservados.</p>
+      </div>
+
+      <ul class="social-icons">
+        <li><a href="#"><i class="bi bi-facebook"></i></a></li>
+        <li><a href="#"><i class="bi bi-twitter"></i></a></li>
+        <li><a href="#"><i class="bi bi-instagram"></i></a></li>
+      </ul>
+    </div>
+    </div>
+    </div>
+  </footer>
 </body>
+
 </html>
