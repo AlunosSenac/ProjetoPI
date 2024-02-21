@@ -1,13 +1,34 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, PasswordField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Email
 from passlib.hash import sha256_crypt
 import mysql.connector
 import os
+from pydrive.auth import GoogleAuth
+from pydrive.drive import GoogleDrive
+
+
 
 app = Flask(__name__)
 app.secret_key = 'malucoFotografoSenac2024'
+
+# Configuração do PyDrive
+def get_drive_service():
+    gauth = GoogleAuth()
+    gauth.LoadCredentialsFile("credentials/drive.json")  
+    if gauth.credentials is None:
+        # Autenticação interativa se as credenciais não estiverem disponíveis
+        gauth.LocalWebserverAuth()
+    elif gauth.access_token_expired:
+        # Atualiza as credenciais se o token de acesso estiver expirado
+        gauth.Refresh()
+    else:
+        # Autoriza as credenciais
+        gauth.Authorize()
+    # Retorna o serviço do Google Drive
+    return GoogleDrive(gauth)
 
 # Conexão com o banco de dados
 db = mysql.connector.connect(
@@ -42,7 +63,7 @@ db = mysql.connector.connect(
     host="localhost",
     user="root",
     password="",  # Substitua pela senha do seu banco de dados MySQL
-    database="fotografos"
+    database="visual"
 )
 cursor = db.cursor()
 
@@ -54,6 +75,7 @@ class RegistrationForm(FlaskForm):
     senha = PasswordField('Senha', validators=[DataRequired()])
     telefone = StringField('Telefone', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
+    foto_perfil = FileField('Foto de Perfil', validators=[FileAllowed(['jpg', 'png'], 'Apenas imagens JPG ou PNG são permitidas.')])
     submit = SubmitField('Registrar')
 
 # Define o formulário de login
@@ -101,9 +123,22 @@ def register():
         telefone = form.telefone.data
         email = form.email.data
         
-        cursor.execute("INSERT INTO perfilFotografos (nome, sobrenome, nome_usuario, senha, telefone, email) VALUES (%s, %s, %s, %s, %s, %s)",
-                       (nome, sobrenome, nome_usuario, senha, telefone, email))
+        # Upload da foto de perfil para o Google Drive
+        foto_perfil = form.foto_perfil.data
+        if foto_perfil:
+            drive_service = get_drive_service()
+            file_drive = drive_service.CreateFile({'title': foto_perfil.filename})
+            file_drive.SetContentString(foto_perfil.read())
+            file_drive.Upload()
+            foto_perfil = file_drive['alternateLink']
+        else:
+            foto_perfil = None
+        
+        # Inserir usuário no banco de dados
+        cursor.execute("INSERT INTO perfilFotografos (nome, sobrenome, nome_usuario, senha, telefone, email, foto_perfil) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+                       (nome, sobrenome, nome_usuario, senha, telefone, email, foto_perfil))
         db.commit()
+        
         flash('Cadastro realizado com sucesso! Faça login para acessar sua conta.', 'success')
         return redirect(url_for('login'))
     return render_template('register.html', form=form)

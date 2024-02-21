@@ -1,8 +1,8 @@
 -- Cria o banco de dados
-CREATE DATABASE IF NOT EXISTS fotografos;
+CREATE DATABASE IF NOT EXISTS visual;
 
 -- Usa o banco de dados
-USE fotografos;
+USE visual;
 
 -- Cria a tabela perfilFotografos
 CREATE TABLE IF NOT EXISTS perfilFotografos (
