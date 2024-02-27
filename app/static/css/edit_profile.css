@@ -1,0 +1,60 @@
+/* Estilo para o formulário de edição de perfil */
+form {
+    max-width: 600px; /* Define a largura máxima do formulário */
+    margin: 0 auto; /* Centraliza o formulário na página */
+    padding: 20px; /* Adiciona espaçamento interno ao redor do formulário */
+    background-color: #fff; /* Cor de fundo do formulário */
+    border-radius: 10px; /* Adiciona borda arredondada ao formulário */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Adiciona sombra ao formulário */
+}
+
+/* Estilo para os campos de entrada do formulário */
+form input[type="text"],
+form input[type="password"],
+form input[type="email"],
+form textarea {
+    width: 100%; /* Define a largura total para os campos de entrada */
+    padding: 10px; /* Adiciona espaçamento interno aos campos de entrada */
+    margin-bottom: 20px; /* Adiciona espaçamento inferior entre os campos */
+    border: 1px solid #ccc; /* Adiciona uma borda sólida aos campos */
+    border-radius: 5px; /* Adiciona borda arredondada aos campos */
+    box-sizing: border-box; /* Garante que o padding não aumente a largura do campo */
+}
+
+/* Estilo para o botão de envio do formulário */
+form input[type="submit"] {
+    width: 100%; /* Define a largura total para o botão de envio */
+    padding: 10px; /* Adiciona espaçamento interno ao botão */
+    background-color: #007bff; /* Cor de fundo do botão */
+    color: #fff; /* Cor do texto do botão */
+    border: none; /* Remove a borda do botão */
+    border-radius: 5px; /* Adiciona borda arredondada ao botão */
+    cursor: pointer; /* Altera o cursor ao passar sobre o botão */
+}
+
+/* Estilo para o rodapé */
+.footer {
+    background-color: #343a40; /* Cor de fundo do rodapé */
+    color: #ffffff; /* Cor do texto do rodapé */
+    padding: 20px 0;
+    border-top: 2px solid #007bff; /* Adiciona borda azul na parte superior */
+}
+
+.footer p {
+    margin-bottom: 0; /* Remove a margem inferior dos parágrafos no rodapé */
+}
+
+/* Estilo para os ícones sociais */
+.social-icons li {
+    display: inline-block; /* Exibe os ícones em linha */
+    margin-right: 10px; /* Espaçamento entre os ícones */
+}
+
+.social-icons li a {
+    color: #ffffff; /* Cor dos ícones */
+    font-size: 20px; /* Tamanho dos ícones */
+}
+
+.social-icons li a:hover {
+    color: #f8f9fa; /* Cor dos ícones ao passar o mouse */
+}
