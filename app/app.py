@@ -4,31 +4,41 @@ from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, PasswordField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Email
 from passlib.hash import sha256_crypt
+from werkzeug.utils import secure_filename
 import mysql.connector
 import os
-from pydrive.auth import GoogleAuth
-from pydrive.drive import GoogleDrive
-
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
+from googleapiclient.http import MediaFileUpload
 
 
 app = Flask(__name__)
 app.secret_key = 'malucoFotografoSenac2024'
 
-# Configuração do PyDrive
+# Configuração api google drive
 def get_drive_service():
-    gauth = GoogleAuth()
-    gauth.LoadCredentialsFile("credentials/drive.json")  
-    if gauth.credentials is None:
-        # Autenticação interativa se as credenciais não estiverem disponíveis
-        gauth.LocalWebserverAuth()
-    elif gauth.access_token_expired:
-        # Atualiza as credenciais se o token de acesso estiver expirado
-        gauth.Refresh()
-    else:
-        # Autoriza as credenciais
-        gauth.Authorize()
-    # Retorna o serviço do Google Drive
-    return GoogleDrive(gauth)
+    SCOPES = ['https://www.googleapis.com/auth/drive']
+    SERVICE_ACCOUNT_FILE = 'app/credentials/drive.json'  # Caminho para o arquivo de credenciais
+
+    # Verifica se o arquivo de credenciais existe
+    if not os.path.exists(SERVICE_ACCOUNT_FILE):
+        print("O arquivo de credenciais não foi encontrado:", SERVICE_ACCOUNT_FILE)
+        return None
+
+    # Carrega as credenciais do arquivo
+    credentials = service_account.Credentials.from_service_account_file(
+        SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+    
+    # Constrói o serviço do Google Drive
+    service = build('drive', 'v3', credentials=credentials)
+    
+    return service
+
+
+# Define a pasta de upload local
+app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(__file__), 'uploads')
+
+app.config['DRIVE_FOLDER_ID'] = '14Aze4LB6elRyima9HVfuI2FpLT6HMu0G'  # Defina o ID da pasta do Google Drive
 
 # Conexão com o banco de dados
 db = mysql.connector.connect(
@@ -111,11 +121,11 @@ def index():
 def quemsomos():
     return render_template('quemsomos.html')
 
-# Página de registro
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
+        # Obtenha outros dados do formulário
         nome = form.nome.data
         sobrenome = form.sobrenome.data
         nome_usuario = form.nome_usuario.data
@@ -127,16 +137,31 @@ def register():
         foto_perfil = form.foto_perfil.data
         if foto_perfil:
             drive_service = get_drive_service()
-            file_drive = drive_service.CreateFile({'title': foto_perfil.filename})
-            file_drive.SetContentString(foto_perfil.read())
-            file_drive.Upload()
-            foto_perfil = file_drive['alternateLink']
-        else:
-            foto_perfil = None
-        
-        # Inserir usuário no banco de dados
+
+            # Defina o nome do arquivo na pasta do usuário
+            filename = secure_filename(foto_perfil.filename)
+            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            
+            # Salva a foto de perfil no servidor
+            foto_perfil.save(filepath)
+
+            # Faz upload da foto para o Google Drive
+            file_metadata = {
+                'name': filename,
+                'parents': [app.config['DRIVE_FOLDER_ID']]
+            }
+            media = MediaFileUpload(filepath, mimetype='image/jpeg')
+            file_drive = drive_service.files().create(body=file_metadata, media_body=media, fields='id').execute()
+            foto_perfil_url = f"https://drive.google.com/file/d/{file_drive['id']}/view"
+            
+            # Exclua o arquivo do servidor após o upload
+            os.remove(filepath)
+
+            # Agora você pode usar foto_perfil_url para salvar a URL no banco de dados, se necessário
+
+        # Insira o usuário no banco de dados
         cursor.execute("INSERT INTO perfilFotografos (nome, sobrenome, nome_usuario, senha, telefone, email, foto_perfil) VALUES (%s, %s, %s, %s, %s, %s, %s)",
-                       (nome, sobrenome, nome_usuario, senha, telefone, email, foto_perfil))
+                       (nome, sobrenome, nome_usuario, senha, telefone, email, foto_perfil_url if foto_perfil else None))
         db.commit()
         
         flash('Cadastro realizado com sucesso! Faça login para acessar sua conta.', 'success')

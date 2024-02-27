@@ -53,7 +53,7 @@
 
   <main>
     <h1>Registro</h1>
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data"> <!-- Adicione enctype="multipart/form-data" para suportar upload de arquivo -->
       {{ form.csrf_token }}
       <p>{{ form.nome.label }}: {{ form.nome }}</p>
       <p>{{ form.sobrenome.label }}: {{ form.sobrenome }}</p>
@@ -65,6 +65,7 @@
       <p>{{ form.submit }}</p>
     </form>
   </main>
+  
 
   <footer class="footer">
     <div class="container">
