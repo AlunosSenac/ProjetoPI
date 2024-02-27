@@ -65,14 +65,16 @@
         Seu navegador não suporta vídeos HTML5.
       </video>
 
-      <form method="POST">
+      <form class="form" method="POST">
         {{ form.csrf_token }}
-        <p>{{ form.nome_usuario.label }}: {{ form.nome_usuario }}</p>
-        <p>{{ form.senha.label }}: {{ form.senha }}</p>
-        <p>{{ form.submit }}</p>
+        <p class="usuario">Usuário: <br> {{ form.nome_usuario }}</p>
+
+        <p class="senha">{{ form.senha.label }}: <br> {{ form.senha }}</p>
+        <p class="entrar">{{ form.submit }}</p>
 
 
-        <a href="{{ url_for('register') }}">Registre</a>
+        <a class="signup-link" href="{{ url_for('register') }}">Faça Seu Cadastro</a>
+
       </form>
 
 
