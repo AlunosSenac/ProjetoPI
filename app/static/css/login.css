@@ -8,7 +8,7 @@ body {
 }
 
 .page {
-    display: flex;
+    display:flex;
     flex-direction: column;
     align-items: center;
     align-content: center;
@@ -73,8 +73,10 @@ body {
     margin-bottom: 20px;
     font-size: 13px;
     color: #232121;
+    text-decoration: none; /* Remover sublinhado */
     transition: all linear 160ms;
 }
+
 
 
 
@@ -150,3 +152,31 @@ form{
     width: 100%;
   }
   
+/*   .signup-link {
+    text-decoration: none;
+    position: relative;
+    align-items: center;
+    left: 80px;
+}
+
+.entrar{
+    position: relative;
+    align-items: center;
+    left: 125px;
+}
+.senha{
+    position: relative;
+    align-items: center;
+    right: 10px;
+}
+
+.usuario{
+    position: relative;
+    align-items: center;
+    right: 20px;
+} */
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
