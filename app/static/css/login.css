@@ -4,18 +4,18 @@ body {
     font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
-   
+
 }
 
 .page {
-    display:flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
     align-content: center;
     justify-content: center;
     width: 100%;
     height: 100vh;
-    background-color:white;
+    background-color: white;
 }
 
 .formLogin {
@@ -60,7 +60,7 @@ body {
 
 
 .formLogin input:focus {
-    border: 1px solid  black;
+    border: 1px solid black;
 }
 
 .formLogin label {
@@ -73,7 +73,8 @@ body {
     margin-bottom: 20px;
     font-size: 13px;
     color: #232121;
-    text-decoration: none; /* Remover sublinhado */
+    text-decoration: none;
+    /* Remover sublinhado */
     transition: all linear 160ms;
 }
 
@@ -81,7 +82,7 @@ body {
 
 
 .btn {
-    background-color:  black;
+    background-color: black;
     color: #fff;
     font-size: 14px;
     font-weight: 600;
@@ -100,58 +101,64 @@ body {
 
 /* Efeito de hover azul nos links do formulário de login */
 .formLogin a:hover {
-    color: #07a4ff; /* Cor azul desejada */
+    color: #07a4ff;
+    /* Cor azul desejada */
     /* Ou você pode definir um fundo azul */
     /* background-color: #07a4ff; */
     /* Certifique-se de ajustar as propriedades conforme necessário */
 }
-  
-  /* Efeito de hover azul nos links do footer */
-  .footer a:hover {
-    color: #07a4ff; /* Cor azul desejada */
+
+/* Efeito de hover azul nos links do footer */
+.footer a:hover {
+    color: #07a4ff;
+    /* Cor azul desejada */
     /* Ou você pode definir um fundo azul */
     /* background-color: #07a4ff; */
     /* Certifique-se de ajustar as propriedades conforme necessário */
-  }
-  
-  /* Efeito de hover azul no botão "Acessar" */
+}
+
+/* Efeito de hover azul no botão "Acessar" */
 .formLogin input[type="submit"]:hover {
-    background-color: #07a4ff; /* Cor azul desejada */
+    background-color: #07a4ff;
+    /* Cor azul desejada */
     /* Ou você pode ajustar outras propriedades conforme necessário */
-  }
-  
+}
+
 
 .page {
-    position: relative; /* Garante que o vídeo fique como fundo */
+    position: relative;
+    /* Garante que o vídeo fique como fundo */
     width: 100%;
     height: 100vh;
-    overflow: hidden; /* Para esconder partes do vídeo que excedam a div */
+    overflow: hidden;
+    /* Para esconder partes do vídeo que excedam a div */
 
 }
-  
-  
- 
-  
- 
-body, html {
+
+
+
+
+
+body,
+html {
     margin: 0;
     padding: 0;
     height: 100%;
 }
-  
- 
-  
-form{
+
+
+
+form {
     position: absolute;
 }
 
-#videoBG{
+#videoBG {
     position: relative;
     z-index: 0;
     padding-bottom: 0;
     width: 100%;
-  }
-  
+}
+
 /*   .signup-link {
     text-decoration: none;
     position: relative;
@@ -175,8 +182,37 @@ form{
     align-items: center;
     right: 20px;
 } */
-.form{
+.form {
     display: flex;
+    font-size: 1.5rem;
+    border-radius: 5px;
+    background-color: #7a787875;
+    padding: 2.5rem;
     flex-direction: column;
     align-items: center;
+    height: 25rem;
+    border: 2px solid rgba(0, 0, 0, 0.219);
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+
+.form input {
+    border-radius: 5px;
+    margin-top: 1.5rem;
+}
+
+.form p {
+    color: white;
+}
+
+.entrar input {
+    width: 8rem;
+}
+
+.signup-link {
+    text-decoration: none;
+    font-size: 1rem;
+    color: black;
 }
