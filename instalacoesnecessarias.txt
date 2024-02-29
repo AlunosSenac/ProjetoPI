@@ -1,5 +1,0 @@
-pip install Flask
-pip install Flask-Login
-pip install Werkzeug
-pip install mysql-connector-python
-pip install Flask-WTF passlib
