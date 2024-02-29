@@ -3,7 +3,7 @@ const urlsToCache = [
   '/',
   '/static/css/style.css',
   '/static/js/main.js',
-  '/static/images/logo.png'
+  '/static/images/logoVJ.png'
 ];
 
 self.addEventListener('install', function(event) {
