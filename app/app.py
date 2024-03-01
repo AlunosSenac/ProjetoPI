@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash
+from flask import Flask, render_template, request, redirect, url_for, session, flash, request
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, PasswordField, SubmitField, TextAreaField
@@ -7,38 +7,30 @@ from passlib.hash import sha256_crypt
 from werkzeug.utils import secure_filename
 import mysql.connector
 import os
-from google.oauth2 import service_account
-from googleapiclient.discovery import build
-from googleapiclient.http import MediaFileUpload
+import requests
 
 
 app = Flask(__name__)
 app.secret_key = 'malucoFotografoSenac2024'
 
-# Configuração api google drive
-def get_drive_service():
-    SCOPES = ['https://www.googleapis.com/auth/drive']
-    SERVICE_ACCOUNT_FILE = 'app/credentials/drive.json'  # Caminho para o arquivo de credenciais
+# Função para fazer upload de imagem para o FreeImage.Host
+def upload_image_to_freeimagehost(image_file):
+    API_KEY = '6d207e02198a847aa98d0a2a901485a5'
+    UPLOAD_URL = 'https://freeimage.host/api/1/upload'
 
-    # Verifica se o arquivo de credenciais existe
-    if not os.path.exists(SERVICE_ACCOUNT_FILE):
-        print("O arquivo de credenciais não foi encontrado:", SERVICE_ACCOUNT_FILE)
+    files = {'source': image_file}
+    data = {'key': API_KEY, 'action': 'upload', 'format': 'json'}
+
+    response = requests.post(UPLOAD_URL, files=files, data=data)
+
+    if response.status_code == 200:
+        response_data = response.json()
+        image_url = response_data['image']['url']
+        return image_url
+    else:
         return None
 
-    # Carrega as credenciais do arquivo
-    credentials = service_account.Credentials.from_service_account_file(
-        SERVICE_ACCOUNT_FILE, scopes=SCOPES)
-    
-    # Constrói o serviço do Google Drive
-    service = build('drive', 'v3', credentials=credentials)
-    
-    return service
 
-
-# Define a pasta de upload local
-app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(__file__), 'uploads')
-
-app.config['DRIVE_FOLDER_ID'] = '14Aze4LB6elRyima9HVfuI2FpLT6HMu0G'  # Defina o ID da pasta do Google Drive
 
 # Conexão com o banco de dados
 db = mysql.connector.connect(
@@ -121,6 +113,8 @@ def index():
 def quemsomos():
     return render_template('quemsomos.html')
 
+
+# Pagina de Registro
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
@@ -133,35 +127,15 @@ def register():
         telefone = form.telefone.data
         email = form.email.data
         
-        # Upload da foto de perfil para o Google Drive
+        # Upload da foto de perfil para o FreeImage.Host
         foto_perfil = form.foto_perfil.data
         if foto_perfil:
-            drive_service = get_drive_service()
+            # Faz upload da imagem para o FreeImage.Host
+            foto_perfil_url = upload_image_to_freeimagehost(foto_perfil)
 
-            # Defina o nome do arquivo na pasta do usuário
-            filename = secure_filename(foto_perfil.filename)
-            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            
-            # Salva a foto de perfil no servidor
-            foto_perfil.save(filepath)
-
-            # Faz upload da foto para o Google Drive
-            file_metadata = {
-                'name': filename,
-                'parents': [app.config['DRIVE_FOLDER_ID']]
-            }
-            media = MediaFileUpload(filepath, mimetype='image/jpeg')
-            file_drive = drive_service.files().create(body=file_metadata, media_body=media, fields='id').execute()
-            foto_perfil_url = f"https://drive.google.com/file/d/{file_drive['id']}/view"
-            
-            # Exclua o arquivo do servidor após o upload
-            os.remove(filepath)
-
-            # Agora você pode usar foto_perfil_url para salvar a URL no banco de dados, se necessário
-
-        # Insira o usuário no banco de dados
+        # Insira o usuário no banco de dados, incluindo o URL da imagem do perfil, se disponível
         cursor.execute("INSERT INTO perfilFotografos (nome, sobrenome, nome_usuario, senha, telefone, email, foto_perfil) VALUES (%s, %s, %s, %s, %s, %s, %s)",
-                       (nome, sobrenome, nome_usuario, senha, telefone, email, foto_perfil_url if foto_perfil else None))
+                       (nome, sobrenome, nome_usuario, senha, telefone, email, foto_perfil_url if foto_perfil_url else None))
         db.commit()
         
         flash('Cadastro realizado com sucesso! Faça login para acessar sua conta.', 'success')
@@ -208,9 +182,18 @@ def profile():
     if 'loggedin' in session:
         user_id = session['id']
         cursor.execute("SELECT * FROM perfilFotografos WHERE id = %s", (user_id,))
-        profile_data = cursor.fetchone()
-        return render_template('profile.html', profile_data=profile_data)
+        profile_data = cursor.fetchone()  # Lê os resultados da consulta
+
+        # Verifica se os dados do perfil foram encontrados
+        if profile_data:
+            # Retorna os dados do perfil para a página de perfil
+            return render_template('profile.html', profile_data=profile_data)
+        else:
+            # Se os dados do perfil não forem encontrados, exibe uma mensagem de erro
+            flash('Dados do perfil não encontrados.', 'danger')
+            return render_template('error.html', message='Dados do perfil não encontrados')
     else:
+        # Se o usuário não estiver logado, redireciona para a página de login
         flash('Você precisa fazer login para acessar esta página.', 'danger')
         return redirect(url_for('login'))
 
