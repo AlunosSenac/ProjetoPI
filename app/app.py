@@ -8,9 +8,10 @@ from werkzeug.utils import secure_filename
 import mysql.connector
 import os
 import requests
-from flask_pwa import FlaskPWA
+#from flask_pwa import FlaskPWA
 
 app = Flask(__name__)
+""""
 app.config['PWA_APP_NAME'] = 'Visual Jorney'
 app.config['PWA_APP_DESCRIPTION'] = 'Descrição da aplicação'
 app.config['PWA_APP_THEME_COLOR'] = '#000000'
@@ -27,7 +28,7 @@ app.config['PWA_APP_DIR'] = 'ltr'
 app.config['PWA_APP_LANG'] = 'en-US'
 
 pwa = FlaskPWA(app)
-
+"""
 
 app.secret_key = 'malucoFotografoSenac2024'
 
