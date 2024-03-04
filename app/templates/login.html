@@ -59,29 +59,29 @@
 
 
   <main>
-    <div class="page">
-      <video autoplay muted loop id="videoBG">
-        <source src="{{ url_for('static', filename='video/photographer.mp4') }}" type="video/mp4">
-        <!-- Adicione outros formatos de vídeo aqui para maior compatibilidade -->
-        Seu navegador não suporta vídeos HTML5.
-      </video>
-
-      <form class="form" method="POST">
-        {{ form.csrf_token }}
-        <p class="usuario"> Usuário: <br> {{ form.nome_usuario }}</p>
-
-        <p class="senha">{{ form.senha.label }}: <br> {{ form.senha }}</p>
-        <p class="entrar">{{ form.submit }}</p>
-
-
-        <a class="signup-link" href="{{ url_for('register') }}">Faça Seu Cadastro</a>
-
+      
+  
+    <div class="container">
+      <form class="login-form" method="POST">
+          {{ form.hidden_tag() }}
+          <div class="form-group">
+              <label for="nome_usuario">Nome de Usuário:</label>
+              <input type="text" id="nome_usuario" name="nome_usuario" required>
+          </div>
+          <div class="form-group">
+              <label for="senha">Senha:</label>
+              <input type="password" id="senha" name="senha" required>
+          </div>
+          <div class="form-group">
+              <a class="signup-link" href="/register">Faça Seu Cadastro</a>
+          </div>
+          <button type="submit" class="btn btn-primary">Login</button>
       </form>
+  </div>
+      
 
 
-
-
-    </div>
+    
   </main>
 
 
@@ -101,6 +101,7 @@
     </div>
     </div>
   </footer>
+<<<<<<< HEAD
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function() {
@@ -118,6 +119,12 @@
   
   
   
+=======
+
+
+
+
+>>>>>>> origin/main
 
 
 </body>

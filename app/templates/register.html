@@ -11,7 +11,11 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+<<<<<<< HEAD
   <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+=======
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+>>>>>>> origin/main
 
 
   <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}" defer></script>
@@ -51,22 +55,46 @@
       </div>
     </nav>
   </header>
+  <main class="container">
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title text-center mb-4">Registro</h1>
+            <form class="custom-form" method="POST" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="sobrenome">Sobrenome:</label>
+                    <input type="text" id="sobrenome" name="sobrenome" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="nome_usuario">Nome de Usuário:</label>
+                    <input type="text" id="nome_usuario" name="nome_usuario" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="senha">Senha:</label>
+                    <input type="password" id="senha" name="senha" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefone">Telefone:</label>
+                    <input type="tel" id="telefone" name="telefone" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="foto_perfil">Foto de Perfil:</label>
+                    <input type="file" id="foto_perfil" name="foto_perfil" class="form-control-file">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Registrar</button>
+            </form>
+        </div>
+    </div>
+</main>
 
-  <main>
-    <h1>Registro</h1>
-    <form method="POST" enctype="multipart/form-data"> <!-- Adicione enctype="multipart/form-data" para suportar upload de arquivo -->
-      {{ form.csrf_token }}
-      <p>{{ form.nome.label }}: {{ form.nome }}</p>
-      <p>{{ form.sobrenome.label }}: {{ form.sobrenome }}</p>
-      <p>{{ form.nome_usuario.label }}: {{ form.nome_usuario }}</p>
-      <p>{{ form.senha.label }}: {{ form.senha }}</p>
-      <p>{{ form.telefone.label }}: {{ form.telefone }}</p>
-      <p>{{ form.email.label }}: {{ form.email }}</p>
-      <p>{{ form.foto_perfil.label }}: {{ form.foto_perfil }}</p>
-      <p>{{ form.submit }}</p>
-    </form>
-  </main>
-  
   <footer class="footer">
     <div class="container">
       <div class="row">
@@ -83,6 +111,7 @@
     </div>
     </div>
   </footer>
+<<<<<<< HEAD
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function() {
@@ -100,6 +129,12 @@
   
   
   
+=======
+
+
+
+
+>>>>>>> origin/main
 </body>
 
 </html>
