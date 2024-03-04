@@ -8,27 +8,10 @@ from werkzeug.utils import secure_filename
 import mysql.connector
 import os
 import requests
-#from flask_pwa import FlaskPWA
+
 
 app = Flask(__name__)
-""""
-app.config['PWA_APP_NAME'] = 'Visual Jorney'
-app.config['PWA_APP_DESCRIPTION'] = 'Descrição da aplicação'
-app.config['PWA_APP_THEME_COLOR'] = '#000000'
-app.config['PWA_APP_BACKGROUND_COLOR'] = '#ffffff'
-app.config['PWA_APP_DISPLAY'] = 'standalone'
-app.config['PWA_APP_SCOPE'] = '/'
-app.config['PWA_APP_ORIENTATION'] = 'any'
-app.config['PWA_APP_START_URL'] = '/'
-app.config['PWA_APP_STATUS_BAR_COLOR'] = 'black'
-app.config['PWA_APP_ICONS'] = [{'src': 'static/img/icon.png', 'sizes': '192x192'}, {'src': 'static/img/icon.png', 'sizes': '512x512'}]
-app.config['PWA_APP_ICONS_APPLE'] = [{'src': 'static/img/icon.png', 'sizes': '180x180'}, {'src': 'static/img/icon.png', 'sizes': '167x167'}]
-app.config['PWA_APP_SPLASH_SCREEN'] = [{'src': 'static/img/splash.png', 'media': '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)'}]
-app.config['PWA_APP_DIR'] = 'ltr'
-app.config['PWA_APP_LANG'] = 'en-US'
 
-pwa = FlaskPWA(app)
-"""
 
 app.secret_key = 'malucoFotografoSenac2024'
 
@@ -55,7 +38,7 @@ def upload_image_to_freeimagehost(image_file):
 db = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="", 
+    password="485485", 
 )
 
 # Cursor para executar consultas SQL
@@ -83,7 +66,7 @@ cursor_master.close()
 db = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="",  # Substitua pela senha do seu banco de dados MySQL
+    password="485485",  # Substitua pela senha do seu banco de dados MySQL
     database="visual"
 )
 cursor = db.cursor()
@@ -247,14 +230,7 @@ def edit_profile():
         flash('Você precisa fazer login para acessar esta página.', 'danger')
         return redirect(url_for('login'))
 
-@app.after_request
-def add_caching(response):
-    CacheControl = request.headers.get('Cache-Control')
-    if not CacheControl or CacheControl.lower() != 'no-cache':
-        response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0'
-        response.headers['Pragma'] = 'no-cache'
-        response.headers['Expires'] = '-1'
-    return response
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port= 5000)
