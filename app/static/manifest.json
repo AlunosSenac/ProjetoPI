@@ -1,0 +1,21 @@
+{
+    "name": "Visual Jorney",
+    "short_name": "VJ",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#007bff",
+    "icons": [
+      {
+        "src": "/static/img/icon.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "/static/img/icon.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ]
+  }
+  

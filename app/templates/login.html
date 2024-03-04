@@ -4,7 +4,7 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Visual Journey</title>
   <link rel="icon" href="{{ url_for('static', filename='img/logoVJ.png') }}" type="image/png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+  <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
 
 
   <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}" defer></script>
@@ -100,10 +101,30 @@
     </div>
     </div>
   </footer>
+<<<<<<< HEAD
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/static/js/service-worker.js')
+          .then(function(registration) {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          }, function(err) {
+            console.log('ServiceWorker registration failed: ', err);
+          });
+      });
+    }
+  </script>
+  
+  
+  
+  
+  
+=======
 
 
 
 
+>>>>>>> origin/main
 
 
 </body>
