@@ -38,7 +38,7 @@ def upload_image_to_freeimagehost(image_file):
 db = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="485485", 
+    password="", 
 )
 
 # Cursor para executar consultas SQL
@@ -66,7 +66,7 @@ cursor_master.close()
 db = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="485485",  # Substitua pela senha do seu banco de dados MySQL
+    password="",  # Substitua pela senha do seu banco de dados MySQL
     database="visual"
 )
 cursor = db.cursor()
@@ -226,6 +226,25 @@ def edit_profile():
             flash('Perfil atualizado com sucesso!', 'success')
             return redirect(url_for('profile'))
         return render_template('edit_profile.html', form=form)
+    else:
+        flash('Você precisa fazer login para acessar esta página.', 'danger')
+        return redirect(url_for('login'))
+
+
+# Página do portfólio
+@app.route('/<nome_usuario>/portfolio')
+def portfolio(nome_usuario):
+    if 'loggedin' in session:
+        cursor.execute("SELECT * FROM perfilFotografos WHERE nome_usuario = %s", (nome_usuario,))
+        profile_data = cursor.fetchone()
+
+        if profile_data:
+            nome = profile_data[1]  # Índice para o primeiro nome
+            sobrenome = profile_data[2]  # Índice para o sobrenome
+            return render_template('portfolio.html', nome=nome, sobrenome=sobrenome)
+        else:
+            flash('Perfil não encontrado.', 'danger')
+            return render_template('error.html', message='Perfil não encontrado')
     else:
         flash('Você precisa fazer login para acessar esta página.', 'danger')
         return redirect(url_for('login'))
