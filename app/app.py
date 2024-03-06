@@ -252,12 +252,19 @@ def portfolio(nome_usuario):
     profile_data = cursor.fetchone()
 
     if profile_data:
-        nome = profile_data[1]  # Índice para o primeiro nome
-        sobrenome = profile_data[2]  # Índice para o sobrenome
-        return render_template('portfolio.html', nome=nome, sobrenome=sobrenome, profile_data=profile_data)
+            user_id = profile_data[0]  # Obtém o ID do usuário
+            cursor.execute("SELECT foto FROM galeria WHERE perfil_id = %s", (user_id,))
+            gallery_photos = cursor.fetchall()  # Obtém todas as fotos da galeria do usuário
+            
+            return render_template('portfolio.html', nome=profile_data[1], sobrenome=profile_data[2], gallery_photos=gallery_photos)
+        else:
+            flash('Perfil não encontrado.', 'danger')
+            return render_template('error.html', message='Perfil não encontrado')
     else:
-        flash('Perfil não encontrado.', 'danger')
-        return render_template('error.html', message='Perfil não encontrado')
+        flash('Você precisa fazer login para acessar esta página.', 'danger')
+        return redirect(url_for('login'))
+
+
 
 
 
