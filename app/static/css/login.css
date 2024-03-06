@@ -1,17 +1,35 @@
-form{
-    padding: 3rem;
-}
-h2{
-    color: black;
+main {
+    background-image: url("../img/camera.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+h2 {
+    color: rgb(243, 239, 239);
+    font-size: 3rem;
+    margin: 2rem;
+}
+
+
 .login-form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     max-width: 500px;
     margin: 100px auto;
-    padding: 30px;
-    background-color: #44404023;
+    padding: 50px;
+    background-color: #444040c5;
     border-radius: 10px;
-    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1);
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    font-size: 1.3rem;
 }
 
 .login-form .form-group {
@@ -19,21 +37,26 @@ h2{
 }
 
 .login-form label {
+    display: flex;
+    align-items: center;
     font-weight: bold;
-    color: #333;
+    color: #eeebeb;
 }
 
 .login-form input[type="text"],
 .login-form input[type="password"] {
-    width: 100%;
-    padding: 15px;
+    display: flex;
+    align-items: center;
+    width: 22rem;
+    padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
+    margin: 5px 0; /* Adjusted margin */
 }
 
 .login-form .btn {
     width: 100%;
-    padding: 15px;
+    padding: 17px;
     border-radius: 5px;
     background-color: #435364;
     color: #fff;
@@ -57,7 +80,29 @@ h2{
     text-decoration: underline;
 }
 
-a{
+a {
     text-decoration: none;
     color: antiquewhite;
+}
+
+/* Media Query for Responsive Design */
+@media (max-width: 768px) {
+    .login-form {
+        padding: 30px;
+        max-width: 90%;
+    }
+
+    h2 {
+        font-size: 2.5rem;
+    }
+
+    label {
+        font-size: 1.1rem;
+    }
+
+    .login-form input[type="text"],
+    .login-form input[type="password"] {
+        width: 100%;
+        margin: 10px 0; /* Adjusted margin */
+    }
 }

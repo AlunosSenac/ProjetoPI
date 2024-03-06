@@ -1,28 +1,47 @@
+*{
+    margin: 0;
+    padding: 0;
+
+}
+main {
+    background-image: url("../img/registro.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+
 .card {
     max-width: 600px;
-    background-color: #44404023;
+    background-color: #444040ad;
     margin: 50px auto;
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
 }
 
-.card-body {
+.card .card-body {
     padding: 40px;
 }
 
-.card-title {
+.card .card-title {
     font-weight: bold;
-    color: black;
+    color: white;
 }
 
-.custom-form label {
+.card .custom-form label {
     font-weight: bold;
+    color: white;
 }
 
-.custom-form input[type="text"],
-.custom-form input[type="password"],
-.custom-form input[type="tel"],
-.custom-form input[type="email"],
-.custom-form input[type="file"] {
+.card .custom-form input[type="text"],
+.card .custom-form input[type="password"],
+.card .custom-form input[type="tel"],
+.card .custom-form input[type="email"],
+.card .custom-form input[type="file"] {
     width: 100%;
     margin-bottom: 20px;
     padding: 10px;
@@ -30,7 +49,7 @@
     border: 1px solid #ccc;
 }
 
-.custom-form button {
+.card .custom-form button {
     padding: 12px;
     border-radius: 5px;
     background-color: #435364;
@@ -39,6 +58,6 @@
     cursor: pointer;
 }
 
-.custom-form button:hover {
+.card .custom-form button:hover {
     background-color: #2e4e70;
 }

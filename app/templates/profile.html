@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
   <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
@@ -70,22 +69,25 @@
     
     
 
-    <footer class="footer">
-        <div class="container">
+    <div class="elemento-acima-do-footer">
+        <footer class="footer">
+          <div class="container">
             <div class="row">
-
-                <p>&copy; 2023 Seu Site. Todos os direitos reservados.</p>
+      
+              <p>&copy; 2023 Seu Site. Todos os direitos reservados.</p>
             </div>
-
+      
             <ul class="social-icons">
-                <li><a href="#"><i class="bi bi-facebook"></i></a></li>
-                <li><a href="#"><i class="bi bi-twitter"></i></a></li>
-                <li><a href="#"><i class="bi bi-instagram"></i></a></li>
+              <li><a href="#"><i class="bi bi-facebook"></i></a></li>
+              <li><a href="#"><i class="bi bi-twitter"></i></a></li>
+              <li><a href="#"><i class="bi bi-instagram"></i></a></li>
             </ul>
-        </div>
-        </div>
-        </div>
-    </footer>
+          </div>
+          </div>
+          </div>
+        </footer>
+      </div>
+      
     <script>
         if ('serviceWorker' in navigator) {
           window.addEventListener('load', function() {

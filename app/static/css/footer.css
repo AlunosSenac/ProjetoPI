@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Tektur:wght@400;500;600&display=swap');
 
+/* Adicione uma margem inferior ao elemento acima do footer para evitar que o footer o sobreponha */
+.elemento-acima-do-footer {
+  margin-bottom: 90px; /* A mesma altura do footer */
+}
+
 .footer {
   position: fixed;
   bottom: 0;
@@ -10,8 +15,8 @@
   text-align: center;
   padding: 10px;
   height: 90px; /* Pode ajustar a altura conforme necessário */
+  z-index: 999; /* Certifique-se de que o footer esteja acima de outros elementos, se necessário */
 }
-
 
 .social-icons li {
   display: inline-block;
@@ -27,29 +32,18 @@
   color: #ccc;
 }
 
-/* Efeito de hover azul nos links do formulário de login */
 .formLogin a:hover {
   color: #07a4ff; /* Cor azul desejada */
-  /* Ou você pode definir um fundo azul */
-  /* background-color: #07a4ff; */
-  /* Certifique-se de ajustar as propriedades conforme necessário */
 }
 
-/* Efeito de hover azul nos links do footer */
 .footer a:hover {
   color: #07a4ff; /* Cor azul desejada */
-  /* Ou você pode definir um fundo azul */
-  /* background-color: #07a4ff; */
-  /* Certifique-se de ajustar as propriedades conforme necessário */
 }
 
-/* Efeito de hover azul nos links do footer */
-.footer a:hover {
+.footer p:hover {
   color: #07a4ff; /* Cor azul desejada */
-  /* Ou você pode definir um fundo azul */
-  /* background-color: #07a4ff; */
-  /* Certifique-se de ajustar as propriedades conforme necessário */
 }
+
 
 /* Efeito de hover azul no texto de direitos autorais */
 .footer p:hover {
