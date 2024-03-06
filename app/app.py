@@ -117,9 +117,11 @@ def quemsomos():
 
 
 # Pagina de Registro
+# Pagina de Registro
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
+    foto_perfil_url = None  # Inicializa foto_perfil_url como None
     if form.validate_on_submit():
         # Obtenha outros dados do formulário
         nome = form.nome.data
@@ -129,20 +131,26 @@ def register():
         telefone = form.telefone.data
         email = form.email.data
         
-        # Upload da foto de perfil para o FreeImage.Host
-        foto_perfil = form.foto_perfil.data
-        if foto_perfil:
+        # Verifica se a foto de perfil foi fornecida
+        if form.foto_perfil.data:
             # Faz upload da imagem para o FreeImage.Host
-            foto_perfil_url = upload_image_to_freeimagehost(foto_perfil)
-
+            foto_perfil_url = upload_image_to_freeimagehost(form.foto_perfil.data)
+        
         # Insira o usuário no banco de dados, incluindo o URL da imagem do perfil, se disponível
         cursor.execute("INSERT INTO perfilFotografos (nome, sobrenome, nome_usuario, senha, telefone, email, foto_perfil) VALUES (%s, %s, %s, %s, %s, %s, %s)",
-                       (nome, sobrenome, nome_usuario, senha, telefone, email, foto_perfil_url if foto_perfil_url else None))
+                       (nome, sobrenome, nome_usuario, senha, telefone, email, foto_perfil_url))
         db.commit()
         
         flash('Cadastro realizado com sucesso! Faça login para acessar sua conta.', 'success')
         return redirect(url_for('login'))
+    
     return render_template('register.html', form=form)
+
+
+
+
+
+
 
 # Página de login
 @app.route('/login', methods=['GET', 'POST'])
