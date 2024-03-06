@@ -1,5 +1,7 @@
 pip install Flask
-pip install Flask-Login
-pip install Werkzeug
+pip install Flask-WTF
+pip install WTForms
+pip install passlib
 pip install mysql-connector-python
-pip install Flask-WTF passlib
+pip install requests
+pip install email_validator
