@@ -106,9 +106,14 @@ class ProfileForm(FlaskForm):
     submit = SubmitField('Salvar')
 
 # Página inicial
+# Modifique a rota '/' para buscar todos os usuários do banco de dados
+# Modifique a rota '/' para buscar a foto, nome, sobrenome e nome de usuário de todos os usuários do banco de dados
 @app.route('/')
 def index():
-    return render_template('index.html')
+    cursor.execute("SELECT foto_perfil, nome, sobrenome, nome_usuario FROM perfilFotografos")
+    users_data = cursor.fetchall()
+    return render_template('index.html', users_data=users_data)
+
 
 # Página 'Quem Somos'
 @app.route('/quemsomos')
@@ -240,22 +245,21 @@ def edit_profile():
 
 
 # Página do portfólio
-@app.route('/<nome_usuario>/portfolio')
+# Página do portfólio
+@app.route('/portfolio/<nome_usuario>')
 def portfolio(nome_usuario):
-    if 'loggedin' in session:
-        cursor.execute("SELECT * FROM perfilFotografos WHERE nome_usuario = %s", (nome_usuario,))
-        profile_data = cursor.fetchone()
+    cursor.execute("SELECT * FROM perfilFotografos WHERE nome_usuario = %s", (nome_usuario,))
+    profile_data = cursor.fetchone()
 
-        if profile_data:
-            nome = profile_data[1]  # Índice para o primeiro nome
-            sobrenome = profile_data[2]  # Índice para o sobrenome
-            return render_template('portfolio.html', nome=nome, sobrenome=sobrenome)
-        else:
-            flash('Perfil não encontrado.', 'danger')
-            return render_template('error.html', message='Perfil não encontrado')
+    if profile_data:
+        nome = profile_data[1]  # Índice para o primeiro nome
+        sobrenome = profile_data[2]  # Índice para o sobrenome
+        return render_template('portfolio.html', nome=nome, sobrenome=sobrenome, profile_data=profile_data)
     else:
-        flash('Você precisa fazer login para acessar esta página.', 'danger')
-        return redirect(url_for('login'))
+        flash('Perfil não encontrado.', 'danger')
+        return render_template('error.html', message='Perfil não encontrado')
+
+
 
 
 
