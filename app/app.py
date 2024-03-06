@@ -88,6 +88,10 @@ class LoginForm(FlaskForm):
     senha = PasswordField('Senha', validators=[DataRequired()])
     submit = SubmitField('Entrar')
 
+class GalleryUploadForm(FlaskForm):
+    photo = FileField('Selecionar Foto', validators=[FileAllowed(['jpg', 'png', 'jpeg'], 'Apenas imagens JPG, JPEG ou PNG são permitidas.')])
+    submit = SubmitField('Enviar')
+
 # Define o formulário de perfil
 class ProfileForm(FlaskForm):
     nome = StringField('Nome', validators=[DataRequired()])
@@ -192,17 +196,37 @@ def logout():
     return redirect(url_for('index'))
 
 # Página de perfil
-@app.route('/profile')
+@app.route('/profile', methods=['GET', 'POST'])
 def profile():
     if 'loggedin' in session:
         user_id = session['id']
         cursor.execute("SELECT * FROM perfilFotografos WHERE id = %s", (user_id,))
         profile_data = cursor.fetchone()  # Lê os resultados da consulta
 
-        # Verifica se os dados do perfil foram encontrados
         if profile_data:
-            # Retorna os dados do perfil para a página de perfil
-            return render_template('profile.html', profile_data=profile_data)
+            if request.method == 'POST':
+                form = GalleryUploadForm(request.form)
+                if form.validate_on_submit():
+                    photo_file = form.photo.data
+                    if photo_file:
+                        # Faz o upload da imagem para o serviço de hospedagem de imagens
+                        photo_url = upload_image_to_freeimagehost(photo_file)
+                        if photo_url:
+                            # Salva a URL da imagem na tabela galeria
+                            cursor.execute("INSERT INTO galeria (perfil_id, foto) VALUES (%s, %s)", (user_id, photo_url))
+                            db.commit()
+                            flash('Foto da galeria enviada com sucesso!', 'success')
+                            return redirect(url_for('profile'))
+                        else:
+                            flash('Falha ao enviar foto da galeria. Tente novamente.', 'danger')
+                    else:
+                        flash('Nenhum arquivo selecionado.', 'danger')
+                else:
+                    flash('Formulário inválido. Verifique se você selecionou uma imagem.', 'danger')
+            else:
+                form = GalleryUploadForm()
+                
+            return render_template('profile.html', profile_data=profile_data, form=form)
         else:
             # Se os dados do perfil não forem encontrados, exibe uma mensagem de erro
             flash('Dados do perfil não encontrados.', 'danger')
@@ -211,6 +235,8 @@ def profile():
         # Se o usuário não estiver logado, redireciona para a página de login
         flash('Você precisa fazer login para acessar esta página.', 'danger')
         return redirect(url_for('login'))
+
+
 
 # Página de edição de perfil
 @app.route('/edit_profile', methods=['GET', 'POST'])
