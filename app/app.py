@@ -66,7 +66,7 @@ cursor_master.close()
 db = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="",  # Substitua pela senha do seu banco de dados MySQL
+    password="",  
     database="visual"
 )
 cursor = db.cursor()
@@ -110,14 +110,9 @@ class ProfileForm(FlaskForm):
     submit = SubmitField('Salvar')
 
 # Página inicial
-# Modifique a rota '/' para buscar todos os usuários do banco de dados
-# Modifique a rota '/' para buscar a foto, nome, sobrenome e nome de usuário de todos os usuários do banco de dados
 @app.route('/')
 def index():
-    cursor.execute("SELECT foto_perfil, nome, sobrenome, nome_usuario FROM perfilFotografos")
-    users_data = cursor.fetchall()
-    return render_template('index.html', users_data=users_data)
-
+    return render_template('index.html')
 
 # Página 'Quem Somos'
 @app.route('/quemsomos')
@@ -125,7 +120,7 @@ def quemsomos():
     return render_template('quemsomos.html')
 
 
-# Pagina de Registro
+
 # Pagina de Registro
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -271,13 +266,13 @@ def edit_profile():
 
 
 # Página do portfólio
-# Página do portfólio
-@app.route('/portfolio/<nome_usuario>')
+@app.route('/<nome_usuario>/portfolio')
 def portfolio(nome_usuario):
-    cursor.execute("SELECT * FROM perfilFotografos WHERE nome_usuario = %s", (nome_usuario,))
-    profile_data = cursor.fetchone()
+    if 'loggedin' in session:
+        cursor.execute("SELECT * FROM perfilFotografos WHERE nome_usuario = %s", (nome_usuario,))
+        profile_data = cursor.fetchone()
 
-    if profile_data:
+        if profile_data:
             user_id = profile_data[0]  # Obtém o ID do usuário
             cursor.execute("SELECT foto FROM galeria WHERE perfil_id = %s", (user_id,))
             gallery_photos = cursor.fetchall()  # Obtém todas as fotos da galeria do usuário
@@ -289,10 +284,6 @@ def portfolio(nome_usuario):
     else:
         flash('Você precisa fazer login para acessar esta página.', 'danger')
         return redirect(url_for('login'))
-
-
-
-
 
 
 
