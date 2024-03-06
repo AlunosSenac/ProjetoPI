@@ -79,7 +79,7 @@ class RegistrationForm(FlaskForm):
     senha = PasswordField('Senha', validators=[DataRequired()])
     telefone = StringField('Telefone', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
-    foto_perfil = FileField('Foto de Perfil', validators=[FileAllowed(['jpg', 'png'], 'Apenas imagens JPG ou PNG são permitidas.')])
+    foto_perfil = FileField('Foto de Perfil', validators=[FileAllowed(['jpg','png','bmp','gif','tiff'], 'Apenas imagens JPG ou PNG são permitidas.')])
     submit = SubmitField('Registrar')
 
 # Define o formulário de login
