@@ -1,5 +1,6 @@
 .card {
     max-width: 600px;
+    background-color: #44404023;
     margin: 50px auto;
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
 }
@@ -10,7 +11,7 @@
 
 .card-title {
     font-weight: bold;
-    color: #007bff;
+    color: black;
 }
 
 .custom-form label {
@@ -32,12 +33,12 @@
 .custom-form button {
     padding: 12px;
     border-radius: 5px;
-    background-color: #007bff;
+    background-color: #435364;
     color: #fff;
     border: none;
     cursor: pointer;
 }
 
 .custom-form button:hover {
-    background-color: #0056b3;
+    background-color: #2e4e70;
 }

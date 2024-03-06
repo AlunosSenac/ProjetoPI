@@ -10,13 +10,14 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/carouselPerfil.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
   <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
 
 
 
   <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}" defer></script>
-  <script src="{{ url_for('static', filename='js/carouselPerfil.js') }}" defer></script>
+
 
 
 </head>
@@ -54,87 +55,37 @@
         </div>
       </div>
     </nav>
+
+    <div id="myCarousel" class="carousel slide reduzido" data-bs-ride="carousel" data-bs-interval="2500">
+      <div class="carousel-inner">
+          <div class="carousel-item active">
+              <img src="{{ url_for('static', filename='img/banners/banerAnimado1.gif') }}" class="d-block" alt="Imagem 1">
+          </div>
+          <div class="carousel-item">
+              <img src="{{ url_for('static', filename='img/banners/banerAnimado2.gif') }}" class="d-block" alt="Imagem 2">
+          </div>
+          <div class="carousel-item">
+              <img src="{{ url_for('static', filename='img/banners/banerAnimado3.gif') }}" class="d-block" alt="Imagem 3">
+          </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+      </button>
+  </div>
+
+
+
   </header>
 
 
   <main>
 
-    <fieldset class="custom-carousel carousel-usuario animated-fieldset" id="carouselUsuario1">
-      <legend style="display: flex;">
-        Casamento
-        <div class="legend-buttons-container">
-          <button class="anterior" data-carousel-id="carouselUsuario1">&#9664;</button>
-          <button class="proximo" data-carousel-id="carouselUsuario1">&#9654;</button>
-        </div>
-      </legend>
-      <div class="carousel-container">
-        <div class="color-border"></div>
-        <div class="carousel">
-
-          <div class="usuario">
-            <div class="usuario-card">
-              <img src="" alt="Foto de Laura Oliveira" class="profile-img">
-              <div class="info">
-                <h2>Laura Oliveira</h2>
-                <p>Idade: 29 anos</p>
-                <p>Cidade: Salvador</p>
-
-              </div>
-            </div>
-          </div>
-          <div class="usuario">
-            <div class="usuario-card">
-              <img
-                src="https://igd-wp-uploads-pluginaws.s3.amazonaws.com/wp-content/uploads/2016/05/30105213/Qual-e%CC%81-o-Perfil-do-Empreendedor.jpg"
-                alt="Foto de Pedro Lima" class="profile-img">
-              <div class="info">
-                <h2>Pedro Lima</h2>
-                <p>Idade: 32 anos</p>
-                <p>Cidade: Curitiba</p>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </fieldset>
-
-
-
-    <fieldset class="custom-carousel carousel-usuario animated-fieldset" id="carouselUsuario2">
-      <legend style="display: flex;">
-        Paisagens
-        <div class="legend-buttons-container">
-          <button class="anterior" data-carousel-id="carouselUsuario2">&#9664;</button>
-          <button class="proximo" data-carousel-id="carouselUsuario2">&#9654;</button>
-        </div>
-      </legend>
-      <div class="carousel-container">
-        <div class="color-border"></div>
-        <div class="carousel">
-          <div class="usuario">
-            <div class="usuario-card">
-              <img src="paisagem9.jpg" alt="Paisagem 9" class="profile-img" width="1rem">
-              <div class="info">
-                <h2>Paisagem 9</h2>
-                <p>Local: Montanhas</p>
-              </div>
-            </div>
-          </div>
-          <div class="usuario">
-            <div class="usuario-card">
-              <img src="paisagem10.jpg" alt="Paisagem 10" class="profile-img">
-              <div class="info">
-                <h2>Paisagem 10</h2>
-                <p>Local: Praia</p>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </fieldset>
-
+    
   </main>
   
   
