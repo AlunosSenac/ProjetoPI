@@ -86,10 +86,12 @@ a {
 }
 
 /* Media Query for Responsive Design */
+
 @media (max-width: 768px) {
     .login-form {
         padding: 30px;
-        max-width: 90%;
+        width: 90%; /* Alteração para largura em porcentagem */
+        max-width: 400px; /* Limite máximo de largura */
     }
 
     h2 {
@@ -103,6 +105,6 @@ a {
     .login-form input[type="text"],
     .login-form input[type="password"] {
         width: 100%;
-        margin: 10px 0; /* Adjusted margin */
+        margin: 10px 0; /* Ajustado o margin */
     }
 }
