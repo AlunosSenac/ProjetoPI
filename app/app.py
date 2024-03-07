@@ -152,11 +152,6 @@ def register():
     return render_template('register.html', form=form)
 
 
-
-
-
-
-
 # Página de login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -261,18 +256,14 @@ def edit_profile():
 @app.route('/<nome_usuario>/portfolio')
 def portfolio(nome_usuario):
     if 'loggedin' in session:
-        cursor.execute("SELECT * FROM perfilFotografos WHERE nome_usuario = %s", (nome_usuario,))
-        profile_data = cursor.fetchone()
+        cursor.execute("SELECT id, foto_url FROM galeria WHERE perfil_id = (SELECT id FROM perfilFotografos WHERE nome_usuario = %s)", (nome_usuario,))
+        gallery_photos = cursor.fetchall()  # Obtém todas as fotos da galeria do usuário
 
-        if profile_data:
-            user_id = profile_data[0]  # Obtém o ID do usuário
-            cursor.execute("SELECT foto FROM galeria WHERE perfil_id = %s", (user_id,))
-            gallery_photos = cursor.fetchall()  # Obtém todas as fotos da galeria do usuário
-            
-            return render_template('portfolio.html', nome=profile_data[1], sobrenome=profile_data[2], gallery_photos=gallery_photos)
+        if gallery_photos:
+            return render_template('portfolio.html', gallery_photos=gallery_photos)
         else:
-            flash('Perfil não encontrado.', 'danger')
-            return render_template('error.html', message='Perfil não encontrado')
+            flash('Nenhuma foto encontrada.', 'danger')
+            return render_template('error.html', message='Nenhuma foto encontrada')
     else:
         flash('Você precisa fazer login para acessar esta página.', 'danger')
         return redirect(url_for('login'))

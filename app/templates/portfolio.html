@@ -7,8 +7,13 @@
     <title>Portfolio</title>
 </head>
 <body>
-    <h1>Portfolio de {{ profile_data[1] }} {{ profile_data[2] }}</h1>
-    <p>Nome de Usuário: {{ profile_data[3] }}</p>
-    <!-- Adicione mais informações do perfil conforme necessário -->
+    <h1>Portfolio</h1>
+
+    <div class="gallery">
+        {% for photo in gallery_photos %}
+            <img src="{{ photo[1] }}" alt="Foto da Galeria">
+        {% endfor %}
+    </div>
+
 </body>
 </html>
