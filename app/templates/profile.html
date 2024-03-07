@@ -79,6 +79,13 @@
       {% else %}
       <p>Não foi possível carregar o perfil do usuário.</p>
       {% endif %}
+      <h3>Galeria</h1>
+      <div class="gallery">
+          {% for photo in gallery_photos %}
+              <img src="{{ photo[1] }}" alt="Foto da Galeria">
+          {% endfor %}
+      </div>
+
   </main>
   
     

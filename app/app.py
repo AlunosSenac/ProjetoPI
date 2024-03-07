@@ -209,7 +209,12 @@ def profile():
                     return redirect(url_for('profile'))
                 else:
                     flash('Nenhuma foto selecionada.', 'danger')
-            return render_template('profile.html', profile_data=profile_data, form=form)
+            
+            # Busca as fotos da galeria do usuário atualmente logado
+            cursor.execute("SELECT id, foto_url FROM galeria WHERE perfil_id = %s", (user_id,))
+            gallery_photos = cursor.fetchall()  # Obtém todas as fotos da galeria do usuário
+
+            return render_template('profile.html', profile_data=profile_data, form=form, gallery_photos=gallery_photos)    
         else:
             # Se os dados do perfil não forem encontrados, exibe uma mensagem de erro
             flash('Dados do perfil não encontrados.', 'danger')
@@ -218,6 +223,8 @@ def profile():
         # Se o usuário não estiver logado, redireciona para a página de login
         flash('Você precisa fazer login para acessar esta página.', 'danger')
         return redirect(url_for('login'))
+
+
 
 
 # Página de edição de perfil
