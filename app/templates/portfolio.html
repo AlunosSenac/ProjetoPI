@@ -8,12 +8,25 @@
 </head>
 <body>
     <h1>Portfolio</h1>
-
-    <div class="gallery">
-        {% for photo in gallery_photos %}
-            <img src="{{ photo[1] }}" alt="Foto da Galeria">
-        {% endfor %}
-    </div>
-
+    <main>
+        <h1>Perfil do Usuário</h1>
+        {% if profile_data %}
+        <img src="{{ profile_data[7] }}" alt="Imagem" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover;">
+        <p>Nome: {{ profile_data[1] }} {{ profile_data[2] }}</p>
+        <p>Nome de Usuário: {{ profile_data[3] }}</p>
+        <p>Telefone: {{ profile_data[5] }}</p>
+        <p>Email: {{ profile_data[6] }}</p>
+        <p>Biografia: {{ profile_data[8] }}</p>
+        <p>Endereço: {{ profile_data[10] }}, {{ profile_data[11] }}, {{ profile_data[12] }}, {{ profile_data[13] }}, {{ profile_data[14] }}</p>
+    
+        <div class="gallery">
+            {% for photo in gallery_photos %}
+                <img src="{{ photo[1] }}" alt="Foto da Galeria">
+            {% endfor %}
+        </div>
+        {% else %}
+        <p>Nenhum dado do perfil encontrado.</p>
+        {% endif %}
+    </main>
 </body>
 </html>

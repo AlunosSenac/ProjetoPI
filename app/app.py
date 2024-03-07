@@ -262,18 +262,18 @@ def edit_profile():
 # Página do portfólio
 @app.route('/<nome_usuario>/portfolio')
 def portfolio(nome_usuario):
-    if 'loggedin' in session:
-        cursor.execute("SELECT id, foto_url FROM galeria WHERE perfil_id = (SELECT id FROM perfilFotografos WHERE nome_usuario = %s)", (nome_usuario,))
-        gallery_photos = cursor.fetchall()  # Obtém todas as fotos da galeria do usuário
+    cursor.execute("SELECT id, foto_url FROM galeria WHERE perfil_id = (SELECT id FROM perfilFotografos WHERE nome_usuario = %s)", (nome_usuario,))
+    gallery_photos = cursor.fetchall()  # Obtém todas as fotos da galeria do usuário
 
-        if gallery_photos:
-            return render_template('portfolio.html', gallery_photos=gallery_photos)
-        else:
-            flash('Nenhuma foto encontrada.', 'danger')
-            return render_template('error.html', message='Nenhuma foto encontrada')
+    # Adiciona consulta para recuperar os dados do usuário
+    cursor.execute("SELECT * FROM perfilFotografos WHERE nome_usuario = %s", (nome_usuario,))
+    profile_data = cursor.fetchone()  # Lê os resultados da consulta
+
+    if gallery_photos:
+        return render_template('portfolio.html', gallery_photos=gallery_photos, profile_data=profile_data)
     else:
-        flash('Você precisa fazer login para acessar esta página.', 'danger')
-        return redirect(url_for('login'))
+        flash('Nenhuma foto encontrada.', 'danger')
+        return render_template('error.html', message='Nenhuma foto encontrada')
 
 
 
