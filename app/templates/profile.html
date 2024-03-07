@@ -51,34 +51,36 @@
     </header>
 
     <main>
-        <h1>Perfil do Usuário</h1>
-        {% if profile_data %}
-        <img src="{{ profile_data[7] }}" alt="Imagem" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover;">
-        <p>Nome: {{ profile_data[1] }} {{ profile_data[2] }}</p>
-        <p>Nome de Usuário: {{ profile_data[3] }}</p>
-        <p>Telefone: {{ profile_data[5] }}</p>
-        <p>Email: {{ profile_data[6] }}</p>
-        <p>Biografia: {{ profile_data[8] }}</p>
-        <p>Endereço: {{ profile_data[10] }}, {{ profile_data[11] }}, {{ profile_data[12] }}, {{ profile_data[13] }}, {{ profile_data[14] }}</p>
-        <p>Foto de Perfil:</p>
-        
-        <p><a href="{{ url_for('edit_profile') }}">Editar Perfil</a> | <a href="{{ url_for('logout') }}">Logout</a> | <a href="{{ url_for('portfolio', nome_usuario=profile_data[3]) }}">Portfólio</a></p>
-        {% else %}
-        <p>Não foi possível carregar o perfil do usuário.</p>
-        {% endif %}  
-
-        <h2>Galeria de Fotos</h2>
-        <form method="POST" enctype="multipart/form-data" action="{{ url_for('profile') }}">
-            {{ form.csrf_token }}
-            {{ form.photo.label }} {{ form.photo }} {{ form.submit }}
-        </form>
-        <div>
-            {% for photo in gallery_photos %}
-                <img src="{{ photo.url }}" alt="Foto da Galeria">
-            {% endfor %}
-        </div>
-    </main>
-    
+      <h1>Perfil do Usuário</h1>
+      {% if profile_data %}
+      <img src="{{ profile_data[7] }}" alt="Imagem" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover;">
+      <p>Nome: {{ profile_data[1] }} {{ profile_data[2] }}</p>
+      <p>Nome de Usuário: {{ profile_data[3] }}</p>
+      <p>Telefone: {{ profile_data[5] }}</p>
+      <p>Email: {{ profile_data[6] }}</p>
+      <p>Biografia: {{ profile_data[8] }}</p>
+      <p>Endereço: {{ profile_data[10] }}, {{ profile_data[11] }}, {{ profile_data[12] }}, {{ profile_data[13] }}, {{ profile_data[14] }}</p>
+  
+      <!-- Formulário para upload de galeria -->
+      <form method="POST" enctype="multipart/form-data" action="{{ url_for('profile') }}">
+          {{ form.csrf_token }}
+          <div class="form-group">
+              <label for="photo">Selecionar Foto:</label>
+              {{ form.photo(class="form-control", id="photo", accept="image/*", required=true) }}
+          </div>
+          <div class="form-group">
+              <label for="descricao">Descrição:</label>
+              {{ form.descricao(class="form-control", id="descricao", required=true) }}
+          </div>
+          <button type="submit" class="btn btn-primary">Enviar Foto</button>
+      </form>
+  
+      <p><a href="{{ url_for('edit_profile') }}">Editar Perfil</a> | <a href="{{ url_for('logout') }}">Logout</a> | <a href="{{ url_for('portfolio', nome_usuario=profile_data[3]) }}">Portfólio</a></p>
+      {% else %}
+      <p>Não foi possível carregar o perfil do usuário.</p>
+      {% endif %}
+  </main>
+  
     
 
     <div class="elemento-acima-do-footer">
