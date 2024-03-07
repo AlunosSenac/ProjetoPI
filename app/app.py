@@ -90,6 +90,7 @@ class LoginForm(FlaskForm):
 
 class GalleryUploadForm(FlaskForm):
     photo = FileField('Selecionar Foto', validators=[FileAllowed(['jpg', 'png', 'jpeg'], 'Apenas imagens JPG, JPEG ou PNG são permitidas.')])
+    descricao = TextAreaField('Descrição')
     submit = SubmitField('Enviar')
 
 # Define o formulário de perfil
@@ -199,28 +200,20 @@ def profile():
         profile_data = cursor.fetchone()  # Lê os resultados da consulta
 
         if profile_data:
-            if request.method == 'POST':
-                form = GalleryUploadForm(request.form)
-                if form.validate_on_submit():
-                    photo_file = form.photo.data
-                    if photo_file:
-                        # Faz o upload da imagem para o serviço de hospedagem de imagens
-                        photo_url = upload_image_to_freeimagehost(photo_file)
-                        if photo_url:
-                            # Salva a URL da imagem na tabela galeria
-                            cursor.execute("INSERT INTO galeria (perfil_id, foto) VALUES (%s, %s)", (user_id, photo_url))
-                            db.commit()
-                            flash('Foto da galeria enviada com sucesso!', 'success')
-                            return redirect(url_for('profile'))
-                        else:
-                            flash('Falha ao enviar foto da galeria. Tente novamente.', 'danger')
-                    else:
-                        flash('Nenhum arquivo selecionado.', 'danger')
+            form = GalleryUploadForm()  # Cria o formulário
+            if form.validate_on_submit():
+                descricao = form.descricao.data
+                if form.photo.data:  # Verifique se a foto foi enviada
+                    # Faz upload da imagem para o FreeImage.Host
+                    foto_galeria_url = upload_image_to_freeimagehost(form.photo.data)
+                    # Insira a foto na tabela de galeria
+                    cursor.execute("INSERT INTO galeria (perfil_id, descricao, foto_url) VALUES (%s, %s, %s)",
+                                   (user_id, descricao, foto_galeria_url))
+                    db.commit() 
+                    flash('Foto adicionada com sucesso!', 'success')
+                    return redirect(url_for('profile'))
                 else:
-                    flash('Formulário inválido. Verifique se você selecionou uma imagem.', 'danger')
-            else:
-                form = GalleryUploadForm()
-                
+                    flash('Nenhuma foto selecionada.', 'danger')
             return render_template('profile.html', profile_data=profile_data, form=form)
         else:
             # Se os dados do perfil não forem encontrados, exibe uma mensagem de erro
@@ -230,7 +223,6 @@ def profile():
         # Se o usuário não estiver logado, redireciona para a página de login
         flash('Você precisa fazer login para acessar esta página.', 'danger')
         return redirect(url_for('login'))
-
 
 
 # Página de edição de perfil

@@ -27,6 +27,10 @@ CREATE TABLE IF NOT EXISTS perfilFotografos (
 CREATE TABLE IF NOT EXISTS galeria (
     id INT AUTO_INCREMENT PRIMARY KEY,
     perfil_id INT,
-    foto VARCHAR(255),
+    foto_id INT,
+    foto_url VARCHAR(255),
     FOREIGN KEY (perfil_id) REFERENCES perfilFotografos(id)
 );
+
+-- Modifica a tabela galeria para incluir uma coluna de descrição
+ALTER TABLE galeria ADD COLUMN descricao VARCHAR(255);
