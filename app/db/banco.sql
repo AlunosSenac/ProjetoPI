@@ -29,8 +29,7 @@ CREATE TABLE IF NOT EXISTS galeria (
     perfil_id INT,
     foto_id INT,
     foto_url VARCHAR(255),
+    descricao VARCHAR(255),
     FOREIGN KEY (perfil_id) REFERENCES perfilFotografos(id)
 );
 
--- Modifica a tabela galeria para incluir uma coluna de descrição
-ALTER TABLE galeria ADD COLUMN descricao VARCHAR(255);
