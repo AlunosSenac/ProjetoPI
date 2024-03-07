@@ -1,38 +1,42 @@
-*{
+* {
     margin: 0;
     padding: 0;
-
 }
+
+body {
+    min-height: 100vh; /* Ensure the body covers the entire viewport height */
+    display: flex;
+    flex-direction: column;
+}
+
+header, footer {
+    background-color: #333; /* Example color */
+    color: white;
+    padding: 20px;
+}
+
 main {
+    flex: 1; /* Let main take up remaining vertical space */
     background-image: url("../img/registro.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0;
 }
 
-
 .card {
-    max-width: 600px;
     background-color: #444040ad;
-    margin: 50px auto;
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+    max-width: 400px; /* Adjust the width as needed */
 }
 
 .card .card-body {
     padding: 40px;
 }
 
-.card .card-title {
-    font-weight: bold;
-    color: white;
-}
-
-.card .custom-form label {
+.card .card-title, .card .custom-form label {
     font-weight: bold;
     color: white;
 }

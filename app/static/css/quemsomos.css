@@ -1,11 +1,12 @@
-body{
-  background: rgb(255,255,255);
-background: linear-gradient(162deg, rgba(255,255,255,0.5298494397759104) 32%, rgba(146,152,152,1) 61%);
-}
+
+ 
 main {
   font-family: 'Montserrat', sans-serif;
   padding: 20px;
-}
+  background: rgb(255,255,255);
+  background: linear-gradient(162deg, rgba(255,255,255,0.5298494397759104) 32%, rgba(146,152,152,1) 61%);
+  }
+
 
 
 h1 {

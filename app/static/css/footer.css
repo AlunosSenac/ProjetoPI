@@ -2,11 +2,13 @@
 
 /* Adicione uma margem inferior ao elemento acima do footer para evitar que o footer o sobreponha */
 .elemento-acima-do-footer {
-  margin-bottom: 90px; /* A mesma altura do footer */
+  display: flex;
+  margin-bottom: 90px;
+  align-content: flex-end;
 }
 
 .footer {
-  position: fixed;
+
   bottom: 0;
   left: 0;
   width: 100%;
@@ -15,7 +17,7 @@
   text-align: center;
   padding: 10px;
   height: 90px; /* Pode ajustar a altura conforme necessário */
-  z-index: 999; /* Certifique-se de que o footer esteja acima de outros elementos, se necessário */
+
 }
 
 .social-icons li {
