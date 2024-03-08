@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS perfilFotografos (
     estado VARCHAR(255),
     pais VARCHAR(255),
     codigo_postal VARCHAR(20)
+    categoria VARCHAR(20)
 );
 
 -- Cria a tabela galeria
