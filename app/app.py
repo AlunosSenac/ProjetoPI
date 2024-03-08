@@ -272,8 +272,7 @@ def portfolio(nome_usuario):
     if gallery_photos:
         return render_template('portfolio.html', gallery_photos=gallery_photos, profile_data=profile_data)
     else:
-        flash('Nenhuma foto encontrada.', 'danger')
-        return render_template('error.html', message='Nenhuma foto encontrada')
+        return render_template('portfolio.html', profile_data=profile_data)
 
 
 
