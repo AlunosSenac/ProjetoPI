@@ -46,14 +46,18 @@
     <main>
         <h1>Perfil do Usuário</h1>
         {% if profile_data %}
-        <img src="{{ profile_data[7] }}" alt="Imagem" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover;">
-        <p>Nome: {{ profile_data[1] }} {{ profile_data[2] }}</p>
-        <p>Nome de Usuário: {{ profile_data[3] }}</p>
-        <p>Telefone: {{ profile_data[5] }}</p>
-        <p>Email: {{ profile_data[6] }}</p>
-        <p>Biografia: {{ profile_data[8] }}</p>
-        <p>Endereço: {{ profile_data[10] }}, {{ profile_data[11] }}, {{ profile_data[12] }}, {{ profile_data[13] }}, {{ profile_data[14] }}</p>
-        
+        <img src="{{ profile_data[7] }}" alt="Imagem" class="profile-img">
+        <h2>{{ profile_data[1] }} {{ profile_data[2] }}</h2>
+        <p><strong>Nome de Usuário:</strong> {{ profile_data[3] }}</p>
+        <p><strong>Telefone:</strong> {{ profile_data[5] }}</p>
+        <p><strong>Email:</strong> {{ profile_data[6] }}</p>
+        <p><strong>Biografia:</strong></p>
+        <p>{{ profile_data[8] }}</p>
+        <p><strong>URL:</strong></p>
+        <p><a href="{{ profile_data[9] }}">{{ profile_data[9] }}</a></p>
+        <p><strong>Endereço:</strong></p>
+        <p>{{ profile_data[10] }}, {{ profile_data[11] }}, {{ profile_data[12] }}, {{ profile_data[13] }}, {{ profile_data[14] }}</p>
+      
         <a href="https://api.whatsapp.com/send?phone={{ profile_data[5] }}" target="_blank">
             Conversar no WhatsApp
         </a>
