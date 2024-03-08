@@ -102,7 +102,7 @@ class ProfileForm(FlaskForm):
     telefone = StringField('Telefone', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
     bio = TextAreaField('Biografia')
-    url = StringField('URL')
+    links = StringField('Links')
     rua = StringField('Rua')
     cidade = StringField('Cidade')
     estado = StringField('Estado')
@@ -241,15 +241,15 @@ def edit_profile():
             telefone = form.telefone.data
             email = form.email.data
             bio = form.bio.data
-            url = form.url.data
+            links = form.links.data
             rua = form.rua.data
             cidade = form.cidade.data
             estado = form.estado.data
             pais = form.pais.data
             codigo_postal = form.codigo_postal.data
             
-            cursor.execute("UPDATE perfilFotografos SET nome = %s, sobrenome = %s, nome_usuario = %s, senha = %s, telefone = %s, email = %s, bio = %s, url = %s, rua = %s, cidade = %s, estado = %s, pais = %s, codigo_postal = %s WHERE id = %s",
-                           (nome, sobrenome, nome_usuario, senha, telefone, email, bio, url, rua, cidade, estado, pais, codigo_postal, user_id))
+            cursor.execute("UPDATE perfilFotografos SET nome = %s, sobrenome = %s, nome_usuario = %s, senha = %s, telefone = %s, email = %s, bio = %s, links = %s, rua = %s, cidade = %s, estado = %s, pais = %s, codigo_postal = %s WHERE id = %s",
+                           (nome, sobrenome, nome_usuario, senha, telefone, email, bio, links, rua, cidade, estado, pais, codigo_postal, user_id))
             db.commit()
             flash('Perfil atualizado com sucesso!', 'success')
             return redirect(url_for('profile'))
