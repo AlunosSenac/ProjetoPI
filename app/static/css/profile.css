@@ -1,0 +1,155 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+}
+
+main {
+    width: 90%; /* Definindo uma largura maior */
+    margin: 0 auto; /* Centralizando na tela */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex; /* Usando flexbox para distribuir o conteúdo */
+    flex-direction: column; /* Distribuindo os itens verticalmente */
+    align-items: center; /* Centralizando os itens horizontalmente */
+}
+
+.infprimarias {
+    width: 100%; /* Garantindo que a largura da seção seja 100% */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 20px; /* Adicionando margem na parte inferior */
+}
+
+.nomecnf {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.fotoperfil {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.menu-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.menu-content a {
+    display: block;
+    padding: 10px 20px;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.menu-content a:hover {
+    background-color: #f0f0f0;
+}
+
+.profile-info {
+    width: 100%; /* Garantindo que a largura da seção seja 100% */
+    display: flex;
+    flex-wrap: wrap; /* Permitindo que os itens quebrem para a próxima linha */
+    justify-content: space-between; /* Distribuindo os itens uniformemente */
+    margin-bottom: 20px; /* Adicionando margem na parte inferior */
+}
+
+.info-group {
+    width: calc(50% - 10px); /* Definindo a largura para ocupar metade do espaço disponível com um espaço de 10px entre os itens */
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.info-group p {
+    margin-bottom: 10px;
+    font-size: 14px; /* Ajuste o tamanho da fonte conforme necessário */
+}
+
+.info-group strong {
+    font-weight: bold;
+}
+
+.info-group a {
+    color: #333;
+    text-decoration: none;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Define 3 colunas com a mesma largura */
+    grid-gap: 20px; /* Espaço entre as imagens */
+    justify-content: center; /* Centraliza as imagens horizontalmente */
+}
+
+.gallery img {
+    width: auto; /* Define a largura automática para manter o formato original */
+    height: auto;
+    max-width: 100%; /* Limita a largura máxima da imagem */
+    max-height: 100%; /* Limita a altura máxima da imagem */
+    object-fit: cover; /* Mantém a proporção da imagem */
+    border-radius: 8px;
+}
+
+.gallery-item p {
+    font-size: 14px; /* Ajuste o tamanho da fonte conforme necessário */
+}
+
+.elemento-acima-do-footer {
+    width: 100%;
+    text-align: center;
+}
+
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+}
+
+.footer p {
+    margin: 0;
+}
+
+.social-icons {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.social-icons li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.social-icons li:last-child {
+    margin-right: 0;
+}
+
+.social-icons a {
+    color: #fff;
+    font-size: 24px;
+    text-decoration: none;
+}

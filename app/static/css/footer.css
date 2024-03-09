@@ -1,23 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Tektur:wght@400;500;600&display=swap');
-
-/* Adicione uma margem inferior ao elemento acima do footer para evitar que o footer o sobreponha */
 .elemento-acima-do-footer {
-  display: flex;
-  margin-bottom: 90px;
-  align-content: flex-end;
+  width: 100%;
+  text-align: center;
 }
 
 .footer {
-
-  bottom: 0;
-  left: 0;
-  width: 100%;
   background-color: #333;
   color: #fff;
-  text-align: center;
-  padding: 10px;
-  height: 90px; /* Pode ajustar a altura conforme necessário */
+  padding: 20px 0;
+}
 
+.footer p {
+  margin: 0;
+}
+
+.social-icons {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 10px;
 }
 
 .social-icons li {
@@ -25,34 +24,13 @@
   margin-right: 10px;
 }
 
+.social-icons li:last-child {
+  margin-right: 0;
+}
+
 .social-icons a {
   color: #fff;
-  font-size: 18px;
+  font-size: 24px;
+  text-decoration: none;
 }
-
-.social-icons a:hover {
-  color: #ccc;
-}
-
-.formLogin a:hover {
-  color: #07a4ff; /* Cor azul desejada */
-}
-
-.footer a:hover {
-  color: #07a4ff; /* Cor azul desejada */
-}
-
-.footer p:hover {
-  color: #07a4ff; /* Cor azul desejada */
-}
-
-
-/* Efeito de hover azul no texto de direitos autorais */
-.footer p:hover {
-  color: #07a4ff; /* Cor azul desejada */
-  /* Ou você pode definir um fundo azul */
-  /* background-color: #07a4ff; */
-  /* Certifique-se de ajustar as propriedades conforme necessário */
-}
-
 

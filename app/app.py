@@ -89,7 +89,7 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Entrar')
 
 class GalleryUploadForm(FlaskForm):
-    photo = FileField('Selecionar Foto', validators=[FileAllowed(['jpg', 'png', 'jpeg'], 'Apenas imagens JPG, JPEG ou PNG são permitidas.')])
+    photo = FileField('Selecionar Foto', validators=[FileAllowed(['jpg','png','bmp','gif','tiff'], 'Apenas imagens JPG, JPEG ou PNG são permitidas.')])
     descricao = TextAreaField('Descrição')
     submit = SubmitField('Enviar')
 
@@ -111,9 +111,14 @@ class ProfileForm(FlaskForm):
     submit = SubmitField('Salvar')
 
 # Página inicial
+# Página inicial
 @app.route('/')
 def index():
-    return render_template('index.html')
+    # Consulta para obter todos os fotógrafos
+    cursor.execute("SELECT nome, nome_usuario FROM perfilFotografos")
+    photographers = cursor.fetchall()  # Retorna uma lista de tuplas (nome, nome_usuario)
+
+    return render_template('index.html', photographers=photographers)
 
 # Página 'Quem Somos'
 @app.route('/quemsomos')
@@ -273,8 +278,10 @@ def portfolio(nome_usuario):
         return render_template('portfolio.html', gallery_photos=gallery_photos, profile_data=profile_data)
     else:
         return render_template('portfolio.html', profile_data=profile_data)
+    
+    
 
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port= 5000)
+    app.run(debug='True', host='0.0.0.0', port= 5000)

@@ -84,16 +84,15 @@
 
 
   <main>
-    <div class="user-cards">
-      {% for user_data in users_data %}
-          <a href="{{ url_for('portfolio', nome_usuario=user_data[3]) }}">
-              <div class="user-card">
-                  <img src="{{ user_data[0] }}" alt="Foto de Perfil de {{ user_data[1] }} {{ user_data[2] }}">
-                  <p>Nome: {{ user_data[1] }}</p>
-                  <p>Sobrenome: {{ user_data[2] }}</p>
-                  <p>Nome de Usuário: {{ user_data[3] }}</p>
-              </div>
-          </a>
+  
+
+    <div class="photographers">
+      {% for photographer in photographers %}
+      <div class="photographer-card">
+          <h2>{{ photographer[0] }}</h2> <!-- Nome do fotógrafo -->
+          <p>{{ photographer[1] }}</p> <!-- Nome de usuário -->
+          <a href="{{ url_for('portfolio', nome_usuario=photographer[1]) }}">Ver Portfólio</a> <!-- Link para o portfólio -->
+      </div>
       {% endfor %}
   </div>
     
