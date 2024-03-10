@@ -115,8 +115,9 @@ class ProfileForm(FlaskForm):
 @app.route('/')
 def index():
     # Consulta para obter todos os fotógrafos
-    cursor.execute("SELECT nome, nome_usuario FROM perfilFotografos")
-    photographers = cursor.fetchall()  # Retorna uma lista de tuplas (nome, nome_usuario)
+    cursor.execute("SELECT nome, nome_usuario, foto_perfil FROM perfilFotografos")
+    photographers = cursor.fetchall()  # Recuperar dados
+# Retorna uma lista de tuplas (nome, nome_usuario)
 
     return render_template('index.html', photographers=photographers)
 

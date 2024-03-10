@@ -17,6 +17,8 @@
 
 
   <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/index.js') }}" defer></script>
+
 
 
 
@@ -55,17 +57,16 @@
         </div>
       </div>
     </nav>
-
     <div id="myCarousel" class="carousel slide reduzido" data-bs-ride="carousel" data-bs-interval="2500">
       <div class="carousel-inner">
           <div class="carousel-item active">
-              <img src="{{ url_for('static', filename='img/banners/banerAnimado1.gif') }}" class="d-block" alt="Imagem 1">
+              <img src="{{ url_for('static', filename='img/banners/banerAnimado1.gif') }}" class="d-block w-100" alt="Imagem 1">
           </div>
           <div class="carousel-item">
-              <img src="{{ url_for('static', filename='img/banners/banerAnimado2.gif') }}" class="d-block" alt="Imagem 2">
+              <img src="{{ url_for('static', filename='img/banners/banerAnimado2.gif') }}" class="d-block w-100" alt="Imagem 2">
           </div>
           <div class="carousel-item">
-              <img src="{{ url_for('static', filename='img/banners/banerAnimado3.gif') }}" class="d-block" alt="Imagem 3">
+              <img src="{{ url_for('static', filename='img/banners/banerAnimado3.gif') }}" class="d-block w-100" alt="Imagem 3">
           </div>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
@@ -76,27 +77,40 @@
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
       </button>
-  </div>
-
+    </div>
+    
 
 
   </header>
 
 
   <main>
-  
-
-    <div class="photographers">
-      {% for photographer in photographers %}
-      <div class="photographer-card">
-          <h2>{{ photographer[0] }}</h2> <!-- Nome do fotógrafo -->
-          <p>{{ photographer[1] }}</p> <!-- Nome de usuário -->
-          <a href="{{ url_for('portfolio', nome_usuario=photographer[1]) }}">Ver Portfólio</a> <!-- Link para o portfólio -->
+    <section>
+      <h2>Título</h2>
+      <div class="carossel-Container">
+        <div class="btnCarossel BtnBack disable">
+          <span id="seta"></span>
+        </div>
+        <div class="carossel-Slide">
+          {% for photographer in photographers %}
+          <div class="item">
+            <img src="{{ photographer[2] }}" alt="Foto de Perfil"> <!-- Adicione a foto do perfil do fotógrafo -->
+            <div class="info">
+              <h2>{{ photographer[0] }}</h2> <!-- Nome do fotógrafo -->
+              <p>{{ photographer[1] }}</p> <!-- Nome de usuário -->
+              <a href="{{ url_for('portfolio', nome_usuario=photographer[1]) }}">Ver Portfólio</a> <!-- Link para o portfólio -->
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="btnCarossel BtnNext">
+          <span id="seta"></span>
+        </div>
       </div>
-      {% endfor %}
-  </div>
+    </section>
     
   </main>
+  
   
   
   <div class="elemento-acima-do-footer">
