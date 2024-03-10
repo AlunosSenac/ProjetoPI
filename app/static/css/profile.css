@@ -38,8 +38,8 @@ main {
 }
 
 .fotoperfil {
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     object-fit: cover;
     margin-right: 20px;
@@ -153,3 +153,32 @@ main {
     font-size: 24px;
     text-decoration: none;
 }
+
+.menu-button {
+    background-color: transparent; 
+    border: none;
+    cursor: pointer; 
+    padding-left: 5px;
+  }
+  
+  .menu-content {
+    display: none; 
+    position: absolute; 
+    background-color: #fff;
+    min-width: 160px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    z-index: 1; 
+  }
+  
+  .menu-content a {
+    display: block; 
+    padding: 10px 20px; 
+    color: #333; 
+    text-decoration: none; 
+    transition: background-color 0.3s ease;
+  }
+  
+  .menu-content a:hover {
+    background-color: #f0f0f0; 
+  }
+  

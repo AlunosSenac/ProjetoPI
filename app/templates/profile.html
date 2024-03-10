@@ -63,17 +63,21 @@
         <h1>{{ profile_data[1] }} {{ profile_data[2] }}</h1>
         
         <div class="menu" id="menu">
-          <button onmouseover="showMenu()"><span class="material-symbols-outlined">
-            more_vert
-            </span></button>
-          
+          <button onmouseover="showMenu()" class="menu-button">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="5" cy="12" r="2" fill="#000"></circle>
+              <circle cx="12" cy="12" r="2" fill="#000"></circle>
+              <circle cx="19" cy="12" r="2" fill="#000"></circle>
+            </svg>
+          </button>
+        
           <div class="menu-content" id="menuContent">
             <a href="{{ url_for('edit_profile') }}">Editar Perfil</a>
             <a href="{{ url_for('portfolio', nome_usuario=profile_data[3]) }}">Portfólio</a>
             <a href="{{ url_for('logout') }}">Logout</a>
           </div>
-        
         </div>
+        
         
   
         </div>
