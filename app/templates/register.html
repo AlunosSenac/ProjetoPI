@@ -54,10 +54,18 @@
     </nav>
   </header>
   <main>
-    
     <div class="card">
         <div class="card-body">
             <h1 class="card-title text-center mb-4">Registro</h1>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
             <form class="custom-form" method="POST" enctype="multipart/form-data">
                 {{ form.hidden_tag() }}
                 <div class="form-group">
@@ -93,6 +101,7 @@
         </div>
     </div>
 </main>
+
 
 
 <div class="elemento-acima-do-footer">

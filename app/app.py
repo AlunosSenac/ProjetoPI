@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash, request
+from flask import flash
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, PasswordField, SubmitField, TextAreaField
@@ -153,6 +154,7 @@ def quemsomos():
 
 
 # Pagina de Registro
+# Pagina de Registro
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
@@ -165,6 +167,20 @@ def register():
         senha = sha256_crypt.hash(form.senha.data)
         telefone = form.telefone.data
         email = form.email.data
+        
+        # Verifica se o número de telefone já está cadastrado
+        cursor.execute("SELECT * FROM perfilFotografos WHERE telefone = %s", (telefone,))
+        existing_phone = cursor.fetchone()
+        if existing_phone:
+            flash('Este número de telefone já está cadastrado. Por favor, escolha outro.', 'danger')
+            return redirect(url_for('register'))
+        
+        # Verifica se o email já está cadastrado
+        cursor.execute("SELECT * FROM perfilFotografos WHERE email = %s", (email,))
+        existing_email = cursor.fetchone()
+        if existing_email:
+            flash('Este endereço de email já está cadastrado. Por favor, use outro.', 'danger')
+            return redirect(url_for('register'))
         
         # Verifica se a foto de perfil foi fornecida
         if form.foto_perfil.data:
@@ -182,6 +198,8 @@ def register():
     return render_template('register.html', form=form)
 
 
+
+# Página de login
 # Página de login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -206,6 +224,7 @@ def login():
         else:
             flash('Usuário não encontrado.', 'danger')
     return render_template('login.html', form=form)
+
 
 # Logout
 @app.route('/logout')
