@@ -85,34 +85,72 @@
   </header>
 
   <main> 
-   <div class="carosselRedondo">
-      <h2>Encontre um Fotografo</h2>
-      <div class="carossel-Container">
-        <div class="btnCarossel BtnBack disable">
-        <span id="seta" class="material-symbols-outlined">
-            arrow_back_ios
-            </span>
-        </div>
-        <div class="carossel-Slide">
-          {% for photographer in photographers %}
-          <div class="item">
-            <img src="{{ photographer[2] }}" alt="Foto de Perfil"> <!-- Adicione a foto do perfil do fotógrafo -->
-            <div class="info">
-              <h2>{{ photographer[0] }}</h2> <!-- Nome do fotógrafo -->
-              <p>{{ photographer[1] }}</p> <!-- Nome de usuário -->
-              <a href="{{ url_for('portfolio', nome_usuario=photographer[1]) }}">Ver Portfólio</a> <!-- Link para o portfólio -->
+    <!-- Carrossel de fotógrafos -->
+    <div class="carosselRedondo">
+        <h2>Encontre um Fotógrafo</h2>
+        <div class="carossel-Container">
+            <div class="btnCarossel BtnBack disable">
+                <span id="seta" class="material-symbols-outlined">arrow_back_ios</span>
             </div>
-          </div>
-          {% endfor %}
+            <div class="carossel-Slide">
+                {% for photographer in photographers %}
+                <div class="item">
+                    <img src="{{ photographer[2] }}" alt="Foto de Perfil" class="img-fluid">
+                    <div class="info">
+                        <h2>{{ photographer[0] }}</h2>
+                        <p>{{ photographer[1] }}</p>
+                        <a href="{{ url_for('portfolio', nome_usuario=photographer[1]) }}">Ver Portfólio</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="btnCarossel BtnNext">
+                <span id="seta" class="material-symbols-outlined">arrow_forward_ios</span>
+            </div>
         </div>
-        <div class="btnCarossel BtnNext">
-          <span id="seta" class="material-symbols-outlined">
-            arrow_forward_ios
-            </span>
+    </div>
+
+    <br>
+
+    <!-- Carrossel de fotos -->
+    <h1>Fotos Fotógrafos</h1>
+    <div class="carroselfotos">
+    <div class="container mt-5">
+        <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% for photo in photo_info %}
+                <div class="carousel-item {% if loop.first %} active {% endif %}">
+                    <div class="card mx-auto" style="width: 600px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="{{ photo[0] }}" class="img-fluid rounded-start" alt="{{ photo[1] }}" style="max-width: 100%; height: auto;">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title">Fotógrafo: {{ photo[2] }}</h5> <br>
+                                    <p class="card-text">Nome de usuário: {{ photo[3] }}</p> <br>
+                                     
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
-      </div>
-</div>
-  </main>
+    </div>
+  
+  </div>
+</main>
+
 
   
 

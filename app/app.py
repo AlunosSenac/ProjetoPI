@@ -116,16 +116,31 @@ class ProfileForm(FlaskForm):
 import random
 
 
+# Rota para a página inicial
 @app.route('/')
 def index():
-    # Consulta para obter todos os fotógrafos
+    # Conecta ao banco de dados
+    db = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="",
+        database="visual"
+    )
+    cursor = db.cursor()
+
+    # Consulta para obter todos os fotógrafos com suas informações
     cursor.execute("SELECT nome, nome_usuario, foto_perfil FROM perfilFotografos")
     photographers = cursor.fetchall()  # Recuperar dados
 
-    # Embaralhe a lista de fotógrafos
-    random.shuffle(photographers)
+    # Consulta para obter fotos da galeria para o carrossel de fotos
+    cursor.execute("SELECT foto_url, descricao, nome_usuario FROM galeria INNER JOIN perfilFotografos ON galeria.perfil_id = perfilFotografos.id")
+    photo_info = cursor.fetchall()
 
-    return render_template('index.html', photographers=photographers)
+    # Fecha a conexão com o banco de dados
+    cursor.close()
+    db.close()
+
+    return render_template('index.html', photographers=photographers, photo_info=photo_info)
 
 
 @app.route('/quemsomos')

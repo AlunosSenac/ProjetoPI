@@ -4,7 +4,11 @@ main{
 }
 
 
-
+.carosselRedondo{
+  background-color: #55555534;
+  padding: 1rem;
+  margin: 0.5rem;
+}
 .carosselRedondo .carossel-Container {
   position: relative;
   width: 100%;
@@ -119,3 +123,25 @@ main{
   margin-bottom: 15px;
 }
 
+.carousel-item img {
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.card {
+  width: 300px;
+  margin: 10px;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 200px; /* Altura fixa para as imagens */
+  object-fit: cover; /* Manter proporções da imagem e preencher o espaço */
+}
+
+.carroselfotos{
+  background-color: #55555534;
+  padding: 1rem;
+  margin: 0.5rem;
+}
