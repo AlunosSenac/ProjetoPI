@@ -11,10 +11,13 @@ import requests
 
 
 
+def generate_secret_key():
+    return os.urandom(24)
+
 app = Flask(__name__)
 
-
-app.secret_key = 'malucoFotografoSenac2024'
+# Define a chave secreta como uma chave gerada aleatoriamente
+app.secret_key = generate_secret_key()
 
 # Função para fazer upload de imagem para o FreeImage.Host
 def upload_image_to_freeimagehost(image_file):
