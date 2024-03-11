@@ -10,6 +10,7 @@ import os
 import requests
 
 
+
 app = Flask(__name__)
 
 
@@ -111,17 +112,22 @@ class ProfileForm(FlaskForm):
     submit = SubmitField('Salvar')
 
 # Página inicial
-# Página inicial
+
+import random
+
+
 @app.route('/')
 def index():
     # Consulta para obter todos os fotógrafos
     cursor.execute("SELECT nome, nome_usuario, foto_perfil FROM perfilFotografos")
     photographers = cursor.fetchall()  # Recuperar dados
-# Retorna uma lista de tuplas (nome, nome_usuario)
+
+    # Embaralhe a lista de fotógrafos
+    random.shuffle(photographers)
 
     return render_template('index.html', photographers=photographers)
 
-# Página 'Quem Somos'
+
 @app.route('/quemsomos')
 def quemsomos():
     return render_template('quemsomos.html')

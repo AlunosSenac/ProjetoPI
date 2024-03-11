@@ -1,22 +1,23 @@
-.elemento-acima-do-footer {
-  width: 100%;
-  text-align: center;
-}
-
+/* Footer styles */
 .footer {
   background-color: #333;
   color: #fff;
   padding: 20px 0;
+  text-align: center; /* Or adjust as needed (left, right) */
+  display: flex; /* For horizontal centering of content (optional) */
+  justify-content: center; /* Horizontally center content within footer (optional) */
+  align-items: center; /* Vertically center content within footer (optional) */
 }
 
 .footer p {
   margin: 0;
 }
 
+/* Social icons (optional) */
 .social-icons {
   list-style-type: none;
   padding: 0;
-  margin-top: 10px;
+  margin-top: 10px; /* Adjust spacing as needed */
 }
 
 .social-icons li {
@@ -34,3 +35,12 @@
   text-decoration: none;
 }
 
+/* Basic styles for headings and links (optional) */
+h1, h2, h3 {
+  margin: 1em 0; /* Add some margin for headings */
+}
+
+a {
+  color: #333; /* Set a default link color */
+  text-decoration: underline; /* Add underline for links */
+}

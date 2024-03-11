@@ -17,6 +17,11 @@
 
 
     <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js" defer></script>
+    <script src="{{ url_for('static', filename='js/edit_profile.js') }}" defer></script>
+    
+
 
 </head>
 
@@ -54,26 +59,51 @@
         </nav>
     </header>
 
-
     <main>
-        <form method="POST">
-            {{ form.csrf_token }}
-            <p>{{ form.nome.label }}: {{ form.nome }}</p>
-            <p>{{ form.sobrenome.label }}: {{ form.sobrenome }}</p>
-            <p>{{ form.nome_usuario.label }}: {{ form.nome_usuario }}</p>
-            <p>{{ form.senha.label }}: {{ form.senha }}</p>
-            <p>{{ form.telefone.label }}: {{ form.telefone }}</p>
-            <p>{{ form.email.label }}: {{ form.email }}</p>
-            <p>{{ form.bio.label }}: {{ form.bio }}</p>
-            <p>{{ form.links.label }}: {{ form.links }}</p>
-            <p>{{ form.rua.label }}: {{ form.rua }}</p>
-            <p>{{ form.cidade.label }}: {{ form.cidade }}</p>
-            <p>{{ form.estado.label }}: {{ form.estado }}</p>
-            <p>{{ form.pais.label }}: {{ form.pais }}</p>
-            <p>{{ form.codigo_postal.label }}: {{ form.codigo_postal }}</p>
-            <p>{{ form.submit }}</p>
-        </form>
-    </main>
+      <div>
+          <h1>Editar Perfil</h1>
+          <nav>
+              <ul>
+                  <li><a href="#name">Nome</a></li>
+                  <li><a href="#security">Segurança</a></li>
+                  <li><a href="#address">Endereço</a></li>
+              </ul>
+          </nav>
+  
+          <form id="edit-form" method="POST">
+              {{ form.csrf_token }}     
+              <div id="name" class="section active">
+                  <p>{{ form.nome.label }} {{ form.nome }}</p>
+                  <p>{{ form.sobrenome.label }} {{ form.sobrenome }}</p>
+                  <p>{{ form.nome_usuario.label }} {{ form.nome_usuario }}</p>
+                  <p>{{ form.bio.label }} {{ form.bio }}</p>
+                  <p>{{ form.links.label }} {{ form.links }}</p>
+              </div>
+              
+              <div id="security" class="section">
+                  <p>{{ form.senha.label }} {{ form.senha }}</p>
+                  <p>{{ form.telefone.label }} {{ form.telefone }}</p>
+                  <p>{{ form.email.label }} {{ form.email }}</p>
+              </div>
+  
+              <!-- Endereço -->
+              <div id="address" class="section">
+                  <p>{{ form.rua.label }} {{ form.rua }}</p>
+                  <p>{{ form.cidade.label }} {{ form.cidade }}</p>
+                  <p>{{ form.estado.label }} {{ form.estado }}</p>
+                  <p>{{ form.pais.label }} {{ form.pais }}</p>
+                  <p>{{ form.codigo_postal.label }} {{ form.codigo_postal }}</p>
+              </div>
+  
+              <input type="submit" value="Salvar">
+          </form>
+      </div>
+  </main>
+  
+  
+  
+
+   
     
     <div class="elemento-acima-do-footer">
         <footer class="footer">
