@@ -182,3 +182,16 @@ main {
     background-color: #f0f0f0; 
   }
   
+.gallery-photo {
+    position: relative;
+    display: inline-block;
+}
+
+.delete-form {
+    margin-top: 0;
+    position: absolute;
+    top: 40px;
+    bottom: 30px; /* Ajuste conforme necessário para a posição vertical */
+    left: 50%; /* Ajuste conforme necessário para a posição horizontal */
+    transform: translateX(-50%);
+} 

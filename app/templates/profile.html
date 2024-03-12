@@ -125,9 +125,15 @@
       
       <h3>Galeria</h3>
       <div class="gallery">
-          {% for photo in gallery_photos %}
-              <img src="{{ photo[1] }}" alt="Foto da Galeria">
-          {% endfor %}
+        {% for photo in gallery_photos %}
+            <div class="gallery-photo">
+                <img src="{{ photo[1] }}" alt="Foto"> <!-- Acessa o URL da foto na segunda posição da tupla -->
+                <!-- Botão de exclusão para a foto -->
+                <form action="{{ url_for('delete_photo', photo_id=photo[0]) }}" method="POST"> <!-- Acessa o ID da foto na primeira posição da tupla -->
+                    <button type="submit" class="btn btn-danger">Excluir</button>
+                </form>
+            </div>
+        {% endfor %}
       </div>
     
   </main>
