@@ -107,21 +107,4 @@ main{
   color: #555;
 }
 
-img {
-  image-rendering: -webkit-optimize-contrast; /* Chrome, Safari */
-  image-rendering: optimizeQuality; /* Firefox */
-  image-rendering: -moz-crisp-edges; /* Firefox */
-  image-rendering: crisp-edges;
-}
 
-/* Define a cor das setas como preto */
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  background-color: black;
-}
-
-/* Define a cor do texto "Anterior" e "Próximo" como preto */
-.carousel-control-prev,
-.carousel-control-next {
-  color: black;
-}
