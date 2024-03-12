@@ -107,41 +107,21 @@ main{
   color: #555;
 }
 
-
-.photo-thumbnail {
-  max-width: 100px; /* Defina o tamanho máximo da imagem da galeria */
-  height: auto;
+img {
+  image-rendering: -webkit-optimize-contrast; /* Chrome, Safari */
+  image-rendering: optimizeQuality; /* Firefox */
+  image-rendering: -moz-crisp-edges; /* Firefox */
+  image-rendering: crisp-edges;
 }
 
-.photo-gallery {
-  display: flex;
-  flex-wrap: wrap;
+/* Define a cor das setas como preto */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: black;
 }
 
-.photo-gallery .card {
-  flex: 0 0 50%; /* Defina a largura de cada card da galeria */
-  margin-bottom: 15px;
-}
-
-.carousel-item img {
-  max-width: 100%;
-  height: auto;
-  margin: 0 auto;
-}
-
-.card {
-  width: 300px;
-  margin: 10px;
-}
-
-.card-img-top {
-  width: 100%;
-  height: 200px; /* Altura fixa para as imagens */
-  object-fit: cover; /* Manter proporções da imagem e preencher o espaço */
-}
-
-.carroselfotos{
-  background-color: #55555534;
-  padding: 1rem;
-  margin: 0.5rem;
+/* Define a cor do texto "Anterior" e "Próximo" como preto */
+.carousel-control-prev,
+.carousel-control-next {
+  color: black;
 }

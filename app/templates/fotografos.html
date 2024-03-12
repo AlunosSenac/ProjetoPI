@@ -14,6 +14,9 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/fotografos.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
   <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+
+  <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}" defer></script>
+
 </head>
 
 <body>
@@ -21,7 +24,7 @@
   <header class="custom-header">
     <nav class="navbar navbar-expand-lg navbar-light">
       <div class="container">
-        <a class="navbar-brand" href="#"><img class="logo" src="{{ url_for('static', filename='img/logoVJ.png') }}"
+        <a class="navbar-brand" href="{{ url_for('index') }}"><img class="logo" src="{{ url_for('static', filename='img/logoVJ.png') }}"
             alt=""></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
           aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,9 +55,11 @@
 
     </header>
     
+    <section>
+   <main class="container mt-5">
     
-   <main>
      
+    <h1 style="text-align: center;">Encontre agora um Fotógrafo mais perto de você.</h1>
     
 <div class="container">
     <form id="searchForm" action="{{ url_for('listar_fotografos') }}" method="GET">
@@ -79,27 +84,23 @@
     
        
     
-
-        <div class='ajuste'>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            {% for photographer in photographers %}
-            <div class="col">
-                <div class="card">
-                    <img src="{{ photographer[2] }}" class="card-img-top" alt="Foto de Perfil">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ photographer[0] }}</h5>
-                        <p class="card-text">Nome de Usuário: {{ photographer[1] }}</p>
-                        <a href="{{ url_for('portfolio', nome_usuario=photographer[1]) }}" class="btn btn-primary">Ver Portfólio</a>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-
+<div class="row justify-content-center">
+  {% for photographer in photographers %}
+  <div class="col">
+      <div class="card">
+          <img src="{{ photographer[2] }}" class="card-img-top" alt="Foto de Perfil">
+          <div class="card-body">
+              <h5 class="card-title">{{ photographer[0] }}</h5>
+              <p class="card-text">Nome de Usuário:<br>{{ photographer[1] }}</p> <!-- Adicionado <br> para quebra de linha -->
+              <a href="{{ url_for('portfolio', nome_usuario=photographer[1]) }}" class="btn btn-primary">Ver Portfólio</a>
+          </div>
+      </div>
+  </div>
+  {% endfor %}
+</div>
 </div>
 </main>
-
+</section>
     <div class="elemento-acima-do-footer">
         <footer class="footer">
           <div class="container">
