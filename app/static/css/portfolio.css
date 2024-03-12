@@ -27,10 +27,11 @@ main {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-bottom: 20px; /* Adicionando margem na parte inferior */
+    margin-bottom: 2rem; /* Adicionando margem na parte inferior */
 }
 
 .nomecnf {
+
     display: flex;
     align-items: center;
     font-size: 1.2rem;

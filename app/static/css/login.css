@@ -5,7 +5,7 @@ body {
     font-family: Arial, sans-serif;
 }
 
-.main {
+main {
     background-image: url("../img/camera.jpg");
     background-repeat: no-repeat;
     background-size: cover;

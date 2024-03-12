@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash, request
 from flask import flash
+from flask import jsonify
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, PasswordField, SubmitField, TextAreaField
@@ -323,9 +324,32 @@ def portfolio(nome_usuario):
     else:
         return render_template('portfolio.html', profile_data=profile_data)
     
-    
+# Add a new route for listing photographers and searching by city and state
+# Add a new route for listing photographers and searching by city, state, and ZIP code
+@app.route('/fotografos')
+def listar_fotografos():
+    cidade = request.args.get('cidade')
+    estado = request.args.get('estado')
+    cep = request.args.get('cep')
+    search = request.args.get('search')
 
+    # Query the database to get photographers based on the provided criteria
+    if cidade and estado:
+        cursor.execute("SELECT nome, nome_usuario, foto_perfil FROM perfilFotografos WHERE cidade = %s AND estado = %s", (cidade, estado))
+    elif cidade:
+        cursor.execute("SELECT nome, nome_usuario, foto_perfil FROM perfilFotografos WHERE cidade = %s", (cidade,))
+    elif estado:
+        cursor.execute("SELECT nome, nome_usuario, foto_perfil FROM perfilFotografos WHERE estado = %s", (estado,))
+    elif cep:
+        cursor.execute("SELECT nome, nome_usuario, foto_perfil FROM perfilFotografos WHERE codigo_postal = %s", (cep,))
+    elif search:
+        cursor.execute("SELECT nome, nome_usuario, foto_perfil FROM perfilFotografos WHERE nome LIKE %s OR sobrenome LIKE %s OR nome_usuario LIKE %s", (f'%{search}%', f'%{search}%', f'%{search}%'))
+    else:
+        cursor.execute("SELECT nome, nome_usuario, foto_perfil FROM perfilFotografos")
 
+    photographers = cursor.fetchall()  # Get photographers
+
+    return render_template('fotografos.html', photographers=photographers)
 
 if __name__ == '__main__':
     app.run(debug='True', host='0.0.0.0', port= 5000)
