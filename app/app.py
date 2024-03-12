@@ -154,7 +154,7 @@ def quemsomos():
 
 
 
-# Pagina de Registro
+
 # Pagina de Registro
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -201,7 +201,6 @@ def register():
 
 
 # Página de login
-# Página de login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -236,6 +235,26 @@ def logout():
     flash('Logout realizado com sucesso!', 'success')
     return redirect(url_for('index'))
 
+@app.route('/profile/delete_photo/<int:photo_id>', methods=['POST'])
+def delete_photo(photo_id):
+    if 'loggedin' in session:
+        user_id = session['id']
+        # Verifica se o usuário possui permissão para excluir a foto
+        cursor.execute("SELECT * FROM galeria WHERE id = %s AND perfil_id = %s", (photo_id, user_id))
+        photo = cursor.fetchone()
+        if photo:
+            # Deleta a foto da galeria
+            cursor.execute("DELETE FROM galeria WHERE id = %s", (photo_id,))
+            db.commit()
+            flash('Foto deletada com sucesso!', 'success')
+        else:
+            flash('Você não possui permissão para excluir esta foto.', 'danger')
+        return redirect(url_for('profile'))
+    else:
+        flash('Você precisa fazer login para acessar esta página.', 'danger')
+        return redirect(url_for('login'))
+    
+    
 # Página de perfil
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
