@@ -1,70 +1,70 @@
+/* Estilo geral */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+}
 
 section {
-    font-family: 'Montserrat', sans-serif;
-    padding: 20px;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(162deg, rgba(255, 255, 255, 0.5298494397759104) 32%, rgba(146, 152, 152, 1) 61%);
+}
+
+/* Estilo dos cards */
+.card {
+    position: relative;
+    background-color: #343a40;
+    color: #fff;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    width: 200px;
+    height: 300px; /* Ajustado para comportar o texto */
     display: flex;
-    justify-content: center;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    background: rgb(255,255,255);
-    background: linear-gradient(162deg, rgba(255,255,255,0.5298494397759104) 32%, rgba(146,152,152,1) 61%);
-    }
-  
-     /* Estilo dos cards */
-     .card {
-        position: relative;
-        background-color: #343a40;
-        color: #fff;
-        border-radius: 20px;
-        margin-bottom: 20px;
-        overflow: hidden;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease;
-        width: 200px;
-        height: 300px; /* Ajustado para comportar o texto */
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-    }
+    text-align: center;
+}
 
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    }
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
 
-    .card img {
-        width: 100%;
-        height: 60%; /* Ajustado para a imagem ocupar 60% do card */
-        object-fit: cover;
-        object-position: center;
-        border-radius: 20px 20px 0 0; /* Ajustado para arredondar somente os cantos superiores */
-    }
+.card img {
+    width: 100%;
+    height: 60%; /* Ajustado para a imagem ocupar 60% do card */
+    object-fit: cover;
+    object-position: center;
+    border-radius: 20px 20px 0 0; /* Ajustado para arredondar somente os cantos superiores */
+}
 
-    .card-body {
-        padding: 20px;
-    }
+.card-body {
+    padding: 20px;
+}
 
-    .card-title {
-        font-size: 18px;
-        margin-bottom: 10px;
-    }
+.card-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
 
-    .card-text {
-        font-size: 14px;
-        color: #ccc;
-    }
+.card-text {
+    font-size: 14px;
+    color: #ccc;
+}
 
-    .card-link {
-        color: #ccc;
-        text-decoration: none;
-        font-weight: bold;
-    }
+.card-link {
+    color: #ccc;
+    text-decoration: none;
+    font-weight: bold;
+}
 
-    .card-link:hover {
-        color: #ccc;
-    }
+.card-link:hover {
+    color: #ccc;
+}
 
 main .container {
     display: flex;
@@ -76,39 +76,57 @@ main .container {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Sombra */
 }
+
 main form {
     display: flex;
-    justify-content: baseline;
+    justify-content: center; /* Centralizar horizontalmente */
     flex-direction: column;
     align-items: center;
-    gap: 20px; /* Aumentando o espaço entre os elementos */
+    gap: 20px; /* Espaçamento entre elementos */
+    max-width: 400px; /* Limitar a largura do formulário */
+    width: 100%; /* Ocupar toda a largura disponível */
 }
+
 main label {
     color: white;
-    margin-bottom: 5px; /* Adicionando um pequeno espaço abaixo do rótulo */
+    margin-bottom: 5px; /* Espaçamento abaixo do rótulo */
+    display: block; /* Colocar cada rótulo em uma linha separada */
 }
+
 main input[type="text"] {
-    flex: 1; /* Fazendo com que os campos de entrada ocupem todo o espaço disponível */
+    width: 100%; /* Ocupar toda a largura disponível */
     padding: 10px;
+    margin-top: 5px; /* Espaçamento acima do campo de entrada */
     border: none;
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.3); /* Fundo branco transparente */
     color: white;
-    transition: background-color 0.3s; /* Adicionando transição suave para o hover */
+    transition: background-color 0.3s; /* Transição suave ao passar o mouse */
 }
+
 main input[type="text"]:focus {
-    background-color: rgba(255, 255, 255, 0.5); /* Mudando o fundo ao focar */
+    background-color: rgba(255, 255, 255, 0.5); /* Mudar a cor de fundo ao focar */
 }
+
 main button {
+    width: 100%; /* Ocupar toda a largura disponível */
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     background-color: #4CAF50; /* Cor do botão */
     color: white;
     cursor: pointer;
-    transition: background-color 0.3s; /* Adicionando transição suave para o hover */
+    transition: background-color 0.3s; /* Transição suave ao passar o mouse */
 }
+
 main button:hover {
     background-color: #45a049; /* Cor do botão ao passar o mouse */
 }
 
+/* Media Query para ajustar o layout em dispositivos móveis */
+@media (max-width: 768px) {
+    main .container {
+        flex-direction: column; /* Mudar a direção do layout para vertical */
+        align-items: center; /* Centralizar os elementos verticalmente */
+    }
+}
