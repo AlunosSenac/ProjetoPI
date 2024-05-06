@@ -66,9 +66,10 @@ class HomeScreen extends StatelessWidget {
                     icon: Icon(Icons.menu),
                     tooltip: localizations.openAppDrawerTooltip,
                     onPressed: () {
-                       Scaffold.of(context).openDrawer();
+                       Scaffold.of(context).openEndDrawer();
                       // Adicione sua lógica de menu aqui
                     },
+                    
                   ),
                 ],
               ),
@@ -164,6 +165,7 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
+      
     );
   }
 }
