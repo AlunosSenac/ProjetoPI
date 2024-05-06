@@ -1,6 +1,0 @@
-Flask
-Flask-WTF
-passlib
-mysql-connector-python
-requests
-email-validator
