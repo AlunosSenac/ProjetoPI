@@ -44,16 +44,13 @@ class HomeScreen extends StatelessWidget {
         MaterialLocalizations.of(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Visual Journey'),
-      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             // Header
             Container(
-              padding: EdgeInsets.all(16.0),
+              padding: EdgeInsets.all(35.0),
               color: Colors.grey[300],
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -120,7 +117,7 @@ class HomeScreen extends StatelessWidget {
                     'Fotos de Fotógrafos',
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 280),
                   // Adicione seu carrossel de fotos aqui
                 ],
               ),
