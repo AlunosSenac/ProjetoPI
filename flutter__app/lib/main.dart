@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
 
 void main() {
   runApp(
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       locale: DevicePreview.locale(context),
       builder: DevicePreview.appBuilder,
       title: 'Visual Journey',
-         localizationsDelegates: const [
+      localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
@@ -37,7 +37,44 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _currentPageIndex = 0;
+  PageController _pageController = PageController();
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _startTimer();
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(Duration(seconds: 3), (timer) {
+      if (_currentPageIndex < 2) {
+        _currentPageIndex++;
+      } else {
+        _currentPageIndex = 0;
+      }
+      _pageController.animateToPage(
+        _currentPageIndex,
+        duration: Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final MaterialLocalizations localizations =
@@ -63,10 +100,8 @@ class HomeScreen extends StatelessWidget {
                     icon: Icon(Icons.menu),
                     tooltip: localizations.openAppDrawerTooltip,
                     onPressed: () {
-                       Scaffold.of(context).openEndDrawer();
-                      // Adicione sua lógica de menu aqui
+                      Scaffold.of(context).openEndDrawer();
                     },
-                    
                   ),
                 ],
               ),
@@ -75,6 +110,12 @@ class HomeScreen extends StatelessWidget {
             Container(
               height: 200,
               child: PageView(
+                controller: _pageController,
+                onPageChanged: (index) {
+                  setState(() {
+                    _currentPageIndex = index;
+                  });
+                },
                 children: [
                   Image.asset(
                     'assets/images/banerAnimado1.gif',
@@ -103,7 +144,30 @@ class HomeScreen extends StatelessWidget {
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 10),
-                  // Adicione seu carrossel de fotógrafos aqui
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      CircleAvatar(
+                        radius: 40,
+                        backgroundImage: AssetImage('caminho/para/imagem1.jpg'),
+                      ),
+                      CircleAvatar(
+                        radius: 40,
+                        backgroundImage: AssetImage('caminho/para/imagem2.jpg'),
+                      ),
+                      CircleAvatar(
+                        radius: 40,
+                        backgroundImage: AssetImage('caminho/para/imagem3.jpg'),
+                      ),
+                      CircleAvatar(
+                        radius: 40,
+                        backgroundImage: AssetImage('caminho/para/imagem4.jpg'),
+                      ),
+                      // Adicionar mais CircleAvatars conforme necessário
+                    ],
+                  ),
+
+                  // Adicionar seu carrossel de fotógrafos aqui
                 ],
               ),
             ),
@@ -117,8 +181,9 @@ class HomeScreen extends StatelessWidget {
                     'Fotos de Fotógrafos',
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 280),
-                  // Adicione seu carrossel de fotos aqui
+                  SizedBox(height: 220),
+
+                  // Adicionar seu carrossel de fotos aqui
                 ],
               ),
             ),
@@ -162,7 +227,40 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
-      
+      endDrawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Text(
+                'Menu',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+              ),
+            ),
+            ListTile(
+              title: Text('Login'),
+              onTap: () {
+                // Implemente a lógica para abrir a tela de login
+              },
+            ),
+            ListTile(
+              title: Text('Cadastro'),
+              onTap: () {
+                // Implemente a lógica para abrir a tela de cadastro
+              },
+            ),
+            ListTile(
+              title: Text('About'),
+              onTap: () {
+                // Implemente a lógica para abrir a tela "Sobre"
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
