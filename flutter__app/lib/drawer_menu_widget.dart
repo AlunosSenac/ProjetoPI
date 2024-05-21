@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter__app/LoginPage.dart';
 
 class DrawerMenuWidget extends StatelessWidget {
   @override
@@ -19,7 +20,11 @@ class DrawerMenuWidget extends StatelessWidget {
           ListTile(
             title: Text('Login'),
             onTap: () {
-              // Implemente a lógica para abrir a tela de login
+               Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => LoginPage()
+                ),
+               );
             },
           ),
           ListTile(
