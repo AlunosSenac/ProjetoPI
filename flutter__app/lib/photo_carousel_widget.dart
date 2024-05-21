@@ -15,6 +15,7 @@ class _PhotoCarouselWidgetState extends State<PhotoCarouselWidget> {
   ];
 
   late PageController _pageController;
+  int activePage = 0;
 
   @override
   void initState() {
@@ -46,29 +47,68 @@ class _PhotoCarouselWidgetState extends State<PhotoCarouselWidget> {
             height: 220,
             child: PageView.builder(
               controller: _pageController,
+              onPageChanged: (page) {
+                setState(() {
+                  activePage = page;
+                });
+              },
               itemCount: photographerPhotos.length,
               itemBuilder: (context, index) {
-                return _buildPhotoCard(photographerPhotos[index]);
+                return _buildPhotoCard(photographerPhotos[index], index);
               },
             ),
+          ),
+          SizedBox(height: 16),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(photographerPhotos.length, (index) {
+              return AnimatedContainer(
+                duration: Duration(milliseconds: 300),
+                margin: EdgeInsets.symmetric(horizontal: 5.0),
+                height: 8.0,
+                width: activePage == index ? 12.0 : 8.0,
+                decoration: BoxDecoration(
+                  color: activePage == index ? Colors.blue : Colors.grey,
+                  borderRadius: BorderRadius.circular(4.0),
+                ),
+              );
+            }),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildPhotoCard(String photoPath) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(16),
-          child: Image.asset(
-            photoPath,
-            fit: BoxFit.cover,
+  Widget _buildPhotoCard(String photoPath, int index) {
+    return AnimatedBuilder(
+      animation: _pageController,
+      builder: (context, child) {
+        double value = 1.0;
+        if (_pageController.position.haveDimensions) {
+          value = _pageController.page! - index;
+          value = (1 - (value.abs() * 0.3)).clamp(0.0, 1.0);
+        }
+
+        return Center(
+          child: SizedBox(
+            height: Curves.easeInOut.transform(value) * 220,
+            width: Curves.easeInOut.transform(value) * 400,
+            child: child,
+          ),
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: Image.asset(
+              photoPath,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
       ),
