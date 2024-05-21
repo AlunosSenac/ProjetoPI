@@ -7,6 +7,7 @@ import 'photographer_carousel_widget.dart';
 import 'photo_carousel_widget.dart';
 import 'footer_widget.dart';
 import 'drawer_menu_widget.dart';
+import 'dart:async';
 
 void main() {
   runApp(
@@ -41,8 +42,43 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomeScreen extends StatelessWidget {
-  final PageController _pageController = PageController();
+class HomeScreen extends StatefulWidget {
+   @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _currentPageIndex = 0;
+  PageController _pageController = PageController();
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _startTimer();
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(Duration(seconds: 5), (timer) { // intervalo das páginas
+      if (_currentPageIndex < 2) {
+        _currentPageIndex++;
+      } else {
+        _currentPageIndex = 0;
+      }
+      _pageController.animateToPage(
+        _currentPageIndex,
+        duration: Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
