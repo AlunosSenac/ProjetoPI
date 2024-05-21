@@ -60,7 +60,7 @@ class PhotoGallery extends StatelessWidget {
               ];
             },
             onSelected: (String value) {
-              // Aqui você pode adicionar a lógica para filtrar as fotos com base na seleção do usuário
+            
               print('Selecionado: $value');
             },
           ),
