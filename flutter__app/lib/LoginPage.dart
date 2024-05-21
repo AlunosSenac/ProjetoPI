@@ -5,9 +5,89 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+      
       ),
-      body: Center(
-        child: Text('Tela de Login'),
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/camera.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextFormField(
+                  style: TextStyle(color: Colors.white,), 
+                  decoration: InputDecoration(
+                    labelText: 'Usuario',
+                    labelStyle: TextStyle(color: Colors.white), 
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white), 
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20),
+                TextFormField(
+                  style: TextStyle(color: Colors.white), 
+                  decoration: InputDecoration(
+                    labelText: 'Senha',
+                    labelStyle: TextStyle(color: Colors.white), 
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white), 
+                    ),
+                  ),
+                  obscureText: true,
+                ),
+                SizedBox(height: 20),
+                SizedBox(
+                  width: 400, 
+                  height: 50, 
+                  child:ElevatedButton(
+                    onPressed: () {
+                    },
+                    style: ElevatedButton.styleFrom(
+                    foregroundColor: Color(0xFFFCFDF9), 
+                    backgroundColor: Color(0xFF435364), 
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14.0),
+                    ),
+                    ),
+                    child: Text(
+                      'Login',
+                      style: TextStyle(color: Colors.white,  fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20),
+                SizedBox(
+                  width: 400, 
+                  height: 50, 
+                  child:ElevatedButton(
+                    onPressed: () {
+                    },
+                    style: ElevatedButton.styleFrom(
+                    foregroundColor: Color(0xFFFCFDF9), 
+                    backgroundColor: Color(0xFF435364),  
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14.0),
+                    ),
+                    ),
+                    child: Text(
+                      'Cadastre-se',
+                      style: TextStyle(color: Colors.white,  fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
