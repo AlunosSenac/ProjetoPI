@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter__app/footer_widget.dart';
+
+// Importações dos widgets que serão utilizados no código
 
 class About extends StatelessWidget {
   @override
@@ -12,7 +15,7 @@ class About extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Sobre o App',
+              'Visual Galeria',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 20),
@@ -28,6 +31,7 @@ class About extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Gallery(),
+            FooterWidget(), // Adicionando o FooterWidget aqui
           ],
         ),
       ),
@@ -37,9 +41,9 @@ class About extends StatelessWidget {
 
 class Gallery extends StatelessWidget {
   final List<String> imagePaths = [
-    'assets/images/image1.jpg',
-    'assets/images/image2.jpg',
-    'assets/images/image3.jpg',
+    'assets/images/photo1_teste.jpg',
+    'assets/images/photo2_teste.jpg',
+    'assets/images/photo3_teste.jpg',
     // Adicione mais caminhos de imagem conforme necessário
   ];
 
