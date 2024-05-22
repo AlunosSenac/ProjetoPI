@@ -1,85 +1,89 @@
 import 'package:flutter/material.dart';
+import 'package:flutter__app/footer_widget.dart';
 
+// Importações dos widgets que serão utilizados no código
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Photo Gallery',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: PhotoGallery(),
-    );
-  }
-}
-
-class PhotoGallery extends StatelessWidget {
-  final List<String> photos = [
-    "assets/images/image1.png",
-    "assets/images/image2.png",
-    "assets/images/image3.png",
-    "assets/images/image4.png",
-    "assets/images/image5.png",
-    "assets/images/image6.png",
-  ];
-
+class About extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Photo Gallery'),
-        actions: [
-          PopupMenuButton(
-            itemBuilder: (BuildContext context) {
-              return [
-                PopupMenuItem(
-                  child: Text('Tecnologia'),
-                  value: 'Tecnologia',
-                ),
-                PopupMenuItem(
-                  child: Text('Casamento'),
-                  value: 'Casamento',
-                ),
-                PopupMenuItem(
-                  child: Text('Paisagem'),
-                  value: 'Paisagem',
-                ),
-                PopupMenuItem(
-                  child: Text('Esporte'),
-                  value: 'Esporte',
-                ),
-                PopupMenuItem(
-                  child: Text('Casual'),
-                  value: 'Casual',
-                ),
-              ];
-            },
-            onSelected: (String value) {
-            
-              print('Selecionado: $value');
-            },
-          ),
-        ],
+        title: Text('About'),
       ),
-      body: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: 4.0,
-          crossAxisSpacing: 4.0,
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Visual Galeria',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Este é um aplicativo de galeria de fotos.',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 16),
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Galeria de Fotos:',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 10),
+            Gallery(),
+            FooterWidget(), // Adicionando o FooterWidget aqui
+          ],
         ),
-        itemCount: photos.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Image.asset(
-            photos[index],
-            fit: BoxFit.cover, 
-          );
-        },
       ),
     );
   }
+}
+
+class Gallery extends StatelessWidget {
+  final List<String> imagePaths = [
+    'assets/images/photo1_teste.jpg',
+    'assets/images/photo2_teste.jpg',
+    'assets/images/photo3_teste.jpg',
+     'assets/images/photo1_teste.jpg',
+    'assets/images/photo2_teste.jpg',
+    'assets/images/photo3_teste.jpg',
+     'assets/images/photo1_teste.jpg',
+    'assets/images/photo2_teste.jpg',
+    'assets/images/photo3_teste.jpg',
+     'assets/images/photo1_teste.jpg',
+    'assets/images/photo2_teste.jpg',
+    'assets/images/photo3_teste.jpg',
+    // Adicione mais caminhos de imagem conforme necessário
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2, // Duas imagens por linha
+        crossAxisSpacing: 4.0,
+        mainAxisSpacing: 4.0,
+      ),
+      itemCount: imagePaths.length,
+      itemBuilder: (BuildContext context, int index) {
+        return GestureDetector(
+          onTap: () {
+            // Implemente aqui a ação que você deseja quando a imagem for tocada
+          },
+          child: Image.asset(
+            imagePaths[index],
+            fit: BoxFit.cover,
+          ),
+        );
+      },
+    );
+  }
+}
+
+void main() {
+  runApp(MaterialApp(
+    home: About(),
+  ));
 }

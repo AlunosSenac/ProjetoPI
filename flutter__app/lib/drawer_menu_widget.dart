@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter__app/LoginPage.dart';
+import 'package:flutter__app/About.dart'; // Importe sua tela "About"
 
 class DrawerMenuWidget extends StatelessWidget {
   @override
@@ -36,7 +37,12 @@ class DrawerMenuWidget extends StatelessWidget {
           ListTile(
             title: Text('About'),
             onTap: () {
-              // Implemente a lógica para abrir a tela "Sobre"
+              // Navegar para a tela "About"
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => About()
+                ),
+              );
             },
           ),
         ],
