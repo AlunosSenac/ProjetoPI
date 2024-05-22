@@ -44,6 +44,15 @@ class Gallery extends StatelessWidget {
     'assets/images/photo1_teste.jpg',
     'assets/images/photo2_teste.jpg',
     'assets/images/photo3_teste.jpg',
+     'assets/images/photo1_teste.jpg',
+    'assets/images/photo2_teste.jpg',
+    'assets/images/photo3_teste.jpg',
+     'assets/images/photo1_teste.jpg',
+    'assets/images/photo2_teste.jpg',
+    'assets/images/photo3_teste.jpg',
+     'assets/images/photo1_teste.jpg',
+    'assets/images/photo2_teste.jpg',
+    'assets/images/photo3_teste.jpg',
     // Adicione mais caminhos de imagem conforme necessário
   ];
 
