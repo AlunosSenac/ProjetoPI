@@ -5,7 +5,18 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-      
+      title: Text ('Login',
+      style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+      ),
+      actions: [
+        Image.asset(
+        'assets/images/logoVJ.png',
+            height: 50,
+        ),
+      ],
+
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -30,6 +41,7 @@ class LoginPage extends StatelessWidget {
                     border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.white), 
                     ),
+                    prefixIcon: Icon(Icons.person, color: Colors.white), // Ícone de usuário
                   ),
                 ),
                 SizedBox(height: 20),
@@ -41,6 +53,7 @@ class LoginPage extends StatelessWidget {
                     border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.white), 
                     ),
+                    prefixIcon: Icon(Icons.lock, color: Colors.white), // Ícone de senha
                   ),
                   obscureText: true,
                 ),
