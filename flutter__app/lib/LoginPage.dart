@@ -13,7 +13,7 @@ class LoginPage extends StatelessWidget {
       actions: [
         Image.asset(
         'assets/images/logoVJ.png',
-            height: 50,
+            height: 40,
         ),
       ],
 
