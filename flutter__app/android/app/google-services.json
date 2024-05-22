@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "150045401053",
+    "project_id": "vs-journey",
+    "storage_bucket": "vs-journey.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:150045401053:android:894e53e133ddc720b8e034",
+        "android_client_info": {
+          "package_name": "com.example.flutter__app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKF4q-iD1GYOgWjxVC0b0rBeH4swCg3bo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
