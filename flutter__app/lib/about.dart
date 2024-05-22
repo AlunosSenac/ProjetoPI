@@ -18,12 +18,7 @@ class About extends StatelessWidget {
               'Visual Galeria',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 20),
-            Text(
-              'Este é um aplicativo de galeria de fotos.',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 16),
-            ),
+          
             SizedBox(height: 20),
             Text(
               'Galeria de Fotos:',
