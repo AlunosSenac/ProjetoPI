@@ -8,8 +8,11 @@ import 'photo_carousel_widget.dart';
 import 'footer_widget.dart';
 import 'drawer_menu_widget.dart';
 import 'dart:async';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(
     DevicePreview(
       enabled: false,
