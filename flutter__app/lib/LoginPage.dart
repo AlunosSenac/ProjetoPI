@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter__app/cadastroPage.dart';
 import 'package:flutter__app/footer_widget.dart';
 
 class LoginPage extends StatelessWidget {
@@ -25,7 +26,7 @@ class LoginPage extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/images/camera.jpg'),
+                  image: AssetImage('assets/images/fundoLogin.jpg'),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -93,6 +94,11 @@ class LoginPage extends StatelessWidget {
                         height: 42, 
                         child: ElevatedButton(
                           onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => CadastroPage()
+                              ),
+                            );
                           },
                           style: ElevatedButton.styleFrom(
                             foregroundColor: Color(0xFFFCFDF9), 
