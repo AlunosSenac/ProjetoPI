@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter__app/LoginPage.dart';
 import 'package:flutter__app/CadastroPage.dart'; 
-import 'package:flutter__app/About.dart';
+import 'package:flutter__app/Galeria.dart';
 
 class DrawerMenuWidget extends StatelessWidget {
   @override
@@ -38,11 +38,11 @@ class DrawerMenuWidget extends StatelessWidget {
             },
           ),
           ListTile(
-            title: Text('About'),
+            title: Text('Galeria'),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => About()),
+                MaterialPageRoute(builder: (context) => Galeria()),
               );
             },
           ),
