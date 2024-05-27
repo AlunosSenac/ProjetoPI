@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter__app/CadastroPage.dart';
 import 'package:flutter__app/footer_widget.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginPage extends StatelessWidget {
   @override
