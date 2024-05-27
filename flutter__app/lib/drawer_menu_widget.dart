@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter__app/LoginPage.dart';
 import 'package:flutter__app/CadastroPage.dart'; 
 import 'package:flutter__app/Galeria.dart';
+import 'package:flutter__app/About.dart';
 
 class DrawerMenuWidget extends StatelessWidget {
   @override
@@ -43,6 +44,15 @@ class DrawerMenuWidget extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => Galeria()),
+              );
+            },
+          ),
+           ListTile(
+            title: Text('About'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => About()),
               );
             },
           ),
