@@ -120,7 +120,6 @@ class LoginPage extends StatelessWidget {
               ),
             ),
           ),
-          FooterWidget(), // Adicionando o FooterWidget aqui
         ],
       ),
     );
