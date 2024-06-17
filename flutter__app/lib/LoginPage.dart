@@ -11,6 +11,7 @@ class LoginPage extends StatelessWidget {
         title: Text('Login',
           style: TextStyle(
             fontWeight: FontWeight.bold,
+            
           ),
         ),
         actions: [
@@ -46,7 +47,7 @@ class LoginPage extends StatelessWidget {
                             labelText: 'Usuario',
                             labelStyle: TextStyle(color: Colors.white), 
                             border: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white), 
+                              borderSide: BorderSide(color: const Color.fromARGB(255, 162, 32, 32)), 
                             ),
                             prefixIcon: Icon(Icons.person, color: Colors.white), // Ícone de usuário
                           ),
