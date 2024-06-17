@@ -18,12 +18,22 @@ class _CadastroPageState extends State<CadastroPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cadastro'),
+        title: Text('Cadastro',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        actions: [
+          Image.asset(
+            'assets/images/logoVJ.png',
+            height: 30,
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.all(20.0),
-          margin: EdgeInsets.all(20.0),
+          padding: EdgeInsets.all(10.0),
+          margin: EdgeInsets.all(30.0),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10.0),
@@ -40,61 +50,84 @@ class _CadastroPageState extends State<CadastroPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Text(
-                'Faça seu cadastro',
+                'Cadastro',
                 style: TextStyle(
                   fontSize: 24.0,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               SizedBox(height: 20.0),
-              TextFormField(
-                controller: _nameController,
-                decoration: InputDecoration(
-                  labelText: 'Nome',
-                  prefixIcon: Icon(Icons.person),
-                  border: OutlineInputBorder(),
+              SizedBox(
+                height: 42.0,
+                width: 350.0,
+                child:TextFormField(
+                    controller: _nameController,
+                    decoration: InputDecoration(
+                      labelText: 'Nome',
+                      prefixIcon: Icon(Icons.person),
+                      border: OutlineInputBorder(),
+                    ),
                 ),
               ),
-              SizedBox(height: 20.0),
-              TextFormField(
-                controller: _emailController,
-                decoration: InputDecoration(
-                  labelText: 'E-mail',
-                  prefixIcon: Icon(Icons.email),
-                  border: OutlineInputBorder(),
+              SizedBox(height: 10.0),
+              SizedBox(
+                height: 42.0,
+                width: 350.0,
+                child:TextFormField(
+                  controller: _emailController,
+                  decoration: InputDecoration(
+                    labelText: 'E-mail',
+                    prefixIcon: Icon(Icons.email),
+                    border: OutlineInputBorder(),
+                  ),
                 ),
               ),
-              SizedBox(height: 20.0),
-              TextFormField(
-                controller: _phoneController,
-                decoration: InputDecoration(
-                  labelText: 'Telefone',
-                  prefixIcon: Icon(Icons.phone),
-                  border: OutlineInputBorder(),
-                ),
-                keyboardType: TextInputType.phone,
-              ),
-              SizedBox(height: 20.0),
-              TextFormField(
-                controller: _addressController,
-                decoration: InputDecoration(
-                  labelText: 'Endereço',
-                  prefixIcon: Icon(Icons.location_on),
-                  border: OutlineInputBorder(),
+              SizedBox(height: 10.0),
+              SizedBox(
+                height: 42.0,
+                width: 350.0,
+                child:TextFormField(
+                    controller: _phoneController,
+                    decoration: InputDecoration(
+                      labelText: 'Telefone',
+                      prefixIcon: Icon(Icons.phone),
+                      border: OutlineInputBorder(),
+                      ),
+                    keyboardType: TextInputType.phone,
                 ),
               ),
-              SizedBox(height: 20.0),
-              TextFormField(
-                controller: _passwordController,
-                decoration: InputDecoration(
-                  labelText: 'Senha',
-                  prefixIcon: Icon(Icons.lock),
-                  border: OutlineInputBorder(),
+              SizedBox(height: 10.0),
+              SizedBox(
+                height: 42.0,
+                width: 350.0,
+                child:TextFormField(
+                  controller: _addressController,
+                  decoration: InputDecoration(
+                    labelText: 'Usuário',
+                    prefixIcon: Icon(Icons.person),
+                    border: OutlineInputBorder(),
+                  ),
                 ),
-                obscureText: true,
               ),
-              SizedBox(height: 20.0),
-              TextFormField(
+              SizedBox(height: 10.0),
+              SizedBox(
+                height: 42.0,
+                width: 350.0,
+                child:TextFormField(
+                    controller: _passwordController,
+                    decoration: InputDecoration(
+                      labelText: 'Senha',
+                      prefixIcon: Icon(Icons.lock),
+                      border: OutlineInputBorder(),
+                    ),
+                    obscureText: true,
+                ),
+              ),
+              SizedBox(height: 10.0),
+              SizedBox(
+              height: 42.0, 
+              width: 350.0, 
+                child:TextFormField(
                 controller: _photoController,
                 readOnly: true,
                 decoration: InputDecoration(
@@ -108,7 +141,8 @@ class _CadastroPageState extends State<CadastroPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 20.0),
+              ),
+              SizedBox(height: 10.0),
               ElevatedButton(
                 onPressed: () {
                   String name = _nameController.text;
