@@ -36,6 +36,12 @@ class _CadastroPageState extends State<CadastroPage> {
           margin: EdgeInsets.all(30.0),
           decoration: BoxDecoration(
             color: Colors.white,
+            image: DecorationImage(
+              image: AssetImage('assets/images/registro.jpg'),
+        
+            ),
+
+            
             borderRadius: BorderRadius.circular(10.0),
             boxShadow: [
               BoxShadow(
