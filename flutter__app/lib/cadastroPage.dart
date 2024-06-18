@@ -43,14 +43,14 @@ class _CadastroPageState extends State<CadastroPage> {
             padding: EdgeInsets.all(10.0),
             margin: EdgeInsets.all(50.0),
             decoration: BoxDecoration(
-              color: Color.fromARGB(123, 78, 74, 74),
+              color: Color.fromARGB(144, 78, 74, 74),
               borderRadius: BorderRadius.circular(10.0),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
+                  color: Colors.grey.withOpacity(0.8),
                   spreadRadius: 5,
-                  blurRadius: 7,
-                  offset: Offset(0, 3),
+                  blurRadius: 3,
+                  offset: Offset(0, 1),
                 ),
               ],
             ),
@@ -58,7 +58,7 @@ class _CadastroPageState extends State<CadastroPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'Cadastro',
+                  'Login',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 24.0,
@@ -94,6 +94,7 @@ class _CadastroPageState extends State<CadastroPage> {
                     decoration: InputDecoration(
                       labelText: 'E-mail',
                       labelStyle: TextStyle(color: Colors.white), 
+                        
                       prefixIcon: Icon(Icons.email, color: Colors.white,),
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.white),

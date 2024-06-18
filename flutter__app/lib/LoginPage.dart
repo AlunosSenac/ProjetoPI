@@ -21,35 +21,56 @@ class LoginPage extends StatelessWidget {
           ),
         ],
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/images/fundoLogin.jpg'),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/fundoLogin.jpg'),
                   fit: BoxFit.cover,
                 ),
-              ),
-              child: Center(
-                child: Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: 42,
-                        width: 350,
-                        child:TextFormField(
-                          style: TextStyle(color: Colors.white,), 
+        ),
+        child: Center(
+          child: SingleChildScrollView( 
+            child: Container(
+            padding: EdgeInsets.all(16.0),
+            margin: EdgeInsets.all(50.0), 
+            decoration: BoxDecoration(
+              color: Color.fromARGB(123, 78, 74, 74),
+              borderRadius: BorderRadius.circular(10.0),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 5,
+                  blurRadius: 3,
+                  offset: Offset(0, 1),
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[ 
+                Text(
+                  'Cadastro',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),  
+            SizedBox(
+              height: 42,
+              width: 350,
+              child:TextFormField(
+              style: TextStyle(color: Colors.white,), 
                           decoration: InputDecoration(
                             labelText: 'Usuario',
                             labelStyle: TextStyle(color: Colors.white), 
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(color: const Color.fromARGB(255, 162, 32, 32)), 
+                            prefixIcon: Icon(Icons.person, color: Colors.white), 
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
                             ),
-                            prefixIcon: Icon(Icons.person, color: Colors.white), // Ícone de usuário
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white,),
+                            ),
                           ),
                         ),
                       ),
@@ -62,10 +83,13 @@ class LoginPage extends StatelessWidget {
                             decoration: InputDecoration(
                               labelText: 'Senha',
                               labelStyle: TextStyle(color: Colors.white), 
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white), 
+                              prefixIcon: Icon(Icons.lock, color: Colors.white), 
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
                               ),
-                              prefixIcon: Icon(Icons.lock, color: Colors.white), // Ícone de senha
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white,),
+                              ),
                             ),
                             obscureText: true,
                           ),
@@ -112,16 +136,14 @@ class LoginPage extends StatelessWidget {
                           child: Text(
                             'Cadastre-se',
                             style: TextStyle(color: Colors.white,  fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
-              ),
+              ],
             ),
-          ),
-        ],
+        ),
+        ),
+      ),
       ),
     );
   }
