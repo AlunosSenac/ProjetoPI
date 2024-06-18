@@ -41,49 +41,55 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAyq9xVxvG0Ls5wzdamlWwQKOH8u8bYYqA',
-    appId: '1:150045401053:web:99f4776e870274a3b8e034',
-    messagingSenderId: '150045401053',
-    projectId: 'vs-journey',
-    authDomain: 'vs-journey.firebaseapp.com',
-    storageBucket: 'vs-journey.appspot.com',
-    measurementId: 'G-RNMZS78D7F',
+    apiKey: 'AIzaSyDGvJ8UF2N-OYVRtrU4WpLADNEjuE5266I',
+    appId: '1:452769124630:web:1c4a6cfe34c300ac0c0037',
+    messagingSenderId: '452769124630',
+    projectId: 'visual-journey-eb477',
+    authDomain: 'visual-journey-eb477.firebaseapp.com',
+    databaseURL: 'https://visual-journey-eb477-default-rtdb.firebaseio.com',
+    storageBucket: 'visual-journey-eb477.appspot.com',
+    measurementId: 'G-YMS9L2LN4N',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDKF4q-iD1GYOgWjxVC0b0rBeH4swCg3bo',
-    appId: '1:150045401053:android:894e53e133ddc720b8e034',
-    messagingSenderId: '150045401053',
-    projectId: 'vs-journey',
-    storageBucket: 'vs-journey.appspot.com',
+    apiKey: 'AIzaSyCvJx8n4V0c652FviQBn97V3R1gLsEFKZA',
+    appId: '1:452769124630:android:bbba917df06f668b0c0037',
+    messagingSenderId: '452769124630',
+    projectId: 'visual-journey-eb477',
+    databaseURL: 'https://visual-journey-eb477-default-rtdb.firebaseio.com',
+    storageBucket: 'visual-journey-eb477.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyA15qah5IAx9KkDlucZp45XLhk5qDtXJV0',
-    appId: '1:150045401053:ios:3abaf1532b7b2968b8e034',
-    messagingSenderId: '150045401053',
-    projectId: 'vs-journey',
-    storageBucket: 'vs-journey.appspot.com',
+    apiKey: 'AIzaSyDV_G9T8h8y4KzurBAT_I4uyeZRdQLqVkU',
+    appId: '1:452769124630:ios:53d2912737137f4c0c0037',
+    messagingSenderId: '452769124630',
+    projectId: 'visual-journey-eb477',
+    databaseURL: 'https://visual-journey-eb477-default-rtdb.firebaseio.com',
+    storageBucket: 'visual-journey-eb477.appspot.com',
     iosBundleId: 'com.example.flutterApp',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyA15qah5IAx9KkDlucZp45XLhk5qDtXJV0',
-    appId: '1:150045401053:ios:3abaf1532b7b2968b8e034',
-    messagingSenderId: '150045401053',
-    projectId: 'vs-journey',
-    storageBucket: 'vs-journey.appspot.com',
+    apiKey: 'AIzaSyDV_G9T8h8y4KzurBAT_I4uyeZRdQLqVkU',
+    appId: '1:452769124630:ios:53d2912737137f4c0c0037',
+    messagingSenderId: '452769124630',
+    projectId: 'visual-journey-eb477',
+    databaseURL: 'https://visual-journey-eb477-default-rtdb.firebaseio.com',
+    storageBucket: 'visual-journey-eb477.appspot.com',
     iosBundleId: 'com.example.flutterApp',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyAyq9xVxvG0Ls5wzdamlWwQKOH8u8bYYqA',
-    appId: '1:150045401053:web:ca7da2fedd627b18b8e034',
-    messagingSenderId: '150045401053',
-    projectId: 'vs-journey',
-    authDomain: 'vs-journey.firebaseapp.com',
-    storageBucket: 'vs-journey.appspot.com',
-    measurementId: 'G-JJEWMYENVN',
+    apiKey: 'AIzaSyDGvJ8UF2N-OYVRtrU4WpLADNEjuE5266I',
+    appId: '1:452769124630:web:581625ea75f7e0a70c0037',
+    messagingSenderId: '452769124630',
+    projectId: 'visual-journey-eb477',
+    authDomain: 'visual-journey-eb477.firebaseapp.com',
+    databaseURL: 'https://visual-journey-eb477-default-rtdb.firebaseio.com',
+    storageBucket: 'visual-journey-eb477.appspot.com',
+    measurementId: 'G-G96WEP0RT0',
   );
+
 }
  */
