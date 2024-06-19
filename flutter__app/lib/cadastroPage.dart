@@ -9,6 +9,7 @@ class CadastroPage extends StatefulWidget {
 }
 
 class _CadastroPageState extends State<CadastroPage> {
+  final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
@@ -56,11 +57,13 @@ class _CadastroPageState extends State<CadastroPage> {
                 ),
               ],
             ),
+            child:Form(
+              key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'Login',  
+                  'Cadastro',  
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 24.0,
@@ -197,6 +200,7 @@ class _CadastroPageState extends State<CadastroPage> {
                         height: 42, 
                 child: ElevatedButton(
                   onPressed: () async {
+                    if (_formKey.currentState?.validate() ?? false) {
                     await
                     FirebaseFirestore.instance.collection('users').add({
                         'name' : _nameController.text,
@@ -207,8 +211,9 @@ class _CadastroPageState extends State<CadastroPage> {
                         'photoPath' : _photoController.text,
               
                     });
+                    } 
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Usuário cadastrado com sucesso')));
-
+                     
                   },
                   child: Text('Cadastrar'),
                   style: ElevatedButton.styleFrom(
@@ -238,6 +243,7 @@ class _CadastroPageState extends State<CadastroPage> {
                   ),
                 ),
               ],
+            ),
             ),
         ),
         ),
