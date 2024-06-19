@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'LoginPage.dart'; 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class CadastroPage extends StatefulWidget {
   @override
@@ -7,12 +9,12 @@ class CadastroPage extends StatefulWidget {
 }
 
 class _CadastroPageState extends State<CadastroPage> {
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _phoneController = TextEditingController();
-  TextEditingController _addressController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _photoController = TextEditingController();
+  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _phoneController = TextEditingController();
+  final _userController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _photoController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +60,7 @@ class _CadastroPageState extends State<CadastroPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'Login',
+                  'Login',  
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 24.0,
@@ -130,7 +132,7 @@ class _CadastroPageState extends State<CadastroPage> {
                   height: 42.0,
                   width: 350.0,
                   child:TextFormField(
-                    controller: _addressController,
+                    controller: _userController,
                     decoration: InputDecoration(
                       labelText: 'Usuário',
                       labelStyle: TextStyle(color: Colors.white), 
@@ -194,20 +196,19 @@ class _CadastroPageState extends State<CadastroPage> {
                         width: 350, 
                         height: 42, 
                 child: ElevatedButton(
-                  onPressed: () {
-                    String name = _nameController.text;
-                    String email = _emailController.text;
-                    String phone = _phoneController.text;
-                    String address = _addressController.text;
-                    String password = _passwordController.text;
-                    String photoPath = _photoController.text;
+                  onPressed: () async {
+                    await
+                    FirebaseFirestore.instance.collection('users').add({
+                        'name' : _nameController.text,
+                        'email' : _emailController.text,
+                        'phone' : _phoneController.text,
+                        'user': _userController.text,
+                        'password' : _passwordController.text,
+                        'photoPath' : _photoController.text,
+              
+                    });
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Usuário cadastrado com sucesso')));
 
-                    print('Nome: $name');
-                    print('E-mail: $email');
-                    print('Telefone: $phone');
-                    print('Endereço: $address');
-                    print('Senha: $password');
-                    print('Foto de Perfil: $photoPath');
                   },
                   child: Text('Cadastrar'),
                   style: ElevatedButton.styleFrom(
