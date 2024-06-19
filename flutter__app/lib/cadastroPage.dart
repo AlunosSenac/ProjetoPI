@@ -75,6 +75,7 @@ class _CadastroPageState extends State<CadastroPage> {
                   height: 42.0,
                   width: 350.0,
                   child:TextFormField(
+                      style: TextStyle(color: Colors.white,),
                       controller: _nameController,
                       decoration: InputDecoration(
                         labelText: 'Nome',
@@ -115,6 +116,7 @@ class _CadastroPageState extends State<CadastroPage> {
                   height: 42.0,
                   width: 350.0,
                   child:TextFormField(
+                      style: TextStyle(color: Colors.white,),
                       controller: _phoneController,
                       decoration: InputDecoration(
                         labelText: 'Telefone',
@@ -136,6 +138,7 @@ class _CadastroPageState extends State<CadastroPage> {
                   width: 350.0,
                   child:TextFormField(
                     controller: _userController,
+                    style: TextStyle(color: Colors.white,),
                     decoration: InputDecoration(
                       labelText: 'Usuário',
                       labelStyle: TextStyle(color: Colors.white), 
@@ -155,6 +158,7 @@ class _CadastroPageState extends State<CadastroPage> {
                   width: 350.0,
                   child:TextFormField(
                       controller: _passwordController,
+                      style: TextStyle(color: Colors.white,),
                       decoration: InputDecoration(
                         labelText: 'Senha',
                         labelStyle: TextStyle(color: Colors.white), 
@@ -176,6 +180,7 @@ class _CadastroPageState extends State<CadastroPage> {
                   child:TextFormField(
                   controller: _photoController,
                   readOnly: true,
+                  style: TextStyle(color: Colors.white,),
                   decoration: InputDecoration(
                     labelText: 'Foto de Perfil',
                     labelStyle: TextStyle(color: Colors.white), 
@@ -187,6 +192,7 @@ class _CadastroPageState extends State<CadastroPage> {
                         borderSide: BorderSide(color: Colors.white,),
                       ),
                     hintText: 'Adicionar foto',
+                    hintStyle: TextStyle(color: Colors.white), 
                     suffixIcon: IconButton(
                       icon: Icon(Icons.camera_alt, color: Colors.white,),
                       onPressed: () {},
