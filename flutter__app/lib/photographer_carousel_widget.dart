@@ -20,22 +20,22 @@ class PhotographerCarouselWidget extends StatelessWidget {
               CircleAvatar(
                 radius: 40,
                 // Substitua os caminhos pelas imagens reais
-                backgroundImage: AssetImage('caminho/para/imagem1.jpg'),
+                backgroundImage: AssetImage('assets/images/foto1.jpg'),
               ),
               CircleAvatar(
                 radius: 40,
                 // Substitua os caminhos pelas imagens reais
-                backgroundImage: AssetImage('caminho/para/imagem2.jpg'),
+                backgroundImage: AssetImage('assets/images/foto1.jpg'),
               ),
               CircleAvatar(
                 radius: 40,
                 // Substitua os caminhos pelas imagens reais
-                backgroundImage: AssetImage('caminho/para/imagem3.jpg'),
+                backgroundImage: AssetImage('assets/images/foto1.jpg'),
               ),
               CircleAvatar(
                 radius: 40,
                 // Substitua os caminhos pelas imagens reais
-                backgroundImage: AssetImage('caminho/para/imagem4.jpg'),
+                backgroundImage: AssetImage('assets/images/foto1.jpg'),
               ),
               // Adicionar mais CircleAvatars conforme necessário
             ],

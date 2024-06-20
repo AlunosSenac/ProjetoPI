@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter__app/CadastroPage.dart';
-import 'package:flutter__app/footer_widget.dart';
-//import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'CadastroPage.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login',
+        title: Text(
+          'Login',
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            
           ),
         ),
         actions: [
@@ -25,125 +33,181 @@ class LoginPage extends StatelessWidget {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/fundoLogin.jpg'),
-                  fit: BoxFit.cover,
-                ),
+            fit: BoxFit.cover,
+          ),
         ),
         child: Center(
-          child: SingleChildScrollView( 
+          child: SingleChildScrollView(
             child: Container(
-            padding: EdgeInsets.all(16.0),
-            margin: EdgeInsets.all(50.0), 
-            decoration: BoxDecoration(
-              color: Color.fromARGB(123, 78, 74, 74),
-              borderRadius: BorderRadius.circular(10.0),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 5,
-                  blurRadius: 3,
-                  offset: Offset(0, 1),
-                ),
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[ 
-                Text(
-                  'Cadastro',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.bold,
+              padding: EdgeInsets.all(16.0),
+              margin: EdgeInsets.all(50.0),
+              decoration: BoxDecoration(
+                color: Color.fromARGB(123, 78, 74, 74),
+                borderRadius: BorderRadius.circular(10.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 3,
+                    offset: Offset(0, 1),
                   ),
-                ),  
-            SizedBox(
-              height: 42,
-              width: 350,
-              child:TextFormField(
-              style: TextStyle(color: Colors.white,), 
-                          decoration: InputDecoration(
-                            labelText: 'Usuario',
-                            labelStyle: TextStyle(color: Colors.white), 
-                            prefixIcon: Icon(Icons.person, color: Colors.white), 
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white,),
-                            ),
-                          ),
-                        ),
+                ],
+              ),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'Login',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24.0,
+                        fontWeight: FontWeight.bold,
                       ),
-                      SizedBox(height: 20),
-                      SizedBox(
-                        height: 42,
-                        width: 350,
-                        child:TextFormField(
-                            style: TextStyle(color: Colors.white), 
-                            decoration: InputDecoration(
-                              labelText: 'Senha',
-                              labelStyle: TextStyle(color: Colors.white), 
-                              prefixIcon: Icon(Icons.lock, color: Colors.white), 
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white,),
-                              ),
-                            ),
-                            obscureText: true,
-                          ),
-                      ),
-                      SizedBox(height: 20),
-                      SizedBox(
-                        width: 350, 
-                        height: 42, 
-                        child: ElevatedButton(
-                          onPressed: () {
-                          },
-                          style: ElevatedButton.styleFrom(
-                            foregroundColor: Color(0xFFFCFDF9), 
-                            backgroundColor: Color(0xFF435364), 
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(14.0),
-                            ),
-                          ),
-                          child: Text(
-                            'Login',
-                            style: TextStyle(color: Colors.white,  fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 20),
-                      SizedBox(
-                        width: 350, 
-                        height: 42, 
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => CadastroPage()
-                              ),
-                            );
-                          },
-                          style: ElevatedButton.styleFrom(
-                            foregroundColor: Color(0xFFFCFDF9), 
-                            backgroundColor: Color(0xFF435364),  
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(14.0),
-                            ),
-                          ),
-                          child: Text(
-                            'Cadastre-se',
-                            style: TextStyle(color: Colors.white,  fontWeight: FontWeight.bold),
                     ),
-                  ),
+                    SizedBox(height: 20.0),
+                    SizedBox(
+                      height: 42.0,
+                      width: 350.0,
+                      child: TextFormField(
+                        style: TextStyle(color: Colors.white),
+                        controller: _emailController,
+                        decoration: InputDecoration(
+                          labelText: 'E-mail',
+                          labelStyle: TextStyle(color: Colors.white),
+                          prefixIcon: Icon(Icons.email, color: Colors.white),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Por favor, insira o e-mail';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    SizedBox(height: 20.0),
+                    SizedBox(
+                      height: 42.0,
+                      width: 350.0,
+                      child: TextFormField(
+                        style: TextStyle(color: Colors.white),
+                        controller: _passwordController,
+                        decoration: InputDecoration(
+                          labelText: 'Senha',
+                          labelStyle: TextStyle(color: Colors.white),
+                          prefixIcon: Icon(Icons.lock, color: Colors.white),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                        ),
+                        obscureText: true,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Por favor, insira a senha';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    SizedBox(height: 20.0),
+                    SizedBox(
+                      width: 350,
+                      height: 42,
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          if (_formKey.currentState?.validate() ?? false) {
+                            try {
+                              UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+                                email: _emailController.text,
+                                password: _passwordController.text,
+                              );
+
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Login realizado com sucesso')));
+
+                              // Navegar para a página principal ou outra página após o login bem-sucedido
+                            } on FirebaseAuthException catch (e) {
+                              String message = '';
+                              if (e.code == 'user-not-found') {
+                                message = 'Usuário não encontrado.';
+                              } else if (e.code == 'wrong-password') {
+                                message = 'Senha incorreta.';
+                              } else {
+                                message = e.message ?? 'Erro desconhecido.';
+                              }
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+                            }
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Color(0xFFFCFDF9),
+                          backgroundColor: Color(0xFF435364),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(14.0),
+                          ),
+                        ),
+                        child: Text(
+                          'Login',
+                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20.0),
+                    SizedBox(
+                      width: 350,
+                      height: 42,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => CadastroPage()),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Color(0xFFFCFDF9),
+                          backgroundColor: Color(0xFF435364),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(14.0),
+                          ),
+                        ),
+                        child: Text(
+                          'Cadastre-se',
+                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20.0),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => CadastroPage()),
+                        );
+                      },
+                      child: Text(
+                        'Não possui cadastro? Registre-se aqui',
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          color: Colors.white,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
+          ),
         ),
-        ),
-      ),
       ),
     );
   }

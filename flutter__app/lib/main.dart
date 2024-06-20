@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -9,7 +10,15 @@ import 'footer_widget.dart';
 import 'drawer_menu_widget.dart';
 import 'dart:async';
 
-void main() {
+
+Future main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: FirebaseOptions(
+      apiKey: "AIzaSyCvJx8n4V0c652FviQBn97V3R1gLsEFKZA", 
+      appId: "1:452769124630:android:bbba917df06f668b0c0037", 
+      messagingSenderId: "452769124630", 
+      projectId: "visual-journey-eb477"));
   runApp(
     DevicePreview(
       enabled: true,
