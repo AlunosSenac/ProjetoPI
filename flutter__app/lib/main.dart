@@ -21,7 +21,7 @@ Future main() async{
       projectId: "visual-journey-eb477"));
   runApp(
     DevicePreview(
-      enabled: false,
+      enabled: true,
       builder: (context) => MyApp(),
     ),
   );
