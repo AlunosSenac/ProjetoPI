@@ -14,6 +14,8 @@ class _CadastroPageState extends State<CadastroPage> {
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
   final _userController = TextEditingController();
+  final _ufController = TextEditingController();
+  final _cityController = TextEditingController();
   final _passwordController = TextEditingController();
   final _photoController = TextEditingController();
 
@@ -193,6 +195,52 @@ class _CadastroPageState extends State<CadastroPage> {
                       height: 42.0,
                       width: 350.0,
                       child: TextFormField(
+                        controller: _ufController,
+                        style: TextStyle(color: Colors.white),
+                        decoration: InputDecoration(
+                          labelText: 'UF',
+                          labelStyle: TextStyle(color: Colors.white),
+                          prefixIcon: Icon(
+                            Icons.location_on,
+                            color: Colors.white,
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 10.0),
+                    SizedBox(
+                      height: 42.0,
+                      width: 350.0,
+                      child: TextFormField(
+                        controller: _cityController,
+                        style: TextStyle(color: Colors.white),
+                        decoration: InputDecoration(
+                          labelText: 'Cidade',
+                          labelStyle: TextStyle(color: Colors.white),
+                          prefixIcon: Icon(
+                            Icons.location_on,
+                            color: Colors.white,
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 10.0),
+                    SizedBox(
+                      height: 42.0,
+                      width: 350.0,
+                      child: TextFormField(
                         controller: _photoController,
                         readOnly: true,
                         style: TextStyle(color: Colors.white),
@@ -239,6 +287,8 @@ class _CadastroPageState extends State<CadastroPage> {
                                 'email': _emailController.text,
                                 'phone': _phoneController.text,
                                 'user': _userController.text,
+                                'UF': _ufController.text,
+                                'city': _cityController.text,
                                 'photoPath': _photoController.text,
                                 'uid': userCredential.user?.uid,
                               });
