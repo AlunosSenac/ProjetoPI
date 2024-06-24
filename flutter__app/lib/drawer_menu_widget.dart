@@ -3,6 +3,10 @@ import 'package:flutter__app/LoginPage.dart';
 import 'package:flutter__app/CadastroPage.dart'; 
 import 'package:flutter__app/Galeria.dart';
 import 'package:flutter__app/About.dart';
+import 'package:flutter__app/Usuario.dart';
+
+
+
 import 'package:flutter__app/explorer.dart';
 
 class DrawerMenuWidget extends StatelessWidget {
@@ -63,6 +67,15 @@ class DrawerMenuWidget extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => About()),
+              );
+            },
+          ),
+          ListTile(
+            title: Text('Usuario'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Usuario()),
               );
             },
           ),
