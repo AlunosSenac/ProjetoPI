@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(UserProfileScreen());
+  runApp(Usuario());
 }
 
-class UserProfileScreen extends StatelessWidget {
+class Usuario extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
