@@ -10,7 +10,6 @@ import 'footer_widget.dart';
 import 'drawer_menu_widget.dart';
 import 'dart:async';
 
-
 Future main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(

@@ -264,7 +264,9 @@ class _CadastroPageState extends State<CadastroPage> {
                               Icons.camera_alt,
                               color: Colors.white,
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                            
+                            },
                           ),
                         ),
                       ),
@@ -289,7 +291,6 @@ class _CadastroPageState extends State<CadastroPage> {
                                 'user': _userController.text,
                                 'UF': _ufController.text,
                                 'city': _cityController.text,
-                                'photoPath': _photoController.text,
                                 'uid': userCredential.user?.uid,
                               });
 
