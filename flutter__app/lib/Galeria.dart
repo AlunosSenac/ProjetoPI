@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter__app/footer_widget.dart';
 
 // Importações dos widgets que serão utilizados no código
 
@@ -26,7 +25,6 @@ class Galeria extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Gallery(),
-            FooterWidget(), // Adicionando o FooterWidget aqui
           ],
         ),
       ),
