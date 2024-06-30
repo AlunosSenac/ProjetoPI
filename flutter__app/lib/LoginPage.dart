@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'CadastroPage.dart';
+import 'CadastroPage.dart'; // Importe a página de cadastro se necessário
+import 'userProfilePage.dart'; // Importe a página do usuário (ou ajuste conforme necessário)
 
 class LoginPage extends StatefulWidget {
   @override
@@ -11,6 +12,41 @@ class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  // Método para realizar o login do usuário
+  Future<void> _signInWithEmailAndPassword() async {
+    try {
+      if (_formKey.currentState?.validate() ?? false) {
+        UserCredential userCredential =
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        );
+
+        // Após o login bem-sucedido, navegar para a página do usuário
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => UserProfilePage()), // Substitua com a página correta do usuário
+        );
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Login realizado com sucesso')),
+        );
+      }
+    } on FirebaseAuthException catch (e) {
+      String message = '';
+      if (e.code == 'user-not-found') {
+        message = 'Usuário não encontrado.';
+      } else if (e.code == 'wrong-password') {
+        message = 'Senha incorreta.';
+      } else {
+        message = e.message ?? 'Erro desconhecido.';
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(message)),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -124,30 +160,7 @@ class _LoginPageState extends State<LoginPage> {
                       width: 350,
                       height: 42,
                       child: ElevatedButton(
-                        onPressed: () async {
-                          if (_formKey.currentState?.validate() ?? false) {
-                            try {
-                              UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-                                email: _emailController.text,
-                                password: _passwordController.text,
-                              );
-
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Login realizado com sucesso')));
-
-                              // Navegar para a página principal ou outra página após o login bem-sucedido
-                            } on FirebaseAuthException catch (e) {
-                              String message = '';
-                              if (e.code == 'user-not-found') {
-                                message = 'Usuário não encontrado.';
-                              } else if (e.code == 'wrong-password') {
-                                message = 'Senha incorreta.';
-                              } else {
-                                message = e.message ?? 'Erro desconhecido.';
-                              }
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
-                            }
-                          }
-                        },
+                        onPressed: _signInWithEmailAndPassword,
                         style: ElevatedButton.styleFrom(
                           foregroundColor: Color(0xFFFCFDF9),
                           backgroundColor: Color(0xFF435364),
@@ -157,7 +170,8 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         child: Text(
                           'Login',
-                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),
@@ -181,7 +195,8 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         child: Text(
                           'Cadastre-se',
-                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),

@@ -30,22 +30,27 @@ class _CadastroPageState extends State<CadastroPage> {
     return image;
   }
 
-  Future<void> upload(String path) async {
+  Future<String> upload(String path) async {
     File file = File(path);
     try {
       String ref = 'images/img-${DateTime.now().toString()}.png';
-      await storage.ref(ref).putFile(file);
+      final uploadTask = await storage.ref(ref).putFile(file);
+      final downloadURL = await uploadTask.ref.getDownloadURL();
+      return downloadURL;
     } on FirebaseException catch (e) {
       throw Exception('Erro no upload: ${e.code}');
     }
   }
 
   pickAndUploadImage() async {
-    XFile? file = await getImage();
-    if (file != null) {
-      await upload(file.path);
-    }
+  XFile? file = await getImage();
+  if (file != null) {
+    String photoURL = await upload(file.path);
+    setState(() {
+      _photoController.text = photoURL; // Atualiza o campo de texto com a URL
+    });
   }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -305,51 +310,56 @@ class _CadastroPageState extends State<CadastroPage> {
                       height: 42,
                       child: ElevatedButton(
                         onPressed: () async {
-                          if (_formKey.currentState?.validate() ?? false) {
-                            try {
-                              UserCredential userCredential = await FirebaseAuth
-                                  .instance
-                                  .createUserWithEmailAndPassword(
-                                email: _emailController.text,
-                                password: _passwordController.text,
-                              );
+  if (_formKey.currentState?.validate() ?? false) {
+    try {
+      UserCredential userCredential = await FirebaseAuth
+          .instance
+          .createUserWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
 
-                              await FirebaseFirestore.instance
-                                  .collection('users')
-                                  .add({
-                                'name': _nameController.text,
-                                'email': _emailController.text,
-                                'phone': _phoneController.text,
-                                'user': _userController.text,
-                                'UF': _ufController.text,
-                                'city': _cityController.text,
-                                'uid': userCredential.user?.uid,
-                              });
+      String photoURL = _photoController.text; // Obtém a URL da imagem
 
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                      content: Text(
-                                          'Usuário cadastrado com sucesso')));
+      await FirebaseFirestore.instance
+          .collection('users')
+          .add({
+            'name': _nameController.text,
+            'email': _emailController.text,
+            'phone': _phoneController.text,
+            'user': _userController.text,
+            'UF': _ufController.text,
+            'city': _cityController.text,
+            'photoURL': photoURL, // Salva a URL da imagem no Firestore
+            'uid': userCredential.user?.uid,
+          });
 
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => LoginPage()),
-                              );
-                            } on FirebaseAuthException catch (e) {
-                              String message = '';
-                              if (e.code == 'email-already-in-use') {
-                                message = 'Este email já está sendo usado.';
-                              } else if (e.code == 'weak-password') {
-                                message = 'A senha é muito fraca.';
-                              } else {
-                                message = e.message ?? 'Erro desconhecido.';
-                              }
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text(message)));
-                            }
-                          }
-                        },
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Usuário cadastrado com sucesso'),
+        ),
+      );
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => LoginPage()),
+      );
+    } on FirebaseAuthException catch (e) {
+      String message = '';
+      if (e.code == 'email-already-in-use') {
+        message = 'Este email já está sendo usado.';
+      } else if (e.code == 'weak-password') {
+        message = 'A senha é muito fraca.';
+      } else {
+        message = e.message ?? 'Erro desconhecido.';
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(message)),
+      );
+    }
+  }
+},
+
                         style: ElevatedButton.styleFrom(
                           foregroundColor: Color(0xFFFCFDF9),
                           backgroundColor: Color(0xFF435364),
