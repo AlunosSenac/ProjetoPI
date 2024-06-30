@@ -30,11 +30,11 @@ class _UserProfilePageState extends State<UserProfilePage> {
       DocumentSnapshot<Map<String, dynamic>> userSnapshot =
           await _firestore.collection('users').doc(uid).get();
 
-      setState(() {
-        _userName = userSnapshot['name'];
-        _userPhotoUrl = userSnapshot['photoUrl'];
-        _whatsappNumber = userSnapshot['whatsapp'];
-      });
+        setState(() {
+          _userName = userSnapshot.data()?['name'] ?? '';
+          _userPhotoUrl = userSnapshot.data()?['photoUrl'] ?? '';
+          _whatsappNumber = userSnapshot.data()?['phone'] ?? '';
+        });
     }
   }
 

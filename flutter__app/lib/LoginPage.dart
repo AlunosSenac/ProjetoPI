@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter__app/main.dart';
 import 'CadastroPage.dart'; // Importe a página de cadastro se necessário
 import 'userProfilePage.dart'; // Importe a página do usuário (ou ajuste conforme necessário)
+import 'main.dart'; // Importe a página inicial
 
 class LoginPage extends StatefulWidget {
   @override
@@ -23,10 +25,10 @@ class _LoginPageState extends State<LoginPage> {
           password: _passwordController.text.trim(),
         );
 
-        // Após o login bem-sucedido, navegar para a página do usuário
+        // Após o login bem-sucedido, navegar para a página inicial
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => UserProfilePage()), // Substitua com a página correta do usuário
+          MaterialPageRoute(builder: (context) => HomeScreen()), // Substitua com a página inicial
         );
 
         ScaffoldMessenger.of(context).showSnackBar(
