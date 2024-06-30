@@ -1,7 +1,11 @@
+import 'dart:io';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'LoginPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
 
 class CadastroPage extends StatefulWidget {
   @override
@@ -18,6 +22,30 @@ class _CadastroPageState extends State<CadastroPage> {
   final _cityController = TextEditingController();
   final _passwordController = TextEditingController();
   final _photoController = TextEditingController();
+  final FirebaseStorage storage = FirebaseStorage.instance;
+
+  Future<XFile?> getImage() async {
+    final ImagePicker _picker = ImagePicker();
+    XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    return image;
+  }
+
+  Future<void> upload(String path) async {
+    File file = File(path);
+    try {
+      String ref = 'images/img-${DateTime.now().toString()}.png';
+      await storage.ref(ref).putFile(file);
+    } on FirebaseException catch (e) {
+      throw Exception('Erro no upload: ${e.code}');
+    }
+  }
+
+  pickAndUploadImage() async {
+    XFile? file = await getImage();
+    if (file != null) {
+      await upload(file.path);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -265,7 +293,7 @@ class _CadastroPageState extends State<CadastroPage> {
                               color: Colors.white,
                             ),
                             onPressed: () {
-                            
+                              pickAndUploadImage();
                             },
                           ),
                         ),
@@ -279,12 +307,16 @@ class _CadastroPageState extends State<CadastroPage> {
                         onPressed: () async {
                           if (_formKey.currentState?.validate() ?? false) {
                             try {
-                              UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                              UserCredential userCredential = await FirebaseAuth
+                                  .instance
+                                  .createUserWithEmailAndPassword(
                                 email: _emailController.text,
                                 password: _passwordController.text,
                               );
 
-                              await FirebaseFirestore.instance.collection('users').add({
+                              await FirebaseFirestore.instance
+                                  .collection('users')
+                                  .add({
                                 'name': _nameController.text,
                                 'email': _emailController.text,
                                 'phone': _phoneController.text,
@@ -294,11 +326,15 @@ class _CadastroPageState extends State<CadastroPage> {
                                 'uid': userCredential.user?.uid,
                               });
 
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Usuário cadastrado com sucesso')));
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                      content: Text(
+                                          'Usuário cadastrado com sucesso')));
 
                               Navigator.pushReplacement(
                                 context,
-                                MaterialPageRoute(builder: (context) => LoginPage()),
+                                MaterialPageRoute(
+                                    builder: (context) => LoginPage()),
                               );
                             } on FirebaseAuthException catch (e) {
                               String message = '';
@@ -309,7 +345,8 @@ class _CadastroPageState extends State<CadastroPage> {
                               } else {
                                 message = e.message ?? 'Erro desconhecido.';
                               }
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text(message)));
                             }
                           }
                         },
@@ -334,9 +371,9 @@ class _CadastroPageState extends State<CadastroPage> {
                       child: Text(
                         'Já possui cadastro? Faça seu Login',
                         style: TextStyle(
-                        fontSize: 16.0,
-                        color: Colors.white,
-                        decoration: TextDecoration.underline,
+                          fontSize: 16.0,
+                          color: Colors.white,
+                          decoration: TextDecoration.underline,
                         ),
                       ),
                     ),
