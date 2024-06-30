@@ -79,7 +79,7 @@ class DrawerMenuWidget extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => UserProfilePage()),
+                  MaterialPageRoute(builder: (context) => UserProfilePage(userName: '', userPhotoUrl: '', whatsappNumber: '',)),
                 );
               },
             ),
