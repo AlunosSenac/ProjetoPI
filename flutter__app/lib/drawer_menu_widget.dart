@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter__app/main.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'LoginPage.dart';
 import 'CadastroPage.dart';
 import 'Galeria.dart';
 import 'About.dart';
-import 'userProfilePage.dart';
 import 'explorer.dart';
+import 'adminPage.dart'; // Importar a nova página de administração
+import 'main.dart';
 
 class DrawerMenuWidget extends StatelessWidget {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -75,11 +77,11 @@ class DrawerMenuWidget extends StatelessWidget {
           ),
           if (_auth.currentUser != null) // Mostra apenas se estiver logado
             ListTile(
-              title: Text('Usuário'),
+              title: Text('Administração'),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => UserProfilePage(userName: '', userPhotoUrl: '', whatsappNumber: '',)),
+                  MaterialPageRoute(builder: (context) => AdminPage()),
                 );
               },
             ),

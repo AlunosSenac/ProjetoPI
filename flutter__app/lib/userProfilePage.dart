@@ -15,17 +15,17 @@ class UserProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Perfil do Fotógrafo'),
+        title: Text(userName),
       ),
-      body: Center(
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: [
             CircleAvatar(
               radius: 50,
               backgroundImage: NetworkImage(userPhotoUrl),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             Text(
               userName,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
@@ -33,9 +33,8 @@ class UserProfilePage extends StatelessWidget {
             SizedBox(height: 10),
             Text(
               'WhatsApp: $whatsappNumber',
-              style: TextStyle(fontSize: 18),
+              style: TextStyle(fontSize: 16),
             ),
-            // Adicione mais informações conforme necessário
           ],
         ),
       ),
