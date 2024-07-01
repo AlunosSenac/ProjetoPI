@@ -1,9 +1,7 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'LoginPage.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -15,42 +13,10 @@ class AdminPage extends StatefulWidget {
 class _AdminPageState extends State<AdminPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _phoneController = TextEditingController();
-  final TextEditingController _userController = TextEditingController();
-  final TextEditingController _ufController = TextEditingController();
-  final TextEditingController _cityController = TextEditingController();
   final TextEditingController _profilePhotoController = TextEditingController();
   final TextEditingController _galleryPhotoController = TextEditingController();
   final FirebaseStorage storage = FirebaseStorage.instance;
   final ImagePicker _picker = ImagePicker();
-
-  @override
-  void initState() {
-    super.initState();
-    loadUserData();
-  }
-
-  void loadUserData() async {
-    try {
-      var snapshot = await _firestore.collection('users').doc(_auth.currentUser!.uid).get();
-      if (snapshot.exists) {
-        var userData = snapshot.data() as Map<String, dynamic>;
-        setState(() {
-          _nameController.text = userData['name'] ?? '';
-          _emailController.text = userData['email'] ?? '';
-          _phoneController.text = userData['phone'] ?? '';
-          _userController.text = userData['user'] ?? '';
-          _ufController.text = userData['UF'] ?? '';
-          _cityController.text = userData['city'] ?? '';
-          _profilePhotoController.text = userData['photoURL'] ?? '';
-        });
-      }
-    } catch (e) {
-      print('Erro ao carregar dados do usuário: $e');
-    }
-  }
 
   Future<XFile?> getImage() async {
     XFile? image = await _picker.pickImage(source: ImageSource.gallery);
@@ -60,7 +26,7 @@ class _AdminPageState extends State<AdminPage> {
   Future<String> upload(String path, String folderName) async {
     File file = File(path);
     try {
-      String ref = 'images/$folderName/img-${DateTime.now().toString()}.png'; // Pasta diferente no Firebase Storage
+      String ref = 'images/$folderName/img-${DateTime.now().toString()}.png';
       final uploadTask = await storage.ref(ref).putFile(file);
       final downloadURL = await uploadTask.ref.getDownloadURL();
       return downloadURL;
@@ -69,23 +35,31 @@ class _AdminPageState extends State<AdminPage> {
     }
   }
 
-  pickAndUploadProfilePhoto() async {
+  pickAndUploadGalleryPhoto() async {
     XFile? file = await getImage();
     if (file != null) {
-      String photoURL = await upload(file.path, 'user_photos'); // Pasta 'user_photos' no Firebase Storage
+      String photoURL = await upload(file.path, 'gallery_photos');
+      await savePhotoURLToGallery(photoURL);
       setState(() {
-        _profilePhotoController.text = photoURL; // Atualiza o controller com o URL
+        _galleryPhotoController.text = photoURL;
       });
     }
   }
 
-  pickAndUploadGalleryPhoto() async {
-    XFile? file = await getImage();
-    if (file != null) {
-      String photoURL = await upload(file.path, 'gallery_photos'); // Pasta 'gallery_photos' no Firebase Storage
-      setState(() {
-        _galleryPhotoController.text = photoURL;
-      });
+  Future<void> savePhotoURLToGallery(String photoURL) async {
+    try {
+      User? currentUser = _auth.currentUser;
+      if (currentUser != null) {
+        await _firestore.collection('gallery').add({
+          'photoURL': photoURL,
+          'userId': currentUser.uid,  // Adiciona o ID do usuário logado
+        });
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Foto adicionada à galeria com sucesso!')));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Nenhum usuário logado!')));
+      }
+    } catch (e) {
+      print('Erro ao salvar URL da foto na galeria: $e');
     }
   }
 
@@ -93,63 +67,13 @@ class _AdminPageState extends State<AdminPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Admin Page'),
+        title: Text('Adicionar Fotografia'),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextFormField(
-              controller: _nameController,
-              decoration: InputDecoration(labelText: 'Nome'),
-            ),
-            TextFormField(
-              controller: _emailController,
-              decoration: InputDecoration(labelText: 'E-mail'),
-            ),
-            TextFormField(
-              controller: _phoneController,
-              decoration: InputDecoration(labelText: 'Telefone'),
-            ),
-            TextFormField(
-              controller: _userController,
-              decoration: InputDecoration(labelText: 'Usuário'),
-            ),
-            TextFormField(
-              controller: _ufController,
-              decoration: InputDecoration(labelText: 'UF'),
-            ),
-            TextFormField(
-              controller: _cityController,
-              decoration: InputDecoration(labelText: 'Cidade'),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () async {
-                await updateUserProfile();
-              },
-              child: Text('Salvar Dados'),
-            ),
-            SizedBox(height: 20),
-            Divider(),
-            SizedBox(height: 20),
-            Text(
-              'Adicionar Foto de Perfil',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            TextFormField(
-              controller: _profilePhotoController,
-              readOnly: true,
-              decoration: InputDecoration(labelText: 'Foto de Perfil'),
-            ),
-            SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: () async {
-                pickAndUploadProfilePhoto();
-              },
-              child: Text('Escolher Foto de Perfil'),
-            ),
             SizedBox(height: 20),
             Divider(),
             SizedBox(height: 20),
@@ -173,22 +97,5 @@ class _AdminPageState extends State<AdminPage> {
         ),
       ),
     );
-  }
-
-  Future<void> updateUserProfile() async {
-    try {
-      await _firestore.collection('users').doc(_auth.currentUser!.uid).update({
-        'name': _nameController.text,
-        'email': _emailController.text,
-        'phone': _phoneController.text,
-        'user': _userController.text,
-        'UF': _ufController.text,
-        'city': _cityController.text,
-        'photoURL': _profilePhotoController.text,
-      });
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Dados atualizados com sucesso!')));
-    } catch (e) {
-      print('Erro ao atualizar dados do usuário: $e');
-    }
   }
 }

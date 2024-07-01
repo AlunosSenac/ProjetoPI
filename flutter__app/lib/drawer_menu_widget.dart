@@ -6,7 +6,7 @@ import 'CadastroPage.dart';
 import 'Galeria.dart';
 import 'About.dart';
 import 'explorer.dart';
-import 'adminPage.dart'; // Importar a nova página de administração
+import 'adminPage.dart'; 
 import 'main.dart';
 
 class DrawerMenuWidget extends StatelessWidget {
@@ -77,7 +77,7 @@ class DrawerMenuWidget extends StatelessWidget {
           ),
           if (_auth.currentUser != null) // Mostra apenas se estiver logado
             ListTile(
-              title: Text('Administração'),
+              title: Text('Adicionar Foto'),
               onTap: () {
                 Navigator.push(
                   context,
