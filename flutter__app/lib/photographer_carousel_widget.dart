@@ -46,6 +46,8 @@ class PhotographerCarouselWidget extends StatelessWidget {
                             userName: data['name'] ?? '',
                             userPhotoUrl: photoUrl,
                             whatsappNumber: data['phone'] ?? '',
+                            city: data['city'] ?? '',
+                            uf: data['UF'] ?? '',
                           ),
                         ),
                       );

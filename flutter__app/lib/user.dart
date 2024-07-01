@@ -4,16 +4,12 @@ class UserProfilePage extends StatelessWidget {
   final String userName;
   final String userPhotoUrl;
   final String whatsappNumber;
-  final String city;
-  final String uf;
   /* final List<String> galleryImages; */
 
   UserProfilePage({
     required this.userName,
     required this.userPhotoUrl,
     required this.whatsappNumber,
-    required this.city,
-    required this.uf,
 /*     required this.galleryImages, */
   });
 
@@ -43,9 +39,6 @@ class UserProfilePage extends StatelessWidget {
                 color: Colors.grey[700],
               ),
             ),
-            Text(
-              city,
-            ),
             SizedBox(height: 10),
             Text(
               'WhatsApp: $whatsappNumber',
@@ -57,7 +50,7 @@ class UserProfilePage extends StatelessWidget {
               children: [
                 PopupMenuButton<String>(
                   onSelected: (String result) {
-                    if (result == 'denuncia') {
+                    if (result == 'edit') {
                       // Lógica para editar
                     } else if (result == 'exit') {
                       // Lógica para sair
@@ -65,8 +58,12 @@ class UserProfilePage extends StatelessWidget {
                   },
                   itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
                     const PopupMenuItem<String>(
-                      value: 'Denuncia',
-                      child: Text('denunciar'),
+                      value: 'edit',
+                      child: Text('Editar'),
+                    ),
+                    const PopupMenuItem<String>(
+                      value: 'exit',
+                      child: Text('Sair'),
                     ),
                   ],
                 ),

@@ -147,7 +147,9 @@ class _ExplorerState extends State<Explorer> {
         builder: (context) => UserProfilePage(
           userName: photographerData['name'],
           userPhotoUrl: photographerData['photoURL'],
-          whatsappNumber: photographerData['phone']
+          whatsappNumber: photographerData['phone'],
+          city: photographerData['city'],
+          uf: photographerData['UF'],
           // Outros dados necessários do fotógrafo
         ),
       ),
