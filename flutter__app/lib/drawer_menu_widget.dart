@@ -77,7 +77,7 @@ class DrawerMenuWidget extends StatelessWidget {
           ),
           if (_auth.currentUser != null) // Mostra apenas se estiver logado
             ListTile(
-              title: Text('Adicionar Foto'),
+              title: Text('Adicionar Fotografia'),
               onTap: () {
                 Navigator.push(
                   context,

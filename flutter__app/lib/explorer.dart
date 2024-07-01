@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter__app/userProfilePage.dart'; // Importe a página do perfil
 
 class Explorer extends StatefulWidget {
   @override
@@ -6,24 +8,17 @@ class Explorer extends StatefulWidget {
 }
 
 class _ExplorerState extends State<Explorer> {
-  // Controllers para os filtros
+  TextEditingController _nameFilterController = TextEditingController();
   TextEditingController _ufFilterController = TextEditingController();
   TextEditingController _cityFilterController = TextEditingController();
-  TextEditingController _categoryFilterController = TextEditingController();
 
-  // Lista de fotógrafos (substitua pela sua própria estrutura de dados)
-  List<Photographer> photographers = [
-    Photographer('João', 'joao@example.com', 'SP', 'São Paulo', 'Retrato'),
-    Photographer('Maria', 'maria@example.com', 'RJ', 'Rio de Janeiro', 'Casamento'),
-    Photographer('Pedro', 'pedro@example.com', 'MG', 'Belo Horizonte', 'Eventos'),
-  ];
-
-  List<Photographer> filteredPhotographers = []; // Lista filtrada inicialmente todos os fotógrafos
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  List<DocumentSnapshot> filteredPhotographers = [];
 
   @override
   void initState() {
     super.initState();
-    filteredPhotographers = photographers; // Inicialmente, mostra todos os fotógrafos
+    applyFilters(); // Inicialmente, mostra todos os fotógrafos
   }
 
   @override
@@ -52,9 +47,19 @@ class _ExplorerState extends State<Explorer> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
+                // Nome
+                Flexible(
+                  child: TextFormField(
+                    controller: _nameFilterController,
+                    decoration: InputDecoration(
+                      labelText: 'Nome',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 10),
                 // UF
-                SizedBox(
-                  width: 120,
+                Flexible(
                   child: TextFormField(
                     controller: _ufFilterController,
                     decoration: InputDecoration(
@@ -63,9 +68,9 @@ class _ExplorerState extends State<Explorer> {
                     ),
                   ),
                 ),
+                SizedBox(width: 10),
                 // Cidade
-                SizedBox(
-                  width: 120,
+                Flexible(
                   child: TextFormField(
                     controller: _cityFilterController,
                     decoration: InputDecoration(
@@ -74,17 +79,7 @@ class _ExplorerState extends State<Explorer> {
                     ),
                   ),
                 ),
-                // Categoria
-                SizedBox(
-                  width: 120,
-                  child: TextFormField(
-                    controller: _categoryFilterController,
-                    decoration: InputDecoration(
-                      labelText: 'Categoria',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                ),
+                SizedBox(width: 10),
                 // Botão de Filtrar
                 ElevatedButton(
                   onPressed: () {
@@ -100,10 +95,15 @@ class _ExplorerState extends State<Explorer> {
             child: ListView.builder(
               itemCount: filteredPhotographers.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(filteredPhotographers[index].name),
-                  subtitle: Text(filteredPhotographers[index].city + ', ' + filteredPhotographers[index].uf),
-                  // Mais detalhes conforme necessário
+                var photographerData = filteredPhotographers[index].data() as Map<String, dynamic>;
+                return GestureDetector(
+                  onTap: () {
+                    navigateToProfilePage(photographerData); // Navegar para o perfil ao clicar
+                  },
+                  child: ListTile(
+                    title: Text(photographerData['name']),
+                    subtitle: Text('${photographerData['city']}, ${photographerData['UF']}'),
+                  ),
                 );
               },
             ),
@@ -114,25 +114,43 @@ class _ExplorerState extends State<Explorer> {
   }
 
   // Método para aplicar filtros com base nos critérios selecionados
-  void applyFilters() {
-    setState(() {
-      filteredPhotographers = photographers.where((photographer) {
-        final ufMatches = _ufFilterController.text.isEmpty || photographer.uf.toLowerCase().contains(_ufFilterController.text.toLowerCase());
-        final cityMatches = _cityFilterController.text.isEmpty || photographer.city.toLowerCase().contains(_cityFilterController.text.toLowerCase());
-        final categoryMatches = _categoryFilterController.text.isEmpty || photographer.category.toLowerCase().contains(_categoryFilterController.text.toLowerCase());
-        return ufMatches && cityMatches && categoryMatches;
-      }).toList();
-    });
+  void applyFilters() async {
+    Query query = _firestore.collection('users');
+
+    if (_nameFilterController.text.isNotEmpty) {
+      String searchTerm = _nameFilterController.text.toLowerCase();
+      query = query.where('name', isGreaterThanOrEqualTo: searchTerm)
+                   .where('name', isLessThan: searchTerm + 'z');
+    }
+    if (_ufFilterController.text.isNotEmpty) {
+      query = query.where('UF', isEqualTo: _ufFilterController.text);
+    }
+    if (_cityFilterController.text.isNotEmpty) {
+      query = query.where('city', isEqualTo: _cityFilterController.text);
+    }
+
+    try {
+      var querySnapshot = await query.get();
+      setState(() {
+        filteredPhotographers = querySnapshot.docs;
+      });
+    } catch (e) {
+      print('Erro ao executar a consulta: $e');
+    }
   }
-}
 
-// Modelo de fotógrafo (substitua pelo seu próprio modelo)
-class Photographer {
-  final String name;
-  final String email;
-  final String uf;
-  final String city;
-  final String category;
-
-  Photographer(this.name, this.email, this.uf, this.city, this.category);
+  // Método para navegar para a página de perfil do fotógrafo
+  void navigateToProfilePage(Map<String, dynamic> photographerData) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => UserProfilePage(
+          userName: photographerData['name'],
+          userPhotoUrl: photographerData['photoURL'],
+          whatsappNumber: photographerData['phone']
+          // Outros dados necessários do fotógrafo
+        ),
+      ),
+    );
+  }
 }
