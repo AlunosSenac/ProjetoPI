@@ -178,31 +178,6 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     SizedBox(height: 20.0),
-                    SizedBox(
-                      width: 350,
-                      height: 42,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => CadastroPage()),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor: Color(0xFFFCFDF9),
-                          backgroundColor: Color(0xFF435364),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(14.0),
-                          ),
-                        ),
-                        child: Text(
-                          'Cadastre-se',
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 20.0),
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
