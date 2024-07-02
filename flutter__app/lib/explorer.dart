@@ -145,12 +145,13 @@ class _ExplorerState extends State<Explorer> {
       context,
       MaterialPageRoute(
         builder: (context) => UserProfilePage(
+          userId: photographerData['uid'], // Passando userId para UserProfilePage
           userName: photographerData['name'],
           userPhotoUrl: photographerData['photoURL'],
           whatsappNumber: photographerData['phone'],
           city: photographerData['city'],
           uf: photographerData['UF'],
-          // Outros dados necessários do fotógrafo
+          nick: photographerData['user']
         ),
       ),
     );

@@ -43,11 +43,13 @@ class PhotographerCarouselWidget extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) => UserProfilePage(
+                            userId: data['uid'] ?? '', // Passando userId para UserProfilePage
                             userName: data['name'] ?? '',
                             userPhotoUrl: photoUrl,
                             whatsappNumber: data['phone'] ?? '',
                             city: data['city'] ?? '',
                             uf: data['UF'] ?? '',
+                            nick: data['user'] ?? '',
                           ),
                         ),
                       );
