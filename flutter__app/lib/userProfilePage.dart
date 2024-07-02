@@ -77,6 +77,13 @@ class UserProfilePage extends StatelessWidget {
               ),
               SizedBox(height: 10),
               ElevatedButton(
+                 style: ElevatedButton.styleFrom(
+                          foregroundColor: Color(0xFFFCFDF9),
+                          backgroundColor: Color(0xFF435364),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(14.0),
+                          ),
+                        ),
                 onPressed: () {
                   _launchWhatsApp(whatsappNumber);
                 },
@@ -85,7 +92,10 @@ class UserProfilePage extends StatelessWidget {
                   children: [
                     Icon(Icons.message),
                     SizedBox(width: 5),
-                    Text('Enviar mensagem'),
+                    Text('Enviar mensagem',
+                    style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
                   ],
                 ),
               ),

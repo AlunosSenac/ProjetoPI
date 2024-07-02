@@ -87,11 +87,26 @@ class _AdminPageState extends State<AdminPage> {
               decoration: InputDecoration(labelText: 'Foto da Galeria'),
             ),
             SizedBox(height: 10),
-            ElevatedButton(
+            SizedBox(
+              height: 50,
+              width: 500,
+              child:ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                          foregroundColor: Color(0xFFFCFDF9),
+                          backgroundColor: Color(0xFF435364),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(14.0),
+                          ),
+              ),
               onPressed: () async {
                 pickAndUploadGalleryPhoto();
               },
-              child: Text('Escolher Foto da Galeria'),
+              child: Text('Escolher Foto da Galeria',
+              style: TextStyle(
+                  color: Colors.white, fontWeight: FontWeight.bold
+                ),
+              ),
+            ),
             ),
           ],
         ),

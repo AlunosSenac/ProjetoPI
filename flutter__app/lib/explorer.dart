@@ -81,11 +81,25 @@ class _ExplorerState extends State<Explorer> {
                 ),
                 SizedBox(width: 10),
                 // Botão de Filtrar
-                ElevatedButton(
+                SizedBox(
+                  height: 60,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                          foregroundColor: Color(0xFFFCFDF9),
+                          backgroundColor: Color(0xFF435364),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(14.0),
+                          ),
+                  ),
                   onPressed: () {
                     applyFilters();
                   },
-                  child: Text('Filtrar'),
+                  child: Text('Filtrar',
+                  style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold
+                          ),
+                  ),
+                ),
                 ),
               ],
             ),
