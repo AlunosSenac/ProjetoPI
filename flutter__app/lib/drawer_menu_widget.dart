@@ -49,15 +49,6 @@ class DrawerMenuWidget extends StatelessWidget {
               },
             ),
           ListTile(
-            title: Text('Galeria'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Galeria()),
-              );
-            },
-          ),
-          ListTile(
             title: Text('Explorer'),
             onTap: () {
               Navigator.push(

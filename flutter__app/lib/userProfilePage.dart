@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:url_launcher/url_launcher.dart'; // Para abrir o WhatsApp
+import 'full_screen_image_page.dart'; // Importando o novo arquivo
 
 class UserProfilePage extends StatelessWidget {
   final String userId;
@@ -89,7 +90,7 @@ class UserProfilePage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
-              _buildGallery(),
+              _buildGallery(context),
             ],
           ),
         ),
@@ -98,7 +99,7 @@ class UserProfilePage extends StatelessWidget {
     );
   }
 
-  Widget _buildGallery() {
+  Widget _buildGallery(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
           .collection('gallery')
@@ -131,15 +132,25 @@ class UserProfilePage extends StatelessWidget {
           itemCount: galleryItems.length,
           itemBuilder: (context, index) {
             String imageUrl = galleryItems[index]['photoURL'];
-            return Image.network(
-              imageUrl,
-              fit: BoxFit.cover,
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => FullScreenImagePage(imageUrl: imageUrl),
+                  ),
+                );
+              },
+              child: Image.network(
+                imageUrl,
+                fit: BoxFit.cover,
+              ),
             );
           },
         );
       },
     );
-  }
+  } 
 
   void _launchWhatsApp(String number) async {
     String url = 'https://wa.me/$number';
